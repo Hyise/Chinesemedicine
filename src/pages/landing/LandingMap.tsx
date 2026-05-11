@@ -41,6 +41,7 @@ const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
 
+  // Data loading — hooks first, then useEffect
   useEffect(() => {
     let cancelled = false;
     fetch('/chishui-towns.json')
@@ -54,23 +55,7 @@ const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
     return () => { cancelled = true; };
   }, []);
 
-  if (error) {
-    return (
-      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: 'rgba(232,228,223,0.5)', fontSize: 13 }}>
-        <div style={{ fontSize: 20 }}>⚠</div>
-        <div>地图数据加载失败：{error}</div>
-      </div>
-    );
-  }
-
-  if (!ready) {
-    return (
-      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(232,228,223,0.4)', fontSize: 13 }}>
-        地图加载中...
-      </div>
-    );
-  }
-
+  // Chart init — runs only after data is ready
   useEffect(() => {
     if (!chartRef.current || !ready) return;
 
@@ -223,6 +208,24 @@ const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
   }, [ready, towns, resources]);
 
   const sel = selected ? towns[TOWN_MAP[selected] ?? -1] : null;
+
+  // Guard: show error / loading before chart
+  if (error) {
+    return (
+      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: 'rgba(232,228,223,0.5)', fontSize: 13 }}>
+        <div style={{ fontSize: 20 }}>⚠</div>
+        <div>地图数据加载失败：{error}</div>
+      </div>
+    );
+  }
+
+  if (!ready) {
+    return (
+      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(232,228,223,0.4)', fontSize: 13 }}>
+        地图加载中...
+      </div>
+    );
+  }
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '380px', flex: 1, display: 'flex', flexDirection: 'column' }}>
