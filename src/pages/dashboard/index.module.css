@@ -1,0 +1,300 @@
+/* ============================================================
+   Dashboard — Claude Design System
+   Warm cream canvas, serif headlines, coral CTAs
+   ============================================================ */
+
+/* ── Page container ── */
+.page {
+  background: var(--claude-canvas);
+  min-height: 100vh;
+}
+
+/* ── Hero Header ── */
+.hero {
+  padding: 80px 80px 64px;
+  background: var(--claude-canvas);
+  border-bottom: 1px solid var(--claude-hairline-soft);
+}
+
+.heroEyebrow {
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-caption-upper);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--claude-primary);
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  font-family: var(--claude-font-display);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--claude-ink);
+  margin: 0 0 10px;
+}
+
+.heroSubtitle {
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-body-md);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  color: var(--claude-muted);
+  margin: 0;
+}
+
+/* ── KPI Section ── */
+.kpiSection {
+  padding: 48px 80px 0;
+  background: var(--claude-canvas);
+}
+
+/* ── KPI Card ── */
+.kpiCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 22px 20px;
+  background: var(--claude-canvas);
+  border: 1px solid var(--claude-hairline);
+  border-radius: var(--claude-radius-lg);
+  cursor: default;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kpiCard:hover {
+  border-color: var(--claude-hairline-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px var(--claude-hairline-soft), 0 4px 16px rgba(20,20,19,0.06);
+}
+
+.kpiIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--claude-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.kpiBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.kpiLabel {
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-caption-upper);
+  font-weight: 500;
+  color: var(--claude-muted);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpiValue {
+  font-family: var(--claude-font-body);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  color: var(--claude-ink);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.kpiUnit {
+  font-size: var(--claude-text-body-sm);
+  font-weight: 400;
+  color: var(--claude-muted);
+}
+
+.kpiTrend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-caption-upper);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
+.kpiTrendLabel {
+  font-weight: 400;
+  color: var(--claude-muted);
+  margin-left: 2px;
+}
+
+/* ── Charts Section ── */
+.chartsSection {
+  padding: 24px 80px 48px;
+  background: var(--claude-canvas);
+}
+
+/* ── Charts Grid ── */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Left column */
+.chartCol {
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Center map */
+.chartColMap {
+  grid-column: span 12;
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bottom split */
+.chartsGrid > .chartCol:nth-child(4),
+.chartsGrid > .chartCol:nth-child(5) {
+  grid-column: span 12;
+}
+
+.chartsGrid .chartCard {
+  flex: 1;
+}
+
+/* ── Chart Card ── */
+.chartCard {
+  background: var(--claude-canvas);
+  border: 1px solid var(--claude-hairline);
+  border-radius: var(--claude-radius-lg);
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.chartCard[role="button"] {
+  cursor: pointer;
+}
+
+.chartCard[role="button"]:hover {
+  border-color: var(--claude-hairline-soft);
+  box-shadow: 0 0 0 1px var(--claude-hairline-soft), 0 4px 16px rgba(20,20,19,0.06);
+  transform: translateY(-1px);
+}
+
+.chartCard[role="button"]:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.chartCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--claude-hairline-soft);
+}
+
+.chartCardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chartCardDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chartCardTitle {
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-body-sm);
+  font-weight: 500;
+  color: var(--claude-ink);
+}
+
+.chartCardTag {
+  font-family: var(--claude-font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 2px 8px;
+  border-radius: var(--claude-radius-full);
+}
+
+.chartCardArrow {
+  color: var(--claude-muted-soft);
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.chartCard[role="button"]:hover .chartCardArrow {
+  color: var(--claude-primary);
+  transform: translateX(2px);
+}
+
+.chartCardBody {
+  padding: 12px 16px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--claude-hairline-soft);
+  margin-top: 8px;
+}
+
+.footer span {
+  font-family: var(--claude-font-body);
+  font-size: var(--claude-text-caption-upper);
+  font-weight: 400;
+  color: var(--claude-muted-soft);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1280px) {
+  .hero { padding: 56px 48px 40px; }
+  .kpiSection { padding: 32px 48px 0; }
+  .chartsSection { padding: 20px 48px 40px; }
+}
+
+@media (max-width: 1024px) {
+  .hero { padding: 40px 32px 32px; }
+  .heroTitle { font-size: 32px; }
+  .kpiSection { padding: 24px 32px 0; }
+  .chartsSection { padding: 16px 32px 32px; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 32px 20px 24px; }
+  .heroTitle { font-size: 26px; }
+  .heroSubtitle { font-size: 15px; }
+  .kpiSection { padding: 20px 20px 0; }
+  .chartsSection { padding: 12px 20px 24px; }
+  .kpiCard { padding: 18px; }
+  .kpiValue { font-size: 24px; }
+}

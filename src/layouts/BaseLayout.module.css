@@ -1,0 +1,220 @@
+/* ============================================================
+   BaseLayout — Claude Design System
+   Warm cream canvas + coral accents
+   ============================================================ */
+
+.layout {
+  min-height: 100vh;
+  background: var(--claude-canvas) !important;
+}
+
+/* ── Sidebar ── */
+.sider {
+  background: var(--claude-canvas) !important;
+  border-right: 1px solid var(--claude-hairline-soft) !important;
+  box-shadow: none !important;
+}
+
+.sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Logo ── */
+.logoArea {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--claude-hairline-soft);
+  flex-shrink: 0;
+}
+
+.logoFull {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoCollapsed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--claude-primary);
+  color: #ffffff;
+  font-family: var(--claude-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.logoTitle {
+  font-family: var(--claude-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--claude-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.logoSubtitle {
+  font-family: var(--claude-font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--claude-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Collapse Button ── */
+.collapseBtn {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--claude-muted);
+  transition: color var(--claude-transition-fast), background var(--claude-transition-fast);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.collapseBtn:hover {
+  color: var(--claude-ink);
+  background: var(--claude-surface-soft);
+}
+
+/* ── Menu ── */
+.menu {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* ── Main Layout ── */
+.mainLayout {
+  background: var(--claude-canvas) !important;
+}
+
+/* ── Header ── */
+.header {
+  background: var(--claude-canvas) !important;
+  border-bottom: 1px solid var(--claude-hairline-soft) !important;
+  padding: 0 24px !important;
+  height: 56px !important;
+  line-height: 56px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  box-shadow: none !important;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  font-family: var(--claude-font-body) !important;
+}
+
+.breadcrumbCurrent {
+  color: var(--claude-ink) !important;
+  font-weight: 400 !important;
+}
+
+/* ── Header Button ── */
+.headerBtn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--claude-radius-md) !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--claude-muted) !important;
+  transition: all var(--claude-transition-fast) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.headerBtn:hover {
+  background: var(--claude-surface-soft) !important;
+  color: var(--claude-ink) !important;
+}
+
+/* ── Role Tag ── */
+.roleTag {
+  font-family: var(--claude-font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--claude-muted) !important;
+  background: var(--claude-surface-card) !important;
+  border: none !important;
+  border-radius: var(--claude-radius-full) !important;
+  padding: 2px 10px !important;
+}
+
+/* ── User Info ── */
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--claude-radius-md);
+  transition: background var(--claude-transition-fast);
+}
+
+.userInfo:hover {
+  background: var(--claude-surface-soft);
+}
+
+.username {
+  font-family: var(--claude-font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--claude-body);
+  white-space: nowrap;
+}
+
+/* ── Avatar ── */
+.avatar {
+  border-radius: var(--claude-radius-md) !important;
+  background: var(--claude-surface-card) !important;
+  color: var(--claude-muted) !important;
+  font-family: var(--claude-font-body) !important;
+}
+
+/* ── Content ── */
+.content {
+  background: var(--claude-canvas) !important;
+  padding: 0 !important;
+}
+
+.contentCard {
+  padding: 0 !important;
+}

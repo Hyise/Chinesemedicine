@@ -1,0 +1,20 @@
+# Nginx 配置示例 — 适用于部署到自己的 Linux 服务器
+# 将 dist 目录下的文件上传到 /var/www/7s-herb/ 后，配置如下：
+
+server {
+    listen 80;
+    server_name 你的域名或IP;
+
+    root /var/www/7s-herb;   # dist 目录解压后的路径
+    index index.html;
+
+    # SPA 路由支持：所有路径回退到 index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 可选：强制 HTTPS
+    # listen 443 ssl;
+    # ssl_certificate     /etc/ssl/your-cert.pem;
+    # ssl_certificate_key /etc/ssl/your-key.pem;
+}
