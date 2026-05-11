@@ -39,12 +39,12 @@ const deviceTypeMap: Record<string, string> = {
 };
 
 const mockDevices: IoTDevice[] = [
-  { id: 1, deviceCode: 'IOT-GS-001', deviceName: '通渭基地气象站', deviceType: 'sensor', location: '甘肃省定西市通渭县', baseName: '通渭黄芪种植基地', status: 'online', lastReportTime: '2026-04-23 10:30:00' },
-  { id: 2, deviceCode: 'IOT-GS-002', deviceName: '岷县土壤监测点', deviceType: 'sensor', location: '甘肃省定西市岷县', baseName: '岷县当归产业园', status: 'online', lastReportTime: '2026-04-23 10:29:00' },
-  { id: 3, deviceCode: 'IOT-GS-003', deviceName: '宕昌视频监控', deviceType: 'camera', location: '甘肃省陇南市宕昌县', baseName: '宕昌党参示范园', status: 'warning', lastReportTime: '2026-04-23 09:15:00' },
-  { id: 4, deviceCode: 'IOT-GS-004', deviceName: '渭源网关', deviceType: 'gateway', location: '甘肃省定西市渭源县', baseName: '渭源天麻种植基地', status: 'offline', lastReportTime: '2026-04-23 08:00:00' },
-  { id: 5, deviceCode: 'IOT-GS-005', deviceName: '武都灌溉控制器', deviceType: 'controller', location: '甘肃省陇南市武都区', baseName: '武都红芪种植园', status: 'online', lastReportTime: '2026-04-23 10:28:00' },
-  { id: 6, deviceCode: 'IOT-GS-006', deviceName: '渭源土壤传感器', deviceType: 'sensor', location: '甘肃省定西市渭源县', baseName: '渭源天麻种植基地', status: 'online', lastReportTime: '2026-04-23 10:27:00' },
+  { id: 1, deviceCode: 'IOT-GS-001', deviceName: '官渡基地气象站', deviceType: 'sensor', location: '贵州省赤水市官渡镇', baseName: '官渡镇石斛林下经济示范园', status: 'online', lastReportTime: '2026-04-23 10:30:00' },
+  { id: 2, deviceCode: 'IOT-GS-002', deviceName: '长期土壤监测点', deviceType: 'sensor', location: '贵州省赤水市长期镇', baseName: '长期镇石斛产业园', status: 'online', lastReportTime: '2026-04-23 10:29:00' },
+  { id: 3, deviceCode: 'IOT-GS-003', deviceName: '大同视频监控', deviceType: 'camera', location: '贵州省赤水市大同镇', baseName: '大同镇石斛示范园', status: 'warning', lastReportTime: '2026-04-23 09:15:00' },
+  { id: 4, deviceCode: 'IOT-GS-004', deviceName: '旺隆网关', deviceType: 'gateway', location: '贵州省赤水市旺隆镇', baseName: '旺隆镇石斛种植基地', status: 'offline', lastReportTime: '2026-04-23 08:00:00' },
+  { id: 5, deviceCode: 'IOT-GS-005', deviceName: '丙安灌溉控制器', deviceType: 'controller', location: '贵州省赤水市丙安镇', baseName: '丙安镇石斛种植园', status: 'online', lastReportTime: '2026-04-23 10:28:00' },
+  { id: 6, deviceCode: 'IOT-GS-006', deviceName: '两河口土壤传感器', deviceType: 'sensor', location: '贵州省赤水市两河口镇', baseName: '两河口镇石斛种植基地', status: 'online', lastReportTime: '2026-04-23 10:27:00' },
 ];
 
 // 模拟实时传感器数据

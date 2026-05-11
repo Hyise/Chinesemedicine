@@ -17,10 +17,10 @@ const statusColorMap: Record<string, string> = {
 };
 
 const mockInbound: InboundOrder[] = [
-  { id: 1, inboundNo: 'RK-2026042201', batchNo: 'HQ-20260401', herbName: '黄芪', quantity: 1200, unit: 'kg', warehouse: '甘肃中心仓', location: 'A-01-03', supplier: '通渭黄芪合作社', inboundDate: '2026-04-01', status: 'completed', inspector: '刘师傅', remark: '质检合格，已完成入库', createdAt: '2026-04-01 10:00:00' },
-  { id: 2, inboundNo: 'RK-2026042202', batchNo: 'DG-20260315', herbName: '当归', quantity: 800, unit: 'kg', warehouse: '甘肃中心仓', location: 'B-02-01', supplier: '岷县当归产业园', inboundDate: '2026-03-15', status: 'completed', inspector: '陈师傅', remark: '符合药典标准', createdAt: '2026-03-15 14:00:00' },
-  { id: 3, inboundNo: 'RK-2026042203', batchNo: 'DC-20260410', herbName: '党参', quantity: 500, unit: 'kg', warehouse: '甘肃中心仓', location: 'A-02-05', supplier: '宕昌党参示范园', inboundDate: '2026-04-10', status: 'confirmed', inspector: '刘师傅', createdAt: '2026-04-10 11:00:00' },
-  { id: 4, inboundNo: 'RK-2026042204', batchNo: 'TM-20260420', herbName: '天麻', quantity: 200, unit: 'kg', warehouse: '渭源分仓', location: 'C-01-02', supplier: '渭源天麻基地', inboundDate: '2026-04-20', status: 'pending', createdAt: '2026-04-20 09:00:00' },
+  { id: 1, inboundNo: 'RK-2026042201', batchNo: 'SH-20260401', herbName: '金钗石斛', quantity: 1200, unit: 'kg', warehouse: '赤水中心仓', location: 'A-01-03', supplier: '官渡镇石斛林下经济示范园', inboundDate: '2026-04-01', status: 'completed', inspector: '刘师傅', remark: '质检合格，已完成入库', createdAt: '2026-04-01 10:00:00' },
+  { id: 2, inboundNo: 'RK-2026042202', batchNo: 'SH-20260315', herbName: '金钗石斛', quantity: 800, unit: 'kg', warehouse: '赤水中心仓', location: 'B-02-01', supplier: '长期镇石斛产业园', inboundDate: '2026-03-15', status: 'completed', inspector: '陈师傅', remark: '符合药典标准', createdAt: '2026-03-15 14:00:00' },
+  { id: 3, inboundNo: 'RK-2026042203', batchNo: 'SH-20260410', herbName: '金钗石斛', quantity: 500, unit: 'kg', warehouse: '赤水中心仓', location: 'A-02-05', supplier: '大同镇石斛示范园', inboundDate: '2026-04-10', status: 'confirmed', inspector: '刘师傅', createdAt: '2026-04-10 11:00:00' },
+  { id: 4, inboundNo: 'RK-2026042204', batchNo: 'SH-20260420', herbName: '金钗石斛', quantity: 200, unit: 'kg', warehouse: '旺隆分仓', location: 'C-01-02', supplier: '旺隆镇石斛种植基地', inboundDate: '2026-04-20', status: 'pending', createdAt: '2026-04-20 09:00:00' },
 ];
 
 const WmsInbound: React.FC = () => {
@@ -214,7 +214,7 @@ const WmsInbound: React.FC = () => {
           <Row gutter={12}>
             <Col span={12}>
               <Form.Item label="药材名称" name="herbName" rules={[{ required: true, message: '请输入药材名称' }]}>
-                <Input placeholder="如：黄芪、当归、金钗石斛" />
+                <Input placeholder="如：金钗石斛、鲜石斛" />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -235,10 +235,10 @@ const WmsInbound: React.FC = () => {
             <Col span={12}>
               <Form.Item label="仓库" name="warehouse" rules={[{ required: true, message: '请选择仓库' }]}>
                 <Select placeholder="请选择仓库">
-                  <Option value="甘肃中心仓">甘肃中心仓</Option>
-                  <Option value="渭源分仓">渭源分仓</Option>
-                  <Option value="岷县分仓">岷县分仓</Option>
-                  <Option value="宕昌分仓">宕昌分仓</Option>
+                  <Option value="赤水中心仓">赤水中心仓</Option>
+                  <Option value="旺隆分仓">旺隆分仓</Option>
+                  <Option value="丙安分仓">丙安分仓</Option>
+                  <Option value="两河口分仓">两河口分仓</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -249,7 +249,7 @@ const WmsInbound: React.FC = () => {
             </Col>
             <Col span={24}>
               <Form.Item label="供应商" name="supplier" rules={[{ required: true, message: '请输入供应商' }]}>
-                <Input placeholder="如：通渭黄芪合作社" />
+                <Input placeholder="如：官渡镇石斛林下经济示范园" />
               </Form.Item>
             </Col>
             <Col span={24}>

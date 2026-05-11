@@ -17,10 +17,10 @@ const statusColorMap: Record<string, string> = {
 };
 
 const mockOutbound: OutboundOrder[] = [
-  { id: 1, outboundNo: 'CK-2026042201', batchNo: 'HQ-20260401', herbName: '黄芪', quantity: 200, unit: 'kg', warehouse: '甘肃中心仓', location: 'A-01-03', customer: '华润三九医药股份有限公司-李总', outboundDate: '2026-04-20', status: 'completed', handler: '王调度', remark: '已送达，客户签收', createdAt: '2026-04-19 10:00:00' },
-  { id: 2, outboundNo: 'CK-2026042202', batchNo: 'DG-20260315', herbName: '当归', quantity: 150, unit: 'kg', warehouse: '甘肃中心仓', location: 'B-02-01', customer: '广州清平药材行-张经理', outboundDate: '2026-04-22', status: 'shipped', handler: '王调度', createdAt: '2026-04-21 09:00:00' },
-  { id: 3, outboundNo: 'CK-2026042203', batchNo: 'DC-20260410', herbName: '党参', quantity: 300, unit: 'kg', warehouse: '甘肃中心仓', location: 'A-02-05', customer: '安徽毫州药材市场-刘总', outboundDate: '2026-04-23', status: 'pending', createdAt: '2026-04-22 14:00:00' },
-  { id: 4, outboundNo: 'CK-2026042204', batchNo: 'TM-20260301', herbName: '天麻', quantity: 100, unit: 'kg', warehouse: '渭源分仓', location: 'C-01-02', customer: '北京同仁堂-采购部', outboundDate: '2026-04-23', status: 'confirmed', handler: '赵调度', createdAt: '2026-04-22 16:00:00' },
+  { id: 1, outboundNo: 'CK-2026042201', batchNo: 'SH-20260401', herbName: '金钗石斛', quantity: 200, unit: 'kg', warehouse: '赤水中心仓', location: 'A-01-03', customer: '华润三九医药股份有限公司-李总', outboundDate: '2026-04-20', status: 'completed', handler: '王调度', remark: '已送达，客户签收', createdAt: '2026-04-19 10:00:00' },
+  { id: 2, outboundNo: 'CK-2026042202', batchNo: 'SH-20260315', herbName: '金钗石斛', quantity: 150, unit: 'kg', warehouse: '赤水中心仓', location: 'B-02-01', customer: '广州清平药材行-张经理', outboundDate: '2026-04-22', status: 'shipped', handler: '王调度', createdAt: '2026-04-21 09:00:00' },
+  { id: 3, outboundNo: 'CK-2026042203', batchNo: 'SH-20260410', herbName: '金钗石斛', quantity: 300, unit: 'kg', warehouse: '赤水中心仓', location: 'A-02-05', customer: '安徽毫州药材市场-刘总', outboundDate: '2026-04-23', status: 'pending', createdAt: '2026-04-22 14:00:00' },
+  { id: 4, outboundNo: 'CK-2026042204', batchNo: 'SH-20260301', herbName: '金钗石斛', quantity: 100, unit: 'kg', warehouse: '旺隆分仓', location: 'C-01-02', customer: '北京同仁堂-采购部', outboundDate: '2026-04-23', status: 'confirmed', handler: '赵调度', createdAt: '2026-04-22 16:00:00' },
 ];
 
 const WmsOutbound: React.FC = () => {
@@ -217,7 +217,7 @@ const WmsOutbound: React.FC = () => {
           <Row gutter={12}>
             <Col span={12}>
               <Form.Item label="药材名称" name="herbName" rules={[{ required: true, message: '请输入药材名称' }]}>
-                <Input placeholder="如：黄芪、当归" />
+                <Input placeholder="如：金钗石斛、鲜石斛" />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -238,10 +238,10 @@ const WmsOutbound: React.FC = () => {
             <Col span={12}>
               <Form.Item label="仓库" name="warehouse" rules={[{ required: true, message: '请选择仓库' }]}>
                 <Select placeholder="请选择仓库">
-                  <Option value="甘肃中心仓">甘肃中心仓</Option>
-                  <Option value="渭源分仓">渭源分仓</Option>
-                  <Option value="岷县分仓">岷县分仓</Option>
-                  <Option value="宕昌分仓">宕昌分仓</Option>
+                  <Option value="赤水中心仓">赤水中心仓</Option>
+                  <Option value="旺隆分仓">旺隆分仓</Option>
+                  <Option value="丙安分仓">丙安分仓</Option>
+                  <Option value="两河口分仓">两河口分仓</Option>
                 </Select>
               </Form.Item>
             </Col>
