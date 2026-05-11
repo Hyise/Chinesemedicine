@@ -3,7 +3,7 @@ import * as echarts from 'echarts/core';
 import { MapChart, ScatterChart } from 'echarts/charts';
 import { TooltipComponent, VisualMapComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import type { TownData, ResourceItem } from './mapData';
+import type { TownData, ResourceItem } from '../dashboard/components/mapData';
 
 echarts.use([MapChart, ScatterChart, TooltipComponent, VisualMapComponent, CanvasRenderer]);
 
@@ -38,7 +38,6 @@ interface LandingMapProps {
 const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
-  const [hovered, setHovered] = useState<string|null>(null);
   const [selected, setSelected] = useState<string|null>(null);
 
   useEffect(() => {
@@ -189,11 +188,10 @@ const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
 
     chart.on('mouseover', (params: any) => {
       if (params.componentType === 'series' && params.seriesType === 'map') {
-        setHovered(params.name);
         (chart.getZr() as any)?.setCursorStyle('pointer');
       }
     });
-    chart.on('mouseout', () => setHovered(null));
+    chart.on('mouseout', () => {});
     chart.on('click', (params: any) => {
       if (params.componentType === 'series' && params.seriesType === 'map') {
         setSelected(prev => prev === params.name ? null : params.name);

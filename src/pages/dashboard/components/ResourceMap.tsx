@@ -102,11 +102,7 @@ const ResourceMap: React.FC<{ towns: TownData[]; resources: ResourceItem[] }>
     chartInstance.current = chart;
 
     // Town colors as series data (for map itemStyle)
-    const townData = towns.map((t,i) => ({
-      name: t.name,
-      value: i,
-      itemStyle: { color: T.fills[i % T.fills.length] },
-    }));
+    // (color is handled via townColorMap in geo itemStyle)
 
     const scatterData = resources.map(r => ({
       name: r.name,
