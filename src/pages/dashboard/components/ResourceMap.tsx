@@ -63,7 +63,7 @@ const ResourceMap: React.FC<{ towns: TownData[]; resources: ResourceItem[] }>
 = ({ towns, resources }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
-  const [loadState, setLoadState] = useState<'loading'|'ready'>('loading');
+  const [loadState, setLoadState] = useState<'loading'|'ready'|'error'>('loading');
   const [hoveredTown, setHoveredTown] = useState<string|null>(null);
   const [selectedTown, setSelectedTown] = useState<string|null>(null);
 
@@ -90,7 +90,7 @@ const ResourceMap: React.FC<{ towns: TownData[]; resources: ResourceItem[] }>
       echarts.registerMap('china', china);
       echarts.registerMap('chishui_towns', chishuiTowns as any);
       setLoadState('ready');
-    }).catch(()=>{});
+    }).catch((_err)=>{ setLoadState('error'); });
     return ()=>{ cancelled=true; };
   }, []);
 
@@ -349,6 +349,24 @@ const ResourceMap: React.FC<{ towns: TownData[]; resources: ResourceItem[] }>
 
   // ── Render ──────────────────────────────────────────────
   const sel = selectedTown ? towns.find(t=>t.name===selectedTown) : null;
+
+  if (loadState === 'error') {
+    return (
+      <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', gap:12, background:T.bg, color:T.muted, fontFamily:'"PingFang SC","Microsoft YaHei",serif' }}>
+        <div style={{ fontSize:28 }}>⚠</div>
+        <div style={{ fontSize:14 }}>地图数据加载失败</div>
+        <div style={{ fontSize:12, color:T.mutedLight }}>请检查 china.json 和 chishui-towns.json 是否存在</div>
+      </div>
+    );
+  }
+
+  if (loadState === 'loading') {
+    return (
+      <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', background:T.bg, color:T.muted, fontFamily:'"PingFang SC","Microsoft YaHei",serif', fontSize:14 }}>
+        地图加载中...
+      </div>
+    );
+  }
 
   return (
     <div style={{

@@ -38,19 +38,38 @@ interface LandingMapProps {
 const LandingMap: React.FC<LandingMapProps> = ({ towns, resources }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
-  const [selected, setSelected] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     fetch('/chishui-towns.json')
-      .then(r => r.json())
+      .then(r => { if (!r.ok) throw new Error('加载地图数据失败'); return r.json(); })
       .then(ct => {
         if (cancelled) return;
         echarts.registerMap('chishui_towns', ct as any);
         setReady(true);
-      }).catch(() => {});
+      })
+      .catch(err => { if (!cancelled) setError(err.message); });
     return () => { cancelled = true; };
   }, []);
+
+  if (error) {
+    return (
+      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: 'rgba(232,228,223,0.5)', fontSize: 13 }}>
+        <div style={{ fontSize: 20 }}>⚠</div>
+        <div>地图数据加载失败：{error}</div>
+      </div>
+    );
+  }
+
+  if (!ready) {
+    return (
+      <div style={{ width: '100%', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(232,228,223,0.4)', fontSize: 13 }}>
+        地图加载中...
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (!chartRef.current || !ready) return;
