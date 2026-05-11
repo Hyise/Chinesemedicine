@@ -778,7 +778,7 @@ const LandingTech: React.FC = () => {
             </div>
             <div className={styles.navLogoText}>
               <span>金钗石斛</span>
-              <span className={styles.navLogoSub}>7S产地仓公共服务平台</span>
+              <span className={styles.navLogoSub}>7s产业仓数据平台</span>
             </div>
           </div>
           <div className={styles.navLinks}>
@@ -818,7 +818,7 @@ const LandingTech: React.FC = () => {
 
           <h1 className={styles.heroTitle}>
             <span className={styles.heroTitleLine1}>金钗石斛</span>
-            <span className={styles.heroTitleLine2}>7S产地仓公共服务平台</span>
+            <span className={styles.heroTitleLine2}>7s产业仓数据平台</span>
           </h1>
 
           <p className={styles.heroDesc}>
@@ -1128,7 +1128,7 @@ const LandingTech: React.FC = () => {
           <div className={styles.ctaDecor1} />
           <div className={styles.ctaDecor2} />
           <h2 className={styles.ctaTitle}>开启金钗石斛产地仓公共服务新篇</h2>
-          <p className={styles.ctaDesc}>金钗石斛7S产地仓公共服务平台已准备好为您的企业提供全产业链一站式服务</p>
+          <p className={styles.ctaDesc}>金钗石斛7s产业仓数据平台已准备好为您的企业提供全产业链一站式服务</p>
           <div className={styles.ctaBtns}>
             <button className={styles.ctaPrimary} onClick={() => navigate('/app/dashboard')}>立即体验</button>
             <button className={styles.ctaSecondary} onClick={() => window.open('/showcase', '_blank')}>功能展示页</button>
@@ -1151,7 +1151,7 @@ const LandingTech: React.FC = () => {
               </defs>
             </svg>
             <div>
-              <div className={styles.footerBrandName}>金钗石斛7S产地仓公共服务平台</div>
+              <div className={styles.footerBrandName}>金钗石斛7s产业仓数据平台</div>
               <div className={styles.footerBrandDesc}>贵州省赤水市 · 金钗石斛全产业链公共服务</div>
             </div>
           </div>
@@ -1161,7 +1161,7 @@ const LandingTech: React.FC = () => {
           </div>
         </div>
         <div className={styles.footerBottom}>
-          <span>© 2025 金钗石斛7S产地仓公共服务平台</span>
+          <span>© 2025 金钗石斛7s产业仓数据平台</span>
           <span>贵州省赤水市</span>
         </div>
       </footer>
