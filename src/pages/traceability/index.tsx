@@ -983,7 +983,7 @@ const Traceability: React.FC = () => {
             </Descriptions>
 
             <div className="trace-qr-card">
-              <QRCode value={`${import.meta.env.VITE_PUBLIC_URL || ''}/traceability?code=${selectedTrace.traceCode}`} size={80} />
+              <QRCode value={`${import.meta.env.VITE_PUBLIC_URL || ''}/app/traceability?code=${selectedTrace.traceCode}`} size={80} />
               <div>
                 <div className="trace-qr-card-title">扫码查询</div>
                 <div className="trace-qr-card-desc">扫描上方二维码，即可查看此批次药材的完整溯源信息</div>
