@@ -27,6 +27,7 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import type { CodeBatch } from '../types';
 import { mockCodeBatches, baseOptions, herbOptions } from '../types';
+import PageHeading from '../../../components/PageHeading';
 
 const { Title, Text } = Typography;
 
@@ -207,16 +208,28 @@ const CodeGenerate: React.FC = () => {
     .reduce((sum, b) => sum + b.quantity, 0);
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 20 }}>
-        <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
-          码生成中心
-        </Title>
-        <Text type="secondary">
-          批量生成多码合一标识，支持一品一码、全流程溯源
-        </Text>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="多码合一"
+        title="码生成中心"
+        description="批量生成多码合一标识，支持一品一码、全流程溯源"
+        accentColor="#cc785c"
+        gradientFrom="#3d2e1e"
+        gradientMid="#52402d"
+        gradientTo="#67523a"
+        padding="32px 32px 28px"
+      />
+
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 48px' }}>
+        {/* 页面标题 */}
+        <div style={{ marginBottom: 20 }}>
+          <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
+            码生成中心
+          </Title>
+          <Text type="secondary">
+            批量生成多码合一标识，支持一品一码、全流程溯源
+          </Text>
+        </div>
 
       {/* ============================================================ */}
       {/* 统计概览 */}
@@ -415,6 +428,7 @@ const CodeGenerate: React.FC = () => {
           }}
         />
       </Card>
+    </div>
     </div>
   );
 };

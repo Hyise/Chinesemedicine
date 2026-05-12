@@ -16,6 +16,7 @@ import {
   ORDER_STATUS_MAP,
   ORDER_STATUS_COLOR_MAP,
 } from '../mockData';
+import PageHeading from '../../../components/PageHeading';
 
 const { Text } = Typography;
 
@@ -325,12 +326,16 @@ const PlantingOrders: React.FC = () => {
   return (
     <div style={{ padding: 0 }} className="page-container page-enter">
       {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>订单种植与托管服务</h3>
-        <p className="page-desc">
-          管理定制药园、种植托管协议及统防统治服务的全流程订单
-        </p>
-      </div>
+      <PageHeading
+        eyebrow="种植服务管理系统"
+        title="订单种植与托管服务"
+        description="管理定制药园、种植托管协议及统防统治服务的全流程订单"
+        accentColor="#52c41a"
+        gradientFrom="#1d3a1a"
+        gradientMid="#2d4a1a"
+        gradientTo="#3d5a2a"
+        padding="32px 32px 28px"
+      />
 
       {/* 总体统计 */}
       <Row gutter={[12, 12]} style={{ marginBottom: 16 }}>

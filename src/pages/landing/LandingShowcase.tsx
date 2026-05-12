@@ -503,7 +503,7 @@ const FEATURES = [
   {
     id: 'multicode',
     tag: 'MULTI-CODE',
-    title: '多码合一标识系统',
+    title: '质量管控-多码和一',
     subtitle: '三种码型适配全场景追溯需求',
     desc: '创新性地提出"一物一码、一批一码、一域一码"三码合一体系。一物一码用于高端饮片全程追溯；一批一码用于批量药材物流追溯；一域一码用于产地认证与品牌保护。',
     highlights: [
@@ -518,7 +518,7 @@ const FEATURES = [
   {
     id: 'iot',
     tag: 'IoT',
-    title: '物联网数据采集',
+    title: '物联网采集',
     subtitle: '让田间地头的数据"活"起来',
     desc: '支持 Modbus、MQTT、HTTP 等多协议设备接入，统一汇聚土壤传感器、气象站、水质监测、无人机航拍等多源数据。边缘计算节点实现数据清洗与异常告警，云端 AI 模型提供种植决策支撑。',
     highlights: [

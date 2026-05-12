@@ -21,6 +21,7 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import type { CodeRule, RuleVersion } from '../types';
 import { mockRuleVersions } from '../types';
+import PageHeading from '../../../components/PageHeading';
 
 const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;
@@ -164,16 +165,28 @@ const CodeRules: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 20 }}>
-        <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
-          编码规则配置
-        </Title>
-        <Text type="secondary">
-          配置多码合一标识系统的编码生成规则，包括分段结构、校验算法等
-        </Text>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="多码合一"
+        title="编码规则配置"
+        description="配置多码合一标识系统的编码生成规则，包括分段结构、校验算法等"
+        accentColor="#6366f1"
+        gradientFrom="#1e1b4b"
+        gradientMid="#2d2565"
+        gradientTo="#3730a3"
+        padding="32px 32px 28px"
+      />
+
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 48px' }}>
+        {/* 页面标题 */}
+        <div style={{ marginBottom: 20 }}>
+          <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
+            编码规则配置
+          </Title>
+          <Text type="secondary">
+            配置多码合一标识系统的编码生成规则，包括分段结构、校验算法等
+          </Text>
+        </div>
 
       {/* ============================================================ */}
       {/* 分段式编码规则配置卡片 */}
@@ -462,6 +475,7 @@ const CodeRules: React.FC = () => {
           )}
         />
       </Card>
+    </div>
     </div>
   );
 };

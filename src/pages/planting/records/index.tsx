@@ -16,6 +16,7 @@ import {
   type FarmTask, type FarmTaskType, type FarmTaskStatus,
   TASK_STATUS_MAP, TASK_STATUS_COLOR_MAP,
 } from '../mockData';
+import PageHeading from '../../../components/PageHeading';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -492,12 +493,16 @@ const PlantingRecords: React.FC = () => {
   return (
     <div style={{ padding: 0 }} className="page-container page-enter">
       {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>农事排期与执行</h3>
-        <p className="page-desc">
-          管理赤水石斛基地的农事任务排期，支持日历视图与列表视图
-        </p>
-      </div>
+      <PageHeading
+        eyebrow="种植服务管理系统"
+        title="农事排期与执行"
+        description="管理赤水石斛基地的农事任务排期，支持日历视图与列表视图"
+        accentColor="#52c41a"
+        gradientFrom="#1d3a1a"
+        gradientMid="#2d4a1a"
+        gradientTo="#3d5a2a"
+        padding="32px 32px 28px"
+      />
 
       {/* 视图切换 + 工具栏 */}
       <Card size="small" style={{ borderRadius: 8, marginBottom: 12 }} styles={{ body: { padding: '12px 16px' } }}>

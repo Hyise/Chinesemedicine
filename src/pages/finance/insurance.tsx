@@ -5,6 +5,7 @@ import {
   SafetyOutlined, ClockCircleOutlined,
   EyeOutlined, DollarOutlined, SearchOutlined,
 } from '@ant-design/icons';
+import PageHeading from '../../components/PageHeading';
 import {
   insurancePolicies, insuranceClaims, insuranceStats,
   type InsurancePolicy, type InsuranceClaim, type InsuranceStatus, type ClaimStatus,
@@ -155,19 +156,21 @@ const InsurancePage: React.FC = () => {
     );
 
   return (
-    <div style={{ background: '#faf9f5', minHeight: '100vh', padding: '40px 64px' }}>
-      {/* Hero */}
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontFamily: '"Tiempos Headline", "Cormorant Garamond", Garamond, serif', fontSize: 32, fontWeight: 400, letterSpacing: '-0.3px', color: '#141413', margin: '0 0 6px', lineHeight: 1.1 }}>
-          农业保险服务
-        </h1>
-        <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, color: '#6c6a64', margin: 0 }}>
-          气象灾害险 · 质量保障险 · 综合收入险，全生长周期保障
-        </p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="金融服务"
+        title="农业保险服务"
+        description="气象灾害险 · 质量保障险 · 综合收入险，全生长周期保障"
+        accentColor="#5db8a6"
+        gradientFrom="#1a3d3d"
+        gradientMid="#1d5252"
+        gradientTo="#2a6767"
+        padding="32px 32px 28px"
+      />
 
-      {/* KPI */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* KPI */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
         <Col xs={12} xl={6}><KpiCard title="生效保单" value={`${insuranceStats.activePolicies}份`} icon={<SafetyOutlined />} accentColor="#5db8a6" /></Col>
         <Col xs={12} xl={6}><KpiCard title="参保面积" value={`${insuranceStats.totalInsuredArea}亩`} icon={<SafetyOutlined />} accentColor="#cc785c" /></Col>
         <Col xs={12} xl={6}><KpiCard title="累计保费" value={`${(insuranceStats.totalPremium / 10000).toFixed(1)}万元`} icon={<DollarOutlined />} accentColor="#e8a55a" /></Col>
@@ -276,6 +279,7 @@ const InsurancePage: React.FC = () => {
           </div>
         )}
       </Drawer>
+    </div>
     </div>
   );
 };

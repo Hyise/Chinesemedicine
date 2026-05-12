@@ -9,6 +9,7 @@ import type { ColumnsType } from 'antd/es/table';
 import ReactECharts from 'echarts-for-react';
 import type { IoTDevice } from '@/types/global';
 import { DEVICE_STATUS_MAP } from '@/types/global';
+import PageHeading from '../../components/PageHeading';
 
 const { Option } = Select;
 
@@ -134,16 +135,23 @@ const IoT: React.FC = () => {
   const latestData = sensorData[sensorData.length - 1];
 
   return (
-    <div style={{ padding: 20 }}>
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>物联网数据采集系统</h3>
-        <p className="page-desc">实时监控各基地传感器、视频、网关等物联网设备运行状态与数据</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="物联网系统"
+        title="物联网数据采集系统"
+        description="实时监控各基地传感器、视频、网关等物联网设备运行状态与数据"
+        accentColor="#5db8a6"
+        gradientFrom="#1a2e3d"
+        gradientMid="#1d3d52"
+        gradientTo="#2a5067"
+        padding="32px 32px 28px"
+      />
 
-      {/* 设备状态 KPI */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 16 }}>
-        <Col xs={24} sm={8}>
-          <Card bordered={false} className="card-interactive" style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px' } }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* 设备状态 KPI */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 16 }}>
+          <Col xs={24} sm={8}>
+            <Card bordered={false} className="card-interactive" style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px' } }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ width: 48, height: 48, borderRadius: 8, background: '#f6ffed', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: '#52c41a', fontWeight: 700 }}>{onlineCount}</div>
               <div>
@@ -271,6 +279,7 @@ const IoT: React.FC = () => {
           </Col>
         </Row>
       </Card>
+    </div>
     </div>
   );
 };

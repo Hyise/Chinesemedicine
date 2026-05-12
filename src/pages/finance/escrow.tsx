@@ -6,6 +6,7 @@ import {
   EyeOutlined,
   SwapOutlined,
 } from '@ant-design/icons';
+import PageHeading from '../../components/PageHeading';
 import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import {
@@ -214,19 +215,21 @@ const EscrowPage: React.FC = () => {
   };
 
   return (
-    <div style={{ background: '#faf9f5', minHeight: '100vh', padding: '40px 64px' }}>
-      {/* Hero */}
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontFamily: '"Tiempos Headline", "Cormorant Garamond", Garamond, serif', fontSize: 32, fontWeight: 400, letterSpacing: '-0.3px', color: '#141413', margin: '0 0 6px', lineHeight: 1.1 }}>
-          资金托管服务
-        </h1>
-        <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, color: '#6c6a64', margin: 0 }}>
-          定金托管 · 验货确认 · 尾款释放，全流程资金安全保障
-        </p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="金融服务"
+        title="资金托管服务"
+        description="定金托管 · 验货确认 · 尾款释放，全流程资金安全保障"
+        accentColor="#5db872"
+        gradientFrom="#1a3d2e"
+        gradientMid="#1d523d"
+        gradientTo="#2a6752"
+        padding="32px 32px 28px"
+      />
 
-      {/* KPI */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* KPI */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
         <Col xs={12} xl={6}><KpiCard title="托管中金额" value={`${escrowStats.totalInEscrow}万元`} icon={<WalletOutlined />} accentColor="#cc785c" /></Col>
         <Col xs={12} xl={6}><KpiCard title="已释放金额" value={`${escrowStats.totalReleased}万元`} icon={<CheckCircleOutlined />} accentColor="#5db872" /></Col>
         <Col xs={12} xl={6}><KpiCard title="活跃托管" value={`${escrowStats.activeEscrow}笔`} icon={<SwapOutlined />} accentColor="#e8a55a" /></Col>
@@ -351,6 +354,7 @@ const EscrowPage: React.FC = () => {
           </div>
         )}
       </Drawer>
+    </div>
     </div>
   );
 };

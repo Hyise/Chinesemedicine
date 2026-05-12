@@ -7,8 +7,9 @@ import {
   RightOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import PageHeading from '../../components/PageHeading';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 /**
  * 多码合一标识系统 - 模块首页
@@ -48,71 +49,75 @@ const MultiCodeIndex: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <div style={{ marginBottom: 20 }}>
-        <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
-          多码合一标识系统
-        </Title>
-        <Text type="secondary">
-          一物一码 · 全程追溯 · 品牌保护
-        </Text>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="多码合一"
+        title="多码合一标识系统"
+        description="一物一码 · 全程追溯 · 品牌保护"
+        accentColor="#5db8a6"
+        gradientFrom="#1a2d3d"
+        gradientMid="#1d4252"
+        gradientTo="#2a5670"
+        padding="32px 32px 28px"
+      />
 
-      <Row gutter={[16, 16]}>
-        {modules.map((mod) => (
-          <Col xs={24} sm={12} lg={8} key={mod.key}>
-            <Card
-              hoverable
-              bordered={false}
-              style={{ borderRadius: 8, cursor: 'pointer' }}
-              onClick={() => navigate(mod.path)}
-              bodyStyle={{ padding: 24 }}
-            >
-              <Space direction="vertical" size={12} style={{ width: '100%' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '28px 32px 48px' }}>
+        <Row gutter={[16, 16]}>
+          {modules.map((mod) => (
+            <Col xs={24} sm={12} lg={8} key={mod.key}>
+              <Card
+                hoverable
+                bordered={false}
+                style={{ borderRadius: 8, cursor: 'pointer' }}
+                onClick={() => navigate(mod.path)}
+                styles={{ body: { padding: 24 } }}
+              >
+                <Space direction="vertical" size={12} style={{ width: '100%' }}>
                   <div
                     style={{
-                      width: 64,
-                      height: 64,
-                      borderRadius: 12,
-                      background: mod.color,
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'space-between',
                     }}
                   >
-                    {mod.icon}
+                    <div
+                      style={{
+                        width: 64,
+                        height: 64,
+                        borderRadius: 12,
+                        background: mod.color,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {mod.icon}
+                    </div>
+                    <Text
+                      type="secondary"
+                      style={{ fontSize: 12 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(mod.path);
+                      }}
+                    >
+                      进入 <RightOutlined style={{ fontSize: 10 }} />
+                    </Text>
                   </div>
-                  <Text
-                    type="secondary"
-                    style={{ fontSize: 12 }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(mod.path);
-                    }}
-                  >
-                    进入 <RightOutlined style={{ fontSize: 10 }} />
-                  </Text>
-                </div>
-                <div>
-                  <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 4 }}>
-                    {mod.title}
-                  </Text>
-                  <Text type="secondary" style={{ fontSize: 13, lineHeight: 1.6 }}>
-                    {mod.description}
-                  </Text>
-                </div>
-              </Space>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                  <div>
+                    <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 4 }}>
+                      {mod.title}
+                    </Text>
+                    <Text type="secondary" style={{ fontSize: 13, lineHeight: 1.6 }}>
+                      {mod.description}
+                    </Text>
+                  </div>
+                </Space>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 };

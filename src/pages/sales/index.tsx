@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import PageHeading from '../../components/PageHeading';
 import type {
   SalesOrder, SalesCustomer, PaymentRecord,
   SalesOrderStatus, PaymentStatus, CustomerLevel,
@@ -763,21 +764,27 @@ const Sales: React.FC = () => {
   // 渲染
   // ============================================================
   return (
-    <div style={{ padding: 20 }}>
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>市场销售服务平台</h3>
-        <p className="page-desc">统一管理销售订单、客户信息、销售统计与回款跟踪</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="市场销售"
+        title="市场销售服务平台"
+        description="统一管理销售订单、客户信息、销售统计与回款跟踪"
+        accentColor="#6366f1"
+        gradientFrom="#1e1b4b"
+        gradientMid="#2d2565"
+        gradientTo="#3730a3"
+        padding="32px 32px 28px"
+      />
 
-      {/* KPI 指标卡 */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
-        <Col xs={24} sm={12} xl={6}>
-          <KpiCard
-            title="本月订单数" value={kpiData.thisMonthOrders} suffix="笔"
-            trend={kpiData.ordersTrend} icon={<ShoppingOutlined />}
-            iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1"
-          />
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* KPI 指标卡 */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
+          <Col xs={24} sm={12} xl={6}>
+            <KpiCard
+              title="本月订单数" value={kpiData.thisMonthOrders} suffix="笔"
+              trend={kpiData.ordersTrend} icon={<ShoppingOutlined />}
+              iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1"
+            />
         </Col>
         <Col xs={24} sm={12} xl={6}>
           <KpiCard
@@ -1014,6 +1021,7 @@ const Sales: React.FC = () => {
           </Row>
         </Form>
       </Modal>
+    </div>
     </div>
   );
 };

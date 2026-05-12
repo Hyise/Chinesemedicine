@@ -6,6 +6,7 @@ import {
   MoneyCollectOutlined, BankOutlined,
   ArrowRightOutlined, EyeOutlined,
 } from '@ant-design/icons';
+import PageHeading from '../../components/PageHeading';
 import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import {
@@ -216,19 +217,21 @@ const ScfPage: React.FC = () => {
     );
 
   return (
-    <div style={{ background: '#faf9f5', minHeight: '100vh', padding: '40px 64px' }}>
-      {/* Hero */}
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontFamily: '"Tiempos Headline", "Cormorant Garamond", Garamond, serif', fontSize: 32, fontWeight: 400, letterSpacing: '-0.3px', color: '#141413', margin: '0 0 6px', lineHeight: 1.1 }}>
-          供应链金融
-        </h1>
-        <p style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, color: '#6c6a64', margin: 0 }}>
-          应收账款确权 · 融资申请管理 · 核心企业信用穿透
-        </p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="金融服务"
+        title="供应链金融"
+        description="应收账款确权 · 融资申请管理 · 核心企业信用穿透"
+        accentColor="#e8a55a"
+        gradientFrom="#3d2e1a"
+        gradientMid="#52402d"
+        gradientTo="#67523a"
+        padding="32px 32px 28px"
+      />
 
-      {/* KPI */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* KPI */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 24 }}>
         <Col xs={12} xl={6}><KpiCard title="应收账款总额" value={`${scfStats.totalReceivables}万元`} icon={<FileTextOutlined />} accentColor="#e8a55a" /></Col>
         <Col xs={12} xl={6}><KpiCard title="已融资总额" value={`${scfStats.totalFinanced}万元`} icon={<MoneyCollectOutlined />} accentColor="#5db8a6" /></Col>
         <Col xs={12} xl={6}><KpiCard title="未结清余额" value={`${scfStats.outstandingAmount}万元`} icon={<ClockCircleOutlined />} accentColor="#cc785c" /></Col>
@@ -354,6 +357,7 @@ const ScfPage: React.FC = () => {
           </div>
         )}
       </Drawer>
+    </div>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import type { SelectProps } from 'antd';
 import type { CodeTrackingDetail } from '../types';
+import PageHeading from '../../../components/PageHeading';
 
 type NodeType = 'issue' | 'planting' | 'quality' | 'warehouse' | 'logistics' | 'consumer';
 
@@ -139,12 +140,24 @@ const CodeTracking: React.FC = () => {
   const timelineItems = result ? buildTimelineItems(result) : [];
 
   return (
-    <div style={{ padding: 20 }}>
-      {contextHolder}
-      <div style={{ marginBottom: 20 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>码状态追踪</h3>
-        <p className="page-desc">输入精确码值或批次号，追踪单一码从赋码到消费的完整生命周期</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="多码合一"
+        title="码状态追踪"
+        description="输入精确码值或批次号，追踪单一码从赋码到消费的完整生命周期"
+        accentColor="#5db8a6"
+        gradientFrom="#1a2d3d"
+        gradientMid="#1d4252"
+        gradientTo="#2a5670"
+        padding="32px 32px 28px"
+      />
+
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {contextHolder}
+        <div style={{ marginBottom: 20 }}>
+          <h3 className="page-title" style={{ margin: '0 0 4px' }}>码状态追踪</h3>
+          <p className="page-desc">输入精确码值或批次号，追踪单一码从赋码到消费的完整生命周期</p>
+        </div>
 
       <Card
         title={<Space><SearchOutlined />多维检索</Space>}
@@ -268,6 +281,7 @@ const CodeTracking: React.FC = () => {
           </Col>
         </Row>
       )}
+    </div>
     </div>
   );
 };

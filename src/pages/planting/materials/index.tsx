@@ -14,6 +14,7 @@ import {
   type AgriculturalMaterial, type MaterialCategory,
   type MaterialApplication,
 } from '../mockData';
+import PageHeading from '../../../components/PageHeading';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -280,12 +281,16 @@ const PlantingMaterials: React.FC = () => {
   return (
     <div style={{ padding: 0 }} className="page-container page-enter">
       {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>农资与种苗中心</h3>
-        <p className="page-desc">
-          统一管理石斛种植所需的种苗、肥料、农药及农具物资
-        </p>
-      </div>
+      <PageHeading
+        eyebrow="种植服务管理系统"
+        title="农资与种苗中心"
+        description="统一管理石斛种植所需的种苗、肥料、农药及农具物资"
+        accentColor="#52c41a"
+        gradientFrom="#1d3a1a"
+        gradientMid="#2d4a1a"
+        gradientTo="#3d5a2a"
+        padding="32px 32px 28px"
+      />
 
       {/* 统计卡片 */}
       <Row gutter={[12, 12]} style={{ marginBottom: 16 }}>
