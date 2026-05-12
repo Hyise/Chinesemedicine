@@ -8,7 +8,7 @@ import {
   SearchOutlined, QrcodeOutlined, ReloadOutlined, CheckCircleOutlined,
   CloseCircleOutlined, ClockCircleOutlined, LinkOutlined, SafetyOutlined,
   BarChartOutlined, DatabaseOutlined, NodeIndexOutlined,
-  WarningOutlined, SyncOutlined, RiseOutlined, SafetyCertificateOutlined,
+  WarningOutlined, SyncOutlined, RiseOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';

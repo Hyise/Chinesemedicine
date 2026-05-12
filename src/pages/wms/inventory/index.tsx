@@ -405,7 +405,7 @@ const WmsInventory: React.FC = () => {
     setBatchDetailModalOpen(true);
   };
 
-  const mainColumns: ColumnsType<InventoryProduct & { key: string }> = [
+  const mainColumns: ColumnsType<InventoryProduct> = [
     {
       title: '产品信息', key: 'name', width: 220,
       render: (_: unknown, record: InventoryProduct & { children?: InventoryBatch[] }) => (

@@ -168,62 +168,6 @@ const KpiCard: React.FC<KpiProps> = ({ title, value, suffix, prefix, valueStyle,
 );
 
 // ============================================================
-// 全局概览条组件
-// ============================================================
-const OverviewStrip: React.FC<{ guides: TechGuideRecord[]; bookings: MachineryBooking[]; pestTasks: PestControlTask[]; finance: FinanceService[] }> = ({ guides, bookings, pestTasks, finance }) => {
-  const pendingGuides = guides.filter((g) => g.status === 'pending' || g.status === 'processing').length;
-  const idleMachinery = bookings.filter((b) => b.status === 'booked').length;
-  const activePests = pestTasks.filter((p) => p.status === 'executing' || p.status === 'planned').length;
-  const pendingFinance = finance.filter((f) => f.status === 'pending').length;
-
-  const items = [
-    { icon: <SolutionOutlined />, label: '待处理农技', value: pendingGuides, color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
-    { icon: <ToolOutlined />, label: '农机待执行', value: idleMachinery, color: '#6366f1', bg: 'rgba(99,102,241,0.08)' },
-    { icon: <ExperimentOutlined />, label: '统防任务', value: activePests, color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
-    { icon: <BankOutlined />, label: '待审核金融', value: pendingFinance, color: '#06b6d4', bg: 'rgba(6,182,212,0.08)' },
-  ];
-
-  return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: 12,
-      marginBottom: 16,
-    }}>
-      {items.map((item) => (
-        <div
-          key={item.label}
-          style={{
-            background: '#fff',
-            borderRadius: 10,
-            border: '1px solid #f1f5f9',
-            padding: '12px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            cursor: 'default',
-          }}
-        >
-          <div style={{
-            width: 36, height: 36, borderRadius: 8,
-            background: item.bg,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: item.color, fontSize: 16,
-            flexShrink: 0,
-          }}>
-            {item.icon}
-          </div>
-          <div>
-            <div style={{ fontSize: 11, color: '#94a3b8', lineHeight: 1 }}>{item.label}</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: item.color, lineHeight: 1.2, marginTop: 3 }}>{item.value}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// ============================================================
 // 主组件
 // ============================================================
 const SocialService: React.FC = () => {
