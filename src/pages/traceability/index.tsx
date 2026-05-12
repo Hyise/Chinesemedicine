@@ -8,7 +8,7 @@ import {
   SearchOutlined, QrcodeOutlined, ReloadOutlined, CheckCircleOutlined,
   CloseCircleOutlined, ClockCircleOutlined, LinkOutlined, SafetyOutlined,
   BarChartOutlined, DatabaseOutlined, NodeIndexOutlined,
-  WarningOutlined, SyncOutlined, RiseOutlined,
+  WarningOutlined, SyncOutlined, RiseOutlined, SafetyCertificateOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
@@ -199,25 +199,29 @@ const chainStats: ChainStats = {
 // Claude Design — CSS Styles
 // ============================================================
 const css = `
-  .trace-page { background: #faf9f5; min-height: 100vh; }
+  /* Unified page header */
+  .trace-header { background: #faf9f5; border-bottom: 1px solid #ebe6df; }
+  .trace-header-inner { max-width: 1200px; margin: 0 auto; padding: 28px 0 24px; display: flex; align-items: center; gap: 24px; }
+  .trace-header-left { flex-shrink: 0; }
+  .trace-header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #cc785c; margin-bottom: 6px; }
+  .trace-header-title { font-family: "Tiempos Headline", "Cormorant Garamond", Garamond, "Times New Roman", serif; font-size: 28px; font-weight: 400; color: #141413; line-height: 1.2; margin: 0; }
+  .trace-header-desc { font-size: 14px; color: #6c6a64; line-height: 1.6; flex: 1; }
 
-  .trace-hero { padding: 64px 80px 56px; background: #faf9f5; border-bottom: 1px solid #ebe6df; }
-  .trace-hero-eyebrow { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #cc785c; margin-bottom: 10px; }
-  .trace-hero-title { font-family: "Tiempos Headline", "Cormorant Garamond", Garamond, "Times New Roman", serif; font-size: 40px; font-weight: 400; line-height: 1.1; letter-spacing: -0.5px; color: #141413; margin: 0 0 10px; }
-  .trace-hero-subtitle { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; font-weight: 400; line-height: 1.55; letter-spacing: 0; color: #6c6a64; margin: 0; }
+  .trace-body { background: #faf9f5; }
+  .trace-body-inner { max-width: 1200px; margin: 0 auto; padding: 0; }
 
-  .trace-kpi-strip { padding: 0 80px; }
-  .trace-kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-  .trace-kpi-card { background: #ffffff; border: 1px solid #e6dfd8; border-radius: 12px; padding: 20px 20px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color 0.15s ease, transform 0.15s ease; }
-  .trace-kpi-card:hover { border-color: #d4cfc4; transform: translateY(-1px); box-shadow: 0 0 0 1px #ebe6df, 0 4px 16px rgba(20,20,19,0.06); }
-  .trace-kpi-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
-  .trace-kpi-label { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: #6c6a64; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .trace-kpi-value { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 26px; font-weight: 500; line-height: 1.1; letter-spacing: -0.3px; color: #141413; display: flex; align-items: baseline; gap: 2px; }
-  .trace-kpi-unit { font-size: 13px; font-weight: 400; color: #6c6a64; }
-  .trace-kpi-sub { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; color: #8e8b82; margin-top: 3px; }
-
-  .trace-body { padding: 24px 80px 48px; background: #faf9f5; }
-  .trace-body-inner { max-width: 1200px; margin: 0 auto; }
+  /* KPI Inline (inside tabs) */
+  .trace-kpi-inline { display: flex; align-items: stretch; gap: 0; margin-bottom: 12px; border: 1px solid #e6dfd8; border-radius: 10px; overflow: hidden; }
+  .trace-kpi-inline .trace-kpi-card { flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-right: 1px solid #ebe6df; background: #ffffff; transition: background 0.15s ease; }
+  .trace-kpi-inline .trace-kpi-card:last-child { border-right: none; }
+  .trace-kpi-inline .trace-kpi-card:hover { background: #fdfcf9; }
+  .trace-kpi-inline .trace-kpi-accent { width: 3px; height: 32px; border-radius: 3px; flex-shrink: 0; }
+  .trace-kpi-inline .trace-kpi-icon { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .trace-kpi-inline .trace-kpi-text { flex: 1; }
+  .trace-kpi-inline .trace-kpi-label { font-size: 12px; color: #8e8b82; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+  .trace-kpi-inline .trace-kpi-value { font-size: 17px; font-weight: 600; color: #141413; line-height: 1.2; }
+  .trace-kpi-inline .trace-kpi-value span { font-size: 12px; font-weight: 400; color: #8e8b82; margin-left: 2px; }
+  .trace-kpi-inline .trace-kpi-sub { font-size: 11px; color: #8e8b82; margin-top: 1px; }
 
   /* Tab nav */
   .trace-tabs { border-bottom: 1px solid #e6dfd8; margin-bottom: 20px; }
@@ -325,57 +329,14 @@ const css = `
   .trace-code:hover { color: #a9583e; }
 
   /* Responsive */
-  @media (max-width: 1280px) {
-    .trace-hero { padding: 48px 48px 40px; }
-    .trace-kpi-strip { padding: 0 48px; }
-    .trace-kpi-grid { grid-template-columns: repeat(3, 1fr); }
-    .trace-body { padding: 20px 48px 40px; }
-  }
-  @media (max-width: 1024px) {
-    .trace-hero { padding: 40px 32px 32px; }
-    .trace-hero-title { font-size: 32px; }
-    .trace-kpi-strip { padding: 0 32px; }
-    .trace-body { padding: 16px 32px 32px; }
-  }
   @media (max-width: 768px) {
-    .trace-hero { padding: 32px 20px 24px; }
-    .trace-hero-title { font-size: 26px; }
-    .trace-hero-subtitle { font-size: 15px; }
-    .trace-kpi-strip { padding: 0 20px; }
-    .trace-kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .trace-body { padding: 12px 20px 24px; }
+    .trace-header-inner { padding: 20px 0 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .trace-header-title { font-size: 22px; }
+    .trace-kpi-inline { flex-wrap: wrap; }
+    .trace-kpi-inline .trace-kpi-card { min-width: 50%; border-bottom: 1px solid #ebe6df; }
+    .trace-kpi-inline .trace-kpi-card:nth-child(2n) { border-right: none; }
   }
 `;
-
-// ============================================================
-// KPI Card Component
-// ============================================================
-interface KpiProps {
-  title: string;
-  value: number | string;
-  suffix?: string;
-  valueColor?: string;
-  icon: React.ReactNode;
-  iconBg: string;
-  iconColor: string;
-  sub?: string;
-}
-
-const KpiCard: React.FC<KpiProps> = ({ title, value, suffix, valueColor, icon, iconBg, iconColor, sub }) => (
-  <div className="trace-kpi-card">
-    <div className="trace-kpi-icon" style={{ background: iconBg, color: iconColor }}>
-      {icon}
-    </div>
-    <div style={{ flex: 1, minWidth: 0 }}>
-      <div className="trace-kpi-label">{title}</div>
-      <div className="trace-kpi-value" style={valueColor ? { color: valueColor } : undefined}>
-        {typeof value === 'number' ? value.toLocaleString() : value}
-        {suffix && <span className="trace-kpi-unit">{suffix}</span>}
-      </div>
-      {sub && <div className="trace-kpi-sub">{sub}</div>}
-    </div>
-  </div>
-);
 
 // ============================================================
 // Chart Card Component
@@ -762,6 +723,7 @@ const Traceability: React.FC = () => {
           rowKey="id"
           pagination={{ pageSize: 8, showTotal: (t) => `共 ${t} 条`, showSizeChanger: false }}
           size="middle"
+          scroll={{ x: 'max-content' }}
         />
       </div>
     </>
@@ -769,11 +731,47 @@ const Traceability: React.FC = () => {
 
   const renderChainTab = () => (
     <>
-      <div className="trace-kpi-grid" style={{ marginBottom: 12 }}>
-        <KpiCard title="区块高度" value={chainStats.blockHeight} icon={<NodeIndexOutlined />} iconBg="rgba(175,82,222,0.08)" iconColor="#5db8a6" sub="最新区块编号" />
-        <KpiCard title="上链总批次" value={chainStats.totalBatches} suffix="批次" icon={<DatabaseOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-        <KpiCard title="数据完整率" value={chainStats.integrityRate} suffix="%" valueColor="#5db872" icon={<SafetyOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-        <KpiCard title="今日查询" value={chainStats.dailyQueries[chainStats.dailyQueries.length - 1]} suffix="次" icon={<BarChartOutlined />} iconBg="rgba(255,149,0,0.08)" iconColor="#e8a55a" />
+      <div className="trace-kpi-inline">
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db8a6' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,166,0.1)', color: '#5db8a6' }}>
+            <NodeIndexOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">区块高度</div>
+            <div className="trace-kpi-value">{chainStats.blockHeight}</div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db872' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,114,0.1)', color: '#5db872' }}>
+            <DatabaseOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">上链总批次</div>
+            <div className="trace-kpi-value">{chainStats.totalBatches}<span>批次</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db872' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,114,0.1)', color: '#5db872' }}>
+            <SafetyOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">数据完整率</div>
+            <div className="trace-kpi-value">{chainStats.integrityRate}<span>%</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#e8a55a' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(232,165,90,0.1)', color: '#e8a55a' }}>
+            <BarChartOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">今日查询</div>
+            <div className="trace-kpi-value">{chainStats.dailyQueries[chainStats.dailyQueries.length - 1]}<span>次</span></div>
+          </div>
+        </div>
       </div>
       <Row gutter={[12, 12]}>
         <Col xs={24} xl={14}>
@@ -790,26 +788,104 @@ const Traceability: React.FC = () => {
     </>
   );
 
-  const renderManagementTab = () => (
+  const renderManagementTab = () => {
+    const failedCount = tasks.filter((t) => t.status === 'failed').length;
+    const onChainCount = tasks.filter((t) => t.status === 'on_chain').length;
+    const confirmingCount = tasks.filter((t) => t.status === 'confirming').length;
+    return (
     <>
-      <div className="trace-kpi-grid" style={{ marginBottom: 12 }}>
-        <KpiCard title="待上链" value={pendingTasks} suffix="条" valueColor="#e8a55a" icon={<ClockCircleOutlined />} iconBg="rgba(255,149,0,0.08)" iconColor="#e8a55a" />
-        <KpiCard title="确认中" value={tasks.filter((t) => t.status === 'confirming').length} suffix="条" icon={<SyncOutlined spin />} iconBg="rgba(0,113,227,0.08)" iconColor="#cc785c" />
-        <KpiCard title="已上链" value={tasks.filter((t) => t.status === 'on_chain').length} suffix="条" valueColor="#5db872" icon={<CheckCircleOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-        <KpiCard title="失败" value={tasks.filter((t) => t.status === 'failed').length} suffix="条" valueColor={tasks.filter((t) => t.status === 'failed').length > 0 ? '#c64545' : undefined} icon={<CloseCircleOutlined />} iconBg={tasks.filter((t) => t.status === 'failed').length > 0 ? 'rgba(255,59,48,0.08)' : 'rgba(255,149,0,0.08)'} iconColor={tasks.filter((t) => t.status === 'failed').length > 0 ? '#c64545' : '#e8a55a'} />
+      <div className="trace-kpi-inline">
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#e8a55a' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(232,165,90,0.1)', color: '#e8a55a' }}>
+            <ClockCircleOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">待上链</div>
+            <div className="trace-kpi-value" style={{ color: '#e8a55a' }}>{pendingTasks}<span>条</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#cc785c' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(204,120,92,0.1)', color: '#cc785c' }}>
+            <SyncOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">确认中</div>
+            <div className="trace-kpi-value">{confirmingCount}<span>条</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db872' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,114,0.1)', color: '#5db872' }}>
+            <CheckCircleOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">已上链</div>
+            <div className="trace-kpi-value" style={{ color: '#5db872' }}>{onChainCount}<span>条</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: failedCount > 0 ? '#c64545' : '#8e8b82' }} />
+          <div className="trace-kpi-icon" style={{ background: failedCount > 0 ? 'rgba(198,69,69,0.1)' : 'rgba(142,139,130,0.08)', color: failedCount > 0 ? '#c64545' : '#8e8b82' }}>
+            <CloseCircleOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">失败</div>
+            <div className="trace-kpi-value" style={{ color: failedCount > 0 ? '#c64545' : '#141413' }}>{failedCount}<span>条</span></div>
+          </div>
+        </div>
       </div>
       <div className="trace-card">
-        <Table className="trace-table" columns={taskColumns} dataSource={tasks} rowKey="id" pagination={{ pageSize: 8, showTotal: (t) => `共 ${t} 条`, showSizeChanger: false }} size="middle" />
+        <Table className="trace-table" columns={taskColumns} dataSource={tasks} rowKey="id" pagination={{ pageSize: 8, showTotal: (t) => `共 ${t} 条`, showSizeChanger: false }} size="middle" scroll={{ x: 'max-content' }} />
       </div>
     </>
   );
+  };
 
   const renderVerifyTab = () => (
     <>
-      <div className="trace-kpi-grid" style={{ marginBottom: 12 }}>
-        <KpiCard title="可信批次" value={intactTraces} suffix="批次" valueColor="#5db872" icon={<CheckCircleOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-        <KpiCard title="异常批次" value={tamperedTraces} suffix="批次" valueColor={tamperedTraces > 0 ? '#c64545' : undefined} icon={<WarningOutlined />} iconBg={tamperedTraces > 0 ? 'rgba(255,59,48,0.08)' : 'rgba(255,149,0,0.08)'} iconColor={tamperedTraces > 0 ? '#c64545' : '#e8a55a'} />
-        <KpiCard title="哈希总数" value={allTraces.reduce((s, t) => s + t.onChainNodes, 0)} suffix="个" icon={<DatabaseOutlined />} iconBg="rgba(175,82,222,0.08)" iconColor="#5db8a6" />
+      <div className="trace-kpi-inline">
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db872' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,114,0.1)', color: '#5db872' }}>
+            <CheckCircleOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">可信批次</div>
+            <div className="trace-kpi-value" style={{ color: '#5db872' }}>{intactTraces}<span>批次</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: tamperedTraces > 0 ? '#c64545' : '#8e8b82' }} />
+          <div className="trace-kpi-icon" style={{ background: tamperedTraces > 0 ? 'rgba(198,69,69,0.1)' : 'rgba(142,139,130,0.08)', color: tamperedTraces > 0 ? '#c64545' : '#8e8b82' }}>
+            <WarningOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">异常批次</div>
+            <div className="trace-kpi-value" style={{ color: tamperedTraces > 0 ? '#c64545' : '#141413' }}>{tamperedTraces}<span>批次</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db8a6' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,166,0.1)', color: '#5db8a6' }}>
+            <DatabaseOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">哈希总数</div>
+            <div className="trace-kpi-value">{allTraces.reduce((s, t) => s + t.onChainNodes, 0)}<span>个</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#cc785c' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(204,120,92,0.1)', color: '#cc785c' }}>
+            <SafetyOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">累计校验</div>
+            <div className="trace-kpi-value">2,840<span>次</span></div>
+          </div>
+        </div>
       </div>
       <Row gutter={[12, 12]}>
         <Col xs={24} xl={16}>
@@ -829,6 +905,7 @@ const Traceability: React.FC = () => {
                   <Button type="primary" size="small" icon={<SafetyOutlined />} className="trace-btn-primary" onClick={() => { setSelectedTrace(record); setVerifyModalOpen(true); }}>校验</Button>
                 ) },
               ]}
+              scroll={{ x: 'max-content' }}
             />
           </ChartCard>
         </Col>
@@ -852,11 +929,47 @@ const Traceability: React.FC = () => {
 
   const renderStatsTab = () => (
     <>
-      <div className="trace-kpi-grid" style={{ marginBottom: 12 }}>
-        <KpiCard title="累计上链批次" value={chainStats.totalBatches} suffix="批次" icon={<DatabaseOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-        <KpiCard title="本月新增" value={chainStats.monthlyNew} suffix="批次" icon={<RiseOutlined />} iconBg="rgba(0,113,227,0.08)" iconColor="#cc785c" />
-        <KpiCard title="溯源覆盖率" value={chainStats.coverageRate} suffix="%" icon={<NodeIndexOutlined />} iconBg="rgba(175,82,222,0.08)" iconColor="#5db8a6" />
-        <KpiCard title="累计查询" value={chainStats.totalQueries} suffix="次" icon={<BarChartOutlined />} iconBg="rgba(255,149,0,0.08)" iconColor="#e8a55a" />
+      <div className="trace-kpi-inline">
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db872' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,114,0.1)', color: '#5db872' }}>
+            <DatabaseOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">累计上链批次</div>
+            <div className="trace-kpi-value">{chainStats.totalBatches}<span>批次</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#cc785c' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(204,120,92,0.1)', color: '#cc785c' }}>
+            <RiseOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">本月新增</div>
+            <div className="trace-kpi-value">{chainStats.monthlyNew}<span>批次</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#5db8a6' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(93,184,166,0.1)', color: '#5db8a6' }}>
+            <NodeIndexOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">溯源覆盖率</div>
+            <div className="trace-kpi-value">{chainStats.coverageRate}<span>%</span></div>
+          </div>
+        </div>
+        <div className="trace-kpi-card">
+          <div className="trace-kpi-accent" style={{ background: '#e8a55a' }} />
+          <div className="trace-kpi-icon" style={{ background: 'rgba(232,165,90,0.1)', color: '#e8a55a' }}>
+            <BarChartOutlined />
+          </div>
+          <div className="trace-kpi-text">
+            <div className="trace-kpi-label">累计查询</div>
+            <div className="trace-kpi-value">{chainStats.totalQueries}<span>次</span></div>
+          </div>
+        </div>
       </div>
       <Row gutter={[12, 12]}>
         <Col xs={24} xl={12}>
@@ -911,28 +1024,14 @@ const Traceability: React.FC = () => {
     <div className="trace-page">
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      {/* ── Hero ── */}
-      <div className="trace-hero">
-        <div className="trace-hero-eyebrow">7S 产地仓</div>
-        <h1 className="trace-hero-title">区块链溯源管理</h1>
-        <p className="trace-hero-subtitle">基于区块链技术的中药材全流程溯源追踪，数据不可篡改，来源真实可信</p>
-      </div>
-
-      {/* ── KPI Strip ── */}
-      <div className="trace-kpi-strip">
-        <div className="trace-kpi-grid">
-          <KpiCard title="上链总批次" value={chainStats.totalBatches} suffix="批次" icon={<DatabaseOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-          <KpiCard title="区块高度" value={chainStats.blockHeight} icon={<NodeIndexOutlined />} iconBg="rgba(175,82,222,0.08)" iconColor="#5db8a6" sub="当前链上区块" />
-          <KpiCard title="数据完整率" value={chainStats.integrityRate} suffix="%" valueColor="#5db872" icon={<SafetyOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-          <KpiCard title="本月新增" value={chainStats.monthlyNew} suffix="批次" icon={<RiseOutlined />} iconBg="rgba(0,113,227,0.08)" iconColor="#cc785c" />
-          <KpiCard title="可信批次" value={intactTraces} suffix="批次" valueColor="#5db872" icon={<CheckCircleOutlined />} iconBg="rgba(52,199,89,0.08)" iconColor="#5db872" />
-          <KpiCard
-            title="异常批次" value={tamperedTraces} suffix="批次"
-            valueColor={tamperedTraces > 0 ? '#c64545' : undefined}
-            icon={<WarningOutlined />}
-            iconBg={tamperedTraces > 0 ? 'rgba(255,59,48,0.08)' : 'rgba(255,149,0,0.08)'}
-            iconColor={tamperedTraces > 0 ? '#c64545' : '#e8a55a'}
-          />
+      {/* ── Page Header ── */}
+      <div className="trace-header">
+        <div className="trace-header-inner">
+          <div className="trace-header-left">
+            <div className="trace-header-eyebrow">7S 产地仓</div>
+            <h1 className="trace-header-title">区块链溯源管理</h1>
+          </div>
+          <div className="trace-header-desc">基于区块链技术的中药材全流程溯源追踪，数据不可篡改，来源真实可信</div>
         </div>
       </div>
 

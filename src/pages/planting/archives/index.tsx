@@ -23,10 +23,10 @@ const buildTreeData = (): DataNode[] =>
   townTreeData.map((town) => ({
     key: town.id,
     title: (
-      <span style={{ fontSize: 13 }}>
-        <EnvironmentOutlined style={{ color: '#cc785c', marginRight: 6 }} />
+      <span style={{ fontSize: 14, lineHeight: 1.6 }}>
+        <EnvironmentOutlined style={{ color: '#cc785c', marginRight: 8 }} />
         {town.name}
-        <Tag style={{ marginLeft: 6, fontSize: 10, borderRadius: 9999, border: 'none', background: '#f5f0e8', color: '#cc785c', padding: '1px 8px' }}>
+        <Tag style={{ marginLeft: 8, fontSize: 11, borderRadius: 9999, border: 'none', background: '#f5f0e8', color: '#cc785c', padding: '1px 10px' }}>
           {town.villages.reduce((s, v) => s + v.baseCount, 0)} 个基地
         </Tag>
       </span>
@@ -34,9 +34,9 @@ const buildTreeData = (): DataNode[] =>
     children: town.villages.map((v) => ({
       key: v.id,
       title: (
-        <span style={{ fontSize: 12, color: '#6c6a64' }}>
+        <span style={{ fontSize: 13, color: '#6c6a64', lineHeight: 1.6 }}>
           {v.name}
-          <Tag style={{ marginLeft: 6, fontSize: 10, borderRadius: 9999, border: 'none', background: '#faf9f5', color: '#6c6a64', padding: '1px 8px' }}>
+          <Tag style={{ marginLeft: 8, fontSize: 11, borderRadius: 9999, border: 'none', background: '#faf9f5', color: '#6c6a64', padding: '1px 10px' }}>
             {v.baseCount}
           </Tag>
         </span>
@@ -69,21 +69,21 @@ const IoTMonitorCard: React.FC<IoTCardProps> = ({ iot }) => {
       }
       extra={<Text type="secondary" style={{ fontSize: 11 }}><ClockCircleOutlined /> {iot.lastUpdate}</Text>}
       style={{ background: '#faf9f5', border: '1px solid rgba(20,20,19,0.06)', borderRadius: 16 }}
-      styles={{ body: { padding: '12px 16px' } }}
+      styles={{ body: { padding: '16px 18px' } }}
     >
-      <Row gutter={[8, 8]}>
+      <Row gutter={[12, 12]}>
         {items.map((item) => {
           const percent = Math.min(100, Math.max(0, ((item.value - item.min) / (item.max - item.min)) * 100));
           return (
-            <Col span={12} key={item.label}>
-              <div style={{ background: '#ffffff', borderRadius: 12, padding: '12px 14px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 0 0 1px rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-                  <span style={{ color: item.color, fontSize: 14 }}>{item.icon}</span>
-                  <Text type="secondary" style={{ fontSize: 11 }}>{item.label}</Text>
+            <Col span={8} key={item.label}>
+              <div style={{ background: '#ffffff', borderRadius: 12, padding: '14px 16px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 0 0 1px rgba(0,0,0,0.03)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                  <span style={{ color: item.color, fontSize: 15 }}>{item.icon}</span>
+                  <Text type="secondary" style={{ fontSize: 12 }}>{item.label}</Text>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 3 }}>
-                  <Text style={{ fontSize: 20, fontWeight: 700, color: item.color }}>{item.value.toFixed(1)}</Text>
-                  <Text type="secondary" style={{ fontSize: 11 }}>{item.unit}</Text>
+                  <Text style={{ fontSize: 22, fontWeight: 700, color: item.color }}>{item.value.toFixed(1)}</Text>
+                  <Text type="secondary" style={{ fontSize: 12 }}>{item.unit}</Text>
                 </div>
                 <Progress
                   percent={percent}
@@ -91,7 +91,7 @@ const IoTMonitorCard: React.FC<IoTCardProps> = ({ iot }) => {
                   strokeColor={item.color}
                   trailColor="#efe9de"
                   size="small"
-                  style={{ marginTop: 6 }}
+                  style={{ marginTop: 8 }}
                 />
               </div>
             </Col>
@@ -284,7 +284,7 @@ const PlantingArchives: React.FC = () => {
 
   return (
     <div style={{ background: '#faf9f5', minHeight: '100%' }}>
-      <div style={{ background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '32px 32px 28px' }}>
+      <div style={{ background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '36px 36px 32px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ fontSize: 12, color: '#cc785c', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 6 }}>种植管理</div>
           <div style={{ fontSize: 26, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.3px', marginBottom: 6 }}>基地与档案管理</div>
@@ -292,26 +292,32 @@ const PlantingArchives: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 32px 32px' }}>
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={6}>
-            <Card
-              size="small"
-              title={
-                <Space>
-                  <AppstoreOutlined style={{ color: '#cc785c' }} />
-                  <span style={{ fontSize: 13, fontWeight: 600 }}>行政区划</span>
-                </Space>
-              }
-              style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)' }}
-              styles={{ body: { padding: '10px 14px', maxHeight: 480, overflowY: 'auto' } }}
-            >
-              <Tree showIcon defaultExpandAll treeData={treeData} selectedKeys={selectedTown ? [selectedTown] : []} onSelect={(keys) => setSelectedTown(keys[0] as string | undefined)} />
-            </Card>
-          </Col>
-          <Col span={18}>
-            <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', marginBottom: 14 }} styles={{ body: { padding: '12px 16px' } }}>
-              <Row gutter={[12, 12]} align="middle">
+      <div style={{ maxWidth: 1680, margin: '0 auto', padding: '28px 36px 48px' }}>
+        <Row gutter={[20, 20]} style={{ marginBottom: 20 }}>
+        <Col xs={24} sm={24} md={5}>
+          <Card
+            size="small"
+            title={
+              <Space>
+                <AppstoreOutlined style={{ color: '#cc785c' }} />
+                <span style={{ fontSize: 14, fontWeight: 600 }}>行政区划</span>
+              </Space>
+            }
+            style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)' }}
+            styles={{ body: { padding: '16px 14px', maxHeight: 520, overflowY: 'auto' } }}
+          >
+            <Tree
+              showIcon
+              defaultExpandAll
+              treeData={treeData}
+              selectedKeys={selectedTown ? [selectedTown] : []}
+              onSelect={(keys) => setSelectedTown(keys[0] as string | undefined)}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={24} md={19}>
+            <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', marginBottom: 16 }} styles={{ body: { padding: '14px 18px' } }}>
+              <Row gutter={[16, 12]} align="middle">
                 <Col xs={24} sm={12} md={8}>
                   <Input
                     prefix={<SearchOutlined />}
@@ -321,7 +327,7 @@ const PlantingArchives: React.FC = () => {
                     allowClear
                   />
                 </Col>
-                <Col xs={24} sm={12} md={5}>
+                <Col xs={24} sm={12} md={6}>
                   <Space.Compact>
                     <Button type={statusFilter === undefined ? 'primary' : 'default'} size="small" onClick={() => { setStatusFilter(undefined); setPage(1); }}>全部</Button>
                     <Button size="small" type={statusFilter === 'growing' ? 'primary' : 'default'} onClick={() => { setStatusFilter('growing'); setPage(1); }}>生长中</Button>
@@ -338,30 +344,30 @@ const PlantingArchives: React.FC = () => {
               </Row>
             </Card>
 
-            <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
-              <Col span={6}>
-                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '14px 16px' } }} className="card-interactive">
-                  <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>基地总数</Text>} value={bases.length} prefix={<EnvironmentOutlined style={{ color: '#cc785c' }} />} valueStyle={{ fontSize: 24, color: '#cc785c', fontWeight: 700 }} />
+            <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
+              <Col xs={12} sm={6}>
+                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '16px 14px' } }}>
+                  <Statistic title={<Text type="secondary" style={{ fontSize: 12 }}>基地总数</Text>} value={bases.length} prefix={<EnvironmentOutlined style={{ color: '#cc785c' }} />} valueStyle={{ fontSize: 22, color: '#cc785c', fontWeight: 700 }} />
                 </Card>
               </Col>
-              <Col span={6}>
-                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '14px 16px' } }} className="card-interactive">
-                  <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>总面积（亩）</Text>} value={bases.reduce((s, b) => s + b.plantingArea, 0)} suffix="亩" valueStyle={{ fontSize: 24, color: '#5db872', fontWeight: 700 }} />
+              <Col xs={12} sm={6}>
+                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '16px 14px' } }}>
+                  <Statistic title={<Text type="secondary" style={{ fontSize: 12 }}>总面积（亩）</Text>} value={bases.reduce((s, b) => s + b.plantingArea, 0)} suffix="亩" valueStyle={{ fontSize: 22, color: '#5db872', fontWeight: 700 }} />
                 </Card>
               </Col>
-              <Col span={6}>
-                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '14px 16px' } }} className="card-interactive">
-                  <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>生长中</Text>} value={bases.filter(b => b.status === 'growing').length} valueStyle={{ fontSize: 24, color: '#cc785c', fontWeight: 700 }} />
+              <Col xs={12} sm={6}>
+                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '16px 14px' } }}>
+                  <Statistic title={<Text type="secondary" style={{ fontSize: 12 }}>生长中</Text>} value={bases.filter(b => b.status === 'growing').length} valueStyle={{ fontSize: 22, color: '#cc785c', fontWeight: 700 }} />
                 </Card>
               </Col>
-              <Col span={6}>
-                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '14px 16px' } }} className="card-interactive">
-                  <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>已采收</Text>} value={bases.filter(b => b.status === 'harvested').length} valueStyle={{ fontSize: 24, color: '#5db872', fontWeight: 700 }} />
+              <Col xs={12} sm={6}>
+                <Card size="small" style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)', textAlign: 'center' }} styles={{ body: { padding: '16px 14px' } }}>
+                  <Statistic title={<Text type="secondary" style={{ fontSize: 12 }}>已采收</Text>} value={bases.filter(b => b.status === 'harvested').length} valueStyle={{ fontSize: 22, color: '#5db872', fontWeight: 700 }} />
                 </Card>
               </Col>
             </Row>
 
-            <Card style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)' }} styles={{ body: { padding: '0 16px' } }}>
+            <Card style={{ borderRadius: 16, border: '1px solid rgba(20,20,19,0.06)' }} styles={{ body: { padding: '4px 8px' } }}>
               <Table
                 columns={columns}
                 dataSource={pagedBases}
@@ -371,6 +377,8 @@ const PlantingArchives: React.FC = () => {
                   onChange: setPage, showSizeChanger: false, showTotal: (total) => `共 ${total} 个基地`,
                 }}
                 size="small"
+                style={{ fontSize: 13 }}
+                scroll={{ x: 'max-content' }}
               />
             </Card>
           </Col>

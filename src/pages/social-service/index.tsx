@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Card, Row, Col, Table, Button, Space, Tag, Input, Select, Modal, Form,
-  DatePicker, InputNumber, Rate, Divider, Progress, Tabs, Badge, Descriptions,
+  DatePicker, InputNumber, Rate, Divider, Progress, Tabs, Descriptions,
   Popconfirm, message,
 } from 'antd';
 import {
@@ -15,12 +15,11 @@ import dayjs from 'dayjs';
 import ReactECharts from 'echarts-for-react';
 import type {
   TechGuideRecord, MachineryItem, MachineryBooking, PestControlTask,
-  FinanceService, Expert, TechGuideStatus, MachineryStatus,
+  FinanceService, Expert, TechGuideStatus,
   PestControlStatus, FinanceServiceType,
 } from '@/types/global';
 import {
   TECH_GUIDE_STATUS_MAP, TECH_GUIDE_STATUS_COLOR,
-  MACHINERY_STATUS_MAP,
   PEST_CONTROL_STATUS_MAP, PEST_CONTROL_STATUS_COLOR,
   FINANCE_STATUS_MAP, FINANCE_STATUS_COLOR,
   FINANCE_TYPE_MAP, BOOKING_STATUS_MAP, BOOKING_STATUS_COLOR,
@@ -126,24 +125,103 @@ const FINANCE_STATUS_OPTIONS = [
 // ============================================================
 // KPI 卡片组件
 // ============================================================
-interface KpiProps { title: string; value: number | string; suffix?: string; prefix?: React.ReactNode; valueStyle?: React.CSSProperties; icon: React.ReactNode; iconBg: string; iconColor: string; }
+interface KpiProps {
+  title: string;
+  value: number | string;
+  suffix?: string;
+  prefix?: React.ReactNode;
+  valueStyle?: React.CSSProperties;
+  icon: React.ReactNode;
+  iconBg: string;
+  iconColor: string;
+}
 const KpiCard: React.FC<KpiProps> = ({ title, value, suffix, prefix, valueStyle, icon, iconBg, iconColor }) => (
-  <Card bordered={false} style={{ borderRadius: 12 }} styles={{ body: { padding: '16px 20px' } }} className="card-interactive">
-    <div className="flex items-center justify-between">
-      <div className="flex flex-col gap-1">
-        <span style={{ fontSize: 12, color: '#64748b' }}>{title}</span>
-        <div className="flex items-baseline gap-1">
-          <span style={{ fontSize: 24, fontWeight: 700, color: '#1e293b', lineHeight: 1, ...valueStyle }}>
-            {prefix}{typeof value === 'number' ? value.toLocaleString() : value}{suffix}
+  <Card
+    bordered={false}
+    style={{ borderRadius: 12, background: '#fff' }}
+    styles={{ body: { padding: '16px 20px' } }}
+    className="card-interactive"
+    hoverable
+  >
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <span style={{ fontSize: 12, color: '#64748b', lineHeight: 1 }}>{title}</span>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginTop: 6 }}>
+          {prefix}
+          <span style={{ fontSize: 26, fontWeight: 700, color: '#1e293b', lineHeight: 1, ...valueStyle }}>
+            {typeof value === 'number' ? value.toLocaleString() : value}
           </span>
+          {suffix && <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 400, marginLeft: 2 }}>{suffix}</span>}
         </div>
       </div>
-      <div style={{ width: 46, height: 46, borderRadius: 10, background: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: iconColor }}>
+      <div style={{
+        width: 48, height: 48, borderRadius: 12,
+        background: iconBg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: 20, color: iconColor,
+        flexShrink: 0,
+      }}>
         {icon}
       </div>
     </div>
   </Card>
 );
+
+// ============================================================
+// 全局概览条组件
+// ============================================================
+const OverviewStrip: React.FC<{ guides: TechGuideRecord[]; bookings: MachineryBooking[]; pestTasks: PestControlTask[]; finance: FinanceService[] }> = ({ guides, bookings, pestTasks, finance }) => {
+  const pendingGuides = guides.filter((g) => g.status === 'pending' || g.status === 'processing').length;
+  const idleMachinery = bookings.filter((b) => b.status === 'booked').length;
+  const activePests = pestTasks.filter((p) => p.status === 'executing' || p.status === 'planned').length;
+  const pendingFinance = finance.filter((f) => f.status === 'pending').length;
+
+  const items = [
+    { icon: <SolutionOutlined />, label: '待处理农技', value: pendingGuides, color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
+    { icon: <ToolOutlined />, label: '农机待执行', value: idleMachinery, color: '#6366f1', bg: 'rgba(99,102,241,0.08)' },
+    { icon: <ExperimentOutlined />, label: '统防任务', value: activePests, color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
+    { icon: <BankOutlined />, label: '待审核金融', value: pendingFinance, color: '#06b6d4', bg: 'rgba(6,182,212,0.08)' },
+  ];
+
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gap: 12,
+      marginBottom: 16,
+    }}>
+      {items.map((item) => (
+        <div
+          key={item.label}
+          style={{
+            background: '#fff',
+            borderRadius: 10,
+            border: '1px solid #f1f5f9',
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            cursor: 'default',
+          }}
+        >
+          <div style={{
+            width: 36, height: 36, borderRadius: 8,
+            background: item.bg,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: item.color, fontSize: 16,
+            flexShrink: 0,
+          }}>
+            {item.icon}
+          </div>
+          <div>
+            <div style={{ fontSize: 11, color: '#94a3b8', lineHeight: 1 }}>{item.label}</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: item.color, lineHeight: 1.2, marginTop: 3 }}>{item.value}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 // ============================================================
 // 主组件
@@ -218,7 +296,12 @@ const SocialService: React.FC = () => {
   // ============================================================
   const guideColumns: ColumnsType<TechGuideRecord> = [
     { title: '申请日期', dataIndex: 'appointmentDate', key: 'appointmentDate', width: 110 },
-    { title: '农户', dataIndex: 'farmerName', key: 'farmerName', width: 80, render: () => <UserOutlined style={{ marginRight: 4 }} /> },
+    { title: '农户', dataIndex: 'farmerName', key: 'farmerName', width: 80, render: (_, record) => (
+      <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <UserOutlined style={{ color: '#94a3b8', fontSize: 11 }} />
+        {record.farmerName}
+      </span>
+    )},
     { title: '基地', dataIndex: 'baseName', key: 'baseName', ellipsis: true },
     { title: '问题类型', dataIndex: 'issueType', key: 'issueType', width: 90, render: (t: string) => <Tag color="blue">{t}</Tag> },
     { title: '预约专家', dataIndex: 'expertName', key: 'expertName', width: 90, render: (n: string) => n || <span style={{ color: '#cbd5e1' }}>待分配</span> },
@@ -235,77 +318,40 @@ const SocialService: React.FC = () => {
       render: (e: number) => e ? <Rate disabled value={e} style={{ fontSize: 12 }} /> : <span style={{ color: '#cbd5e1' }}>未评价</span>,
     },
     {
-      title: '操作', key: 'action', width: 130,
+      title: '操作', key: 'action', width: 120,
       render: (_: unknown, record: TechGuideRecord) => (
         <Space size={4}>
-          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingGuide(record); setGuideModalMode('view'); setGuideModalOpen(true); }}>详情</Button>
+          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingGuide(record); setGuideModalMode('view'); setGuideModalOpen(true); }} style={{ padding: '0 4px' }}>详情</Button>
           {record.status === 'completed' && !record.evaluation && (
-            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => { setViewingGuide(record); setGuideModalMode('evaluate'); evalForm.resetFields(); setGuideModalOpen(true); }}>评价</Button>
+            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => { setViewingGuide(record); setGuideModalMode('evaluate'); evalForm.resetFields(); setGuideModalOpen(true); }} style={{ padding: '0 4px' }}>评价</Button>
           )}
         </Space>
       ),
     },
   ];
 
-  const machineryColumns: ColumnsType<MachineryItem> = [
-    { title: '设备名称', dataIndex: 'name', key: 'name', render: (n: string, r: MachineryItem) => <div><div style={{ fontWeight: 600 }}>{n}</div><div style={{ fontSize: 11, color: '#94a3b8' }}>{r.model}</div></div> },
-    { title: '类型', dataIndex: 'type', key: 'type', width: 100, render: (t: string) => <Tag>{t}</Tag> },
-    { title: '服务区域', dataIndex: 'serviceArea', key: 'serviceArea', width: 130, ellipsis: true },
-    {
-      title: '状态', dataIndex: 'status', key: 'status', width: 90,
-      render: (s: MachineryStatus) => (
-        <Badge status={s === 'idle' ? 'success' : s === 'in_use' ? 'processing' : 'warning'} text={MACHINERY_STATUS_MAP[s]} />
-      ),
-    },
-    {
-      title: '日租金', dataIndex: 'dailyRate', key: 'dailyRate', width: 100, align: 'right',
-      render: (r: number) => <span style={{ color: '#f59e0b', fontWeight: 600 }}>¥{r}/天</span>,
-    },
-    {
-      title: '本月使用', dataIndex: 'thisMonthUses', key: 'thisMonthUses', width: 90, align: 'center',
-      render: (u: number) => (
-        <div>
-          <div>{u} 次</div>
-          <Progress percent={Math.round((u / 30) * 100)} size="small" showInfo={false} strokeColor={CHART_COLORS.primary} style={{ width: 60 }} />
-        </div>
-      ),
-    },
-    {
-      title: '累计使用', dataIndex: 'totalUses', key: 'totalUses', width: 90, align: 'center',
-      render: (u: number) => <span style={{ color: '#64748b' }}>{u} 次</span>,
-    },
-    {
-      title: '操作', key: 'action', width: 90,
-      render: (_: unknown, record: MachineryItem) => (
-        <Button type="primary" size="small" icon={<PlusOutlined />} onClick={() => { bookingForm.setFieldsValue({ machineryId: record.id, machineryName: record.name, dailyRate: record.dailyRate }); setBookingModalOpen(true); }}>
-          预约
-        </Button>
-      ),
-    },
-  ];
-
   const bookingColumns: ColumnsType<MachineryBooking> = [
-    { title: '预约设备', dataIndex: 'machineryName', key: 'machineryName', render: (n: string) => <Tag color="blue">{n}</Tag> },
-    { title: '农户', dataIndex: 'farmerName', key: 'farmerName', width: 80 },
+    { title: '预约设备', dataIndex: 'machineryName', key: 'machineryName', width: 110, render: (n: string) => <Tag color="blue" style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{n}</Tag> },
+    { title: '农户', dataIndex: 'farmerName', key: 'farmerName', width: 72, ellipsis: true },
     { title: '基地', dataIndex: 'baseName', key: 'baseName', ellipsis: true },
-    { title: '预约日期', dataIndex: 'bookingDate', key: 'bookingDate', width: 110 },
+    { title: '预约日期', dataIndex: 'bookingDate', key: 'bookingDate', width: 105 },
     {
-      title: '使用天数', dataIndex: 'duration', key: 'duration', width: 90, align: 'center',
-      render: (d: number) => `${d} 天`,
+      title: '天数', dataIndex: 'duration', key: 'duration', width: 62, align: 'center',
+      render: (d: number) => `${d}天`,
     },
     {
-      title: '费用', dataIndex: 'fee', key: 'fee', width: 90, align: 'right',
+      title: '费用', dataIndex: 'fee', key: 'fee', width: 72, align: 'right',
       render: (f: number) => <span style={{ color: '#f59e0b', fontWeight: 600 }}>¥{f.toLocaleString()}</span>,
     },
     {
-      title: '状态', dataIndex: 'status', key: 'status', width: 90,
-      render: (s: string) => <Tag color={BOOKING_STATUS_COLOR[s]}>{BOOKING_STATUS_MAP[s]}</Tag>,
+      title: '状态', dataIndex: 'status', key: 'status', width: 70,
+      render: (s: string) => <Tag color={BOOKING_STATUS_COLOR[s]} style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{BOOKING_STATUS_MAP[s]}</Tag>,
     },
     {
-      title: '操作', key: 'action', width: 90,
+      title: '操作', key: 'action', width: 56,
       render: (_: unknown, record: MachineryBooking) => (
         <Popconfirm title="确认取消此预约？" onConfirm={() => setBookings((prev) => prev.map((b) => b.id === record.id ? { ...b, status: 'cancelled' } : b))} okText="确认">
-          <Button type="link" size="small" danger disabled={record.status === 'completed' || record.status === 'cancelled'}>取消</Button>
+          <Button type="link" size="small" danger disabled={record.status === 'completed' || record.status === 'cancelled'} style={{ padding: '0 4px' }}>取消</Button>
         </Popconfirm>
       ),
     },
@@ -323,28 +369,37 @@ const SocialService: React.FC = () => {
       render: (s: PestControlStatus) => <Tag color={PEST_CONTROL_STATUS_COLOR[s]}>{PEST_CONTROL_STATUS_MAP[s]}</Tag>,
     },
     {
-      title: '防控效果', key: 'effect', width: 120,
+      title: '防控效果', key: 'effect', width: 130,
       render: (_: unknown, record: PestControlTask) => {
         if (record.effectBefore === undefined || record.effectAfter === undefined) return <span style={{ color: '#cbd5e1' }}>—</span>;
         const rate = Math.round((1 - record.effectAfter / record.effectBefore) * 100);
         return (
           <div>
-            <div style={{ fontSize: 11, color: '#94a3b8' }}>{record.effectBefore}% → {record.effectAfter}%</div>
-            <Progress percent={rate} size="small" showInfo={false} strokeColor={CHART_COLORS.primary} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: '#94a3b8', marginBottom: 3 }}>
+              <span>{record.effectBefore}%</span>
+              <span style={{ color: '#10b981', fontWeight: 600 }}>-{rate}%</span>
+              <span>{record.effectAfter}%</span>
+            </div>
+            <Progress percent={rate} size="small" showInfo={false} strokeColor={CHART_COLORS.primary} trailColor="#e2e8f0" />
           </div>
         );
       },
     },
     {
-      title: '操作', key: 'action', width: 90,
+      title: '操作', key: 'action', width: 80,
       render: (_: unknown, record: PestControlTask) => (
-        <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingPest(record); setPestModalMode('view'); setPestModalOpen(true); }}>详情</Button>
+        <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingPest(record); setPestModalMode('view'); setPestModalOpen(true); }} style={{ padding: '0 4px' }}>详情</Button>
       ),
     },
   ];
 
   const financeColumns: ColumnsType<FinanceService> = [
-    { title: '申请人', dataIndex: 'applicantName', key: 'applicantName', width: 90, render: () => <UserOutlined style={{ marginRight: 4 }} /> },
+    { title: '申请人', dataIndex: 'applicantName', key: 'applicantName', width: 90, render: (_, record) => (
+      <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <UserOutlined style={{ color: '#94a3b8', fontSize: 11 }} />
+        {record.applicantName}
+      </span>
+    )},
     { title: '基地', dataIndex: 'baseName', key: 'baseName', ellipsis: true },
     {
       title: '服务类型', dataIndex: 'serviceType', key: 'serviceType', width: 110,
@@ -361,9 +416,9 @@ const SocialService: React.FC = () => {
       render: (s: string) => <Tag color={FINANCE_STATUS_COLOR[s]}>{FINANCE_STATUS_MAP[s]}</Tag>,
     },
     {
-      title: '操作', key: 'action', width: 90,
+      title: '操作', key: 'action', width: 80,
       render: (_: unknown, record: FinanceService) => (
-        <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingFinance(record); setFinanceModalMode('view'); setFinanceModalOpen(true); }}>详情</Button>
+        <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => { setViewingFinance(record); setFinanceModalMode('view'); setFinanceModalOpen(true); }} style={{ padding: '0 4px' }}>详情</Button>
       ),
     },
   ];
@@ -465,15 +520,28 @@ const SocialService: React.FC = () => {
   };
 
   // ============================================================
-  // Tab 配置
+  // Tab 配置 — 带徽标计数
   // ============================================================
   const tabItems = [
     {
       key: 'tech',
-      label: <span><SolutionOutlined /> 农技服务</span>,
+      label: (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <SolutionOutlined />
+          农技服务
+          {kpiData.tech.pending > 0 && (
+            <span style={{
+              background: '#fef3c7', color: '#d97706',
+              fontSize: 10, fontWeight: 700,
+              padding: '1px 5px', borderRadius: 8,
+              lineHeight: '16px',
+            }}>{kpiData.tech.pending}</span>
+          )}
+        </span>
+      ),
       children: (
         <>
-          <Row gutter={[12, 12]} style={{ marginBottom: 12 }}>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
             <Col xs={12} sm={6}>
               <KpiCard title="累计指导" value={kpiData.tech.total} suffix="次" icon={<SolutionOutlined />} iconBg="rgba(16,185,129,0.1)" iconColor="#10b981" />
             </Col>
@@ -487,20 +555,37 @@ const SocialService: React.FC = () => {
               <KpiCard title="平均评分" value={kpiData.tech.avgRating} suffix="分" icon={<RiseOutlined />} iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1" />
             </Col>
           </Row>
-          <Card bordered={false} style={{ borderRadius: 8, marginBottom: 12 }} styles={{ body: { padding: '12px 16px' } }}>
-            <Row gutter={12} align="middle">
-              <Col xs={24} sm={12} md={8}>
-                <Input prefix={<SearchOutlined style={{ color: '#94a3b8' }} />} placeholder="搜索农户/基地/专家" allowClear />
+          {/* 筛选工具条 */}
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10, marginBottom: 12 }}
+            styles={{ body: { padding: '10px 14px' } }}
+          >
+            <Row gutter={10} align="middle">
+              <Col xs={24} sm={10} md={8}>
+                <Input
+                  prefix={<SearchOutlined style={{ color: '#94a3b8' }} />}
+                  placeholder="搜索农户 / 基地 / 专家"
+                  allowClear
+                  size="middle"
+                />
               </Col>
-              <Col style={{ marginLeft: 'auto' }}>
-                <Space>
-                  <Select placeholder="状态筛选" allowClear style={{ width: 120 }} options={[{ value: 'pending', label: '待处理' }, { value: 'processing', label: '处理中' }, { value: 'completed', label: '已完成' }, { value: 'evaluated', label: '已评价' }]} />
-                  <Button type="primary" icon={<PlusOutlined />} onClick={() => { guideForm.resetFields(); setGuideModalMode('add'); setGuideModalOpen(true); }}>预约指导</Button>
-                </Space>
+              <Col xs={24} sm={10} md={6}>
+                <Select placeholder="状态筛选" allowClear style={{ width: '100%' }} size="middle" options={[
+                  { value: 'pending', label: '待处理' },
+                  { value: 'processing', label: '处理中' },
+                  { value: 'completed', label: '已完成' },
+                  { value: 'evaluated', label: '已评价' },
+                ]} />
+              </Col>
+              <Col xs={24} sm={4} md={{ span: 4, offset: 6 }}>
+                <Button type="primary" icon={<PlusOutlined />} block onClick={() => { guideForm.resetFields(); setGuideModalMode('add'); setGuideModalOpen(true); }}>
+                  预约指导
+                </Button>
               </Col>
             </Row>
           </Card>
-          <Card bordered={false} style={{ borderRadius: 8 }} styles={{ body: { padding: 0 } }}>
+          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: 0 } }}>
             <Table columns={guideColumns} dataSource={guides} rowKey="id" pagination={{ pageSize: 8, showTotal: (t) => `共 ${t} 条` }} size="middle" />
           </Card>
         </>
@@ -508,10 +593,23 @@ const SocialService: React.FC = () => {
     },
     {
       key: 'machinery',
-      label: <span><ToolOutlined /> 农机共享</span>,
+      label: (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <ToolOutlined />
+          农机共享
+          {kpiData.machinery.idle > 0 && (
+            <span style={{
+              background: '#dcfce7', color: '#16a34a',
+              fontSize: 10, fontWeight: 700,
+              padding: '1px 5px', borderRadius: 8,
+              lineHeight: '16px',
+            }}>{kpiData.machinery.idle}</span>
+          )}
+        </span>
+      ),
       children: (
         <>
-          <Row gutter={[12, 12]} style={{ marginBottom: 12 }}>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
             <Col xs={12} sm={6}>
               <KpiCard title="农机总数" value={kpiData.machinery.total} suffix="台" icon={<ToolOutlined />} iconBg="rgba(6,182,212,0.1)" iconColor="#06b6d4" />
             </Col>
@@ -522,30 +620,97 @@ const SocialService: React.FC = () => {
               <KpiCard title="使用率" value={kpiData.machinery.usageRate} suffix="%" icon={<CarOutlined />} iconBg="rgba(245,158,11,0.1)" iconColor="#f59e0b" />
             </Col>
             <Col xs={12} sm={6}>
-              <KpiCard title="本月租金收入" value={kpiData.machinery.monthlyFee} prefix="¥" icon={<BankOutlined />} iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1" />
+              <KpiCard title="本月租金收入" value={kpiData.machinery.monthlyFee} prefix={<span style={{ fontSize: 16 }}>¥</span>} icon={<BankOutlined />} iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1" />
             </Col>
           </Row>
-          <Row gutter={[12, 12]}>
-            <Col xs={24} xl={14}>
-              <Card bordered={false} style={{ borderRadius: 8 }} headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9' }} title={<span style={{ color: '#374151' }}>农机设备</span>} styles={{ body: { padding: 0 } }}>
-                <Table columns={machineryColumns} dataSource={machinery} rowKey="id" pagination={false} size="middle" />
-              </Card>
-            </Col>
-            <Col xs={24} xl={10}>
-              <Card bordered={false} style={{ borderRadius: 8 }} headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9' }} title={<span style={{ color: '#374151' }}>预约记录</span>}>
-                <Table columns={bookingColumns} dataSource={bookings} rowKey="id" pagination={{ pageSize: 6 }} size="small" />
-              </Card>
-            </Col>
-          </Row>
+
+          {/* 设备横向卡片 — 更紧凑的网格 */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+            gap: 10,
+            marginBottom: 12,
+          }}>
+            {machinery.map((m) => {
+              const statusColor = m.status === 'idle' ? '#10b981' : m.status === 'in_use' ? '#06b6d4' : '#f59e0b';
+              const statusBg = m.status === 'idle' ? 'rgba(16,185,129,0.08)' : m.status === 'in_use' ? 'rgba(6,182,212,0.08)' : 'rgba(245,158,11,0.08)';
+              const statusLabel = m.status === 'idle' ? '空闲' : m.status === 'in_use' ? '使用中' : '维护中';
+              return (
+                <Card
+                  key={m.id}
+                  bordered={false}
+                  style={{
+                    borderRadius: 10,
+                    border: '1px solid #f1f5f9',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  styles={{ body: { padding: '12px 14px' } }}
+                  className="card-interactive"
+                  hoverable
+                  onClick={() => { bookingForm.setFieldsValue({ machineryId: m.id, machineryName: m.name, dailyRate: m.dailyRate }); setBookingModalOpen(true); }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', lineHeight: 1.3, flex: 1, marginRight: 8 }}>{m.name}</div>
+                    <span style={{
+                      fontSize: 10, fontWeight: 600,
+                      color: statusColor,
+                      background: statusBg,
+                      padding: '2px 7px', borderRadius: 6,
+                      whiteSpace: 'nowrap',
+                    }}>{statusLabel}</span>
+                  </div>
+                  <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 8 }}>{m.model} · {m.type}</div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <span style={{ fontSize: 15, color: '#f59e0b', fontWeight: 700 }}>¥{m.dailyRate}<span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 400 }}>/天</span></span>
+                    <span style={{ fontSize: 11, color: '#64748b' }}>{m.serviceArea}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 12, paddingTop: 8, borderTop: '1px solid #f1f5f9' }}>
+                    <span style={{ fontSize: 11, color: '#64748b' }}>累计 <strong style={{ color: '#374151' }}>{m.totalUses}</strong> 次</span>
+                    <span style={{ fontSize: 11, color: '#64748b' }}>本月 <strong style={{ color: '#374151' }}>{m.thisMonthUses}</strong> 次</span>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10 }}
+            headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9', paddingLeft: 4 }}
+            title={<span style={{ color: '#374151' }}>预约记录</span>}
+            styles={{ body: { padding: '8px 4px' } }}
+          >
+            <Table
+              columns={bookingColumns}
+              dataSource={bookings}
+              rowKey="id"
+              pagination={{ pageSize: 5, showTotal: (t) => `共 ${t} 条`, size: 'small' }}
+              size="small"
+            />
+          </Card>
         </>
       ),
     },
     {
       key: 'pest',
-      label: <span><ExperimentOutlined /> 统防统治</span>,
+      label: (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <ExperimentOutlined />
+          统防统治
+          {kpiData.pest.executing > 0 && (
+            <span style={{
+              background: '#ede9fe', color: '#7c3aed',
+              fontSize: 10, fontWeight: 700,
+              padding: '1px 5px', borderRadius: 8,
+              lineHeight: '16px',
+            }}>{kpiData.pest.executing}</span>
+          )}
+        </span>
+      ),
       children: (
         <>
-          <Row gutter={[12, 12]} style={{ marginBottom: 12 }}>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
             <Col xs={12} sm={6}>
               <KpiCard title="任务总数" value={kpiData.pest.total} suffix="个" icon={<ExperimentOutlined />} iconBg="rgba(245,158,11,0.1)" iconColor="#f59e0b" />
             </Col>
@@ -559,20 +724,31 @@ const SocialService: React.FC = () => {
               <KpiCard title="累计覆盖" value={kpiData.pest.totalCoverage} suffix="亩" valueStyle={{ color: '#06b6d4' }} icon={<TeamOutlined />} iconBg="rgba(6,182,212,0.1)" iconColor="#06b6d4" />
             </Col>
           </Row>
-          <Card bordered={false} style={{ borderRadius: 8, marginBottom: 12 }} styles={{ body: { padding: '12px 16px' } }}>
-            <Row gutter={12} align="middle">
-              <Col xs={24} sm={12} md={8}>
-                <Input prefix={<SearchOutlined style={{ color: '#94a3b8' }} />} placeholder="搜索任务/区域/执行人" allowClear />
+          {/* 筛选工具条 */}
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10, marginBottom: 12 }}
+            styles={{ body: { padding: '10px 14px' } }}
+          >
+            <Row gutter={10} align="middle">
+              <Col xs={24} sm={10} md={8}>
+                <Input prefix={<SearchOutlined style={{ color: '#94a3b8' }} />} placeholder="搜索任务 / 区域 / 执行人" allowClear size="middle" />
               </Col>
-              <Col style={{ marginLeft: 'auto' }}>
-                <Space>
-                  <Select placeholder="状态筛选" allowClear style={{ width: 120 }} options={[{ value: 'planned', label: '已计划' }, { value: 'executing', label: '执行中' }, { value: 'completed', label: '已完成' }]} />
-                  <Button type="primary" icon={<PlusOutlined />} onClick={() => { pestForm.resetFields(); setPestModalMode('add'); setPestModalOpen(true); }}>新增任务</Button>
-                </Space>
+              <Col xs={24} sm={10} md={6}>
+                <Select placeholder="状态筛选" allowClear style={{ width: '100%' }} size="middle" options={[
+                  { value: 'planned', label: '已计划' },
+                  { value: 'executing', label: '执行中' },
+                  { value: 'completed', label: '已完成' },
+                ]} />
+              </Col>
+              <Col xs={24} sm={4} md={{ span: 4, offset: 6 }}>
+                <Button type="primary" icon={<PlusOutlined />} block onClick={() => { pestForm.resetFields(); setPestModalMode('add'); setPestModalOpen(true); }}>
+                  新增任务
+                </Button>
               </Col>
             </Row>
           </Card>
-          <Card bordered={false} style={{ borderRadius: 8 }} styles={{ body: { padding: 0 } }}>
+          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: 0 } }}>
             <Table columns={pestColumns} dataSource={pestTasks} rowKey="id" pagination={{ pageSize: 8 }} size="middle" />
           </Card>
         </>
@@ -580,10 +756,23 @@ const SocialService: React.FC = () => {
     },
     {
       key: 'finance',
-      label: <span><BankOutlined /> 金融服务</span>,
+      label: (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <BankOutlined />
+          金融服务
+          {kpiData.finance.pending > 0 && (
+            <span style={{
+              background: '#fef3c7', color: '#d97706',
+              fontSize: 10, fontWeight: 700,
+              padding: '1px 5px', borderRadius: 8,
+              lineHeight: '16px',
+            }}>{kpiData.finance.pending}</span>
+          )}
+        </span>
+      ),
       children: (
         <>
-          <Row gutter={[12, 12]} style={{ marginBottom: 12 }}>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
             <Col xs={12} sm={6}>
               <KpiCard title="服务总数" value={kpiData.finance.total} suffix="笔" icon={<BankOutlined />} iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1" />
             </Col>
@@ -591,47 +780,73 @@ const SocialService: React.FC = () => {
               <KpiCard title="待审核" value={kpiData.finance.pending} suffix="笔" valueStyle={{ color: '#f59e0b' }} icon={<ClockCircleOutlined />} iconBg="rgba(245,158,11,0.1)" iconColor="#f59e0b" />
             </Col>
             <Col xs={12} sm={6}>
-              <KpiCard title="已放款总额" value={kpiData.finance.disbursed} prefix="¥" icon={<RiseOutlined />} iconBg="rgba(16,185,129,0.1)" iconColor="#10b981" />
+              <KpiCard title="已放款总额" value={kpiData.finance.disbursed} prefix={<span style={{ fontSize: 16 }}>¥</span>} icon={<RiseOutlined />} iconBg="rgba(16,185,129,0.1)" iconColor="#10b981" />
             </Col>
             <Col xs={12} sm={6}>
               <KpiCard title="通过率" value={Math.round((kpiData.finance.approved / kpiData.finance.total) * 100)} suffix="%" valueStyle={{ color: '#06b6d4' }} icon={<CheckCircleOutlined />} iconBg="rgba(6,182,212,0.1)" iconColor="#06b6d4" />
             </Col>
           </Row>
           {/* 金融政策卡片 */}
-          <Row gutter={[12, 12]} style={{ marginBottom: 12 }}>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
             {[
-              { title: '石斛种植贷', desc: '最高50万元，利率3.85%，政府贴息30%', bg: 'rgba(16,185,129,0.06)', border: '#10b981', icon: '💰' },
-              { title: '气象指数保险', desc: '保费政府补贴60%，触发理赔自动到账', bg: 'rgba(6,182,212,0.06)', border: '#06b6d4', icon: '🌦️' },
-              { title: '有机肥补贴', desc: '每亩补贴200元，认证基地优先', bg: 'rgba(245,158,11,0.06)', border: '#f59e0b', icon: '🌱' },
+              { title: '石斛种植贷', desc: '最高50万元，利率3.85%，政府贴息30%', bg: 'rgba(16,185,129,0.05)', border: '#10b981', accent: '#10b981' },
+              { title: '气象指数保险', desc: '保费政府补贴60%，触发理赔自动到账', bg: 'rgba(6,182,212,0.05)', border: '#06b6d4', accent: '#06b6d4' },
+              { title: '有机肥补贴', desc: '每亩补贴200元，认证基地优先', bg: 'rgba(245,158,11,0.05)', border: '#f59e0b', accent: '#f59e0b' },
             ].map((policy, i) => (
               <Col xs={24} sm={8} key={i}>
-                <Card bordered={false} style={{ borderRadius: 10, borderLeft: `3px solid ${policy.border}`, background: policy.bg }} styles={{ body: { padding: '12px 16px' } }} className="card-interactive">
-                  <div className="flex items-center gap-3">
-                    <span style={{ fontSize: 24 }}>{policy.icon}</span>
+                <Card
+                  bordered={false}
+                  style={{
+                    borderRadius: 10,
+                    borderLeft: `3px solid ${policy.border}`,
+                    background: policy.bg,
+                  }}
+                  styles={{ body: { padding: '12px 16px' } }}
+                  className="card-interactive"
+                  hoverable
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{
+                      width: 38, height: 38, borderRadius: 8,
+                      background: '#fff',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <BankOutlined style={{ fontSize: 18, color: policy.accent }} />
+                    </div>
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 2 }}>{policy.title}</div>
-                      <div style={{ fontSize: 11, color: '#64748b' }}>{policy.desc}</div>
+                      <div style={{ fontWeight: 600, fontSize: 13, color: '#1e293b', marginBottom: 2 }}>{policy.title}</div>
+                      <div style={{ fontSize: 11, color: '#64748b', lineHeight: 1.4 }}>{policy.desc}</div>
                     </div>
                   </div>
                 </Card>
               </Col>
             ))}
           </Row>
-          <Card bordered={false} style={{ borderRadius: 8, marginBottom: 12 }} styles={{ body: { padding: '12px 16px' } }}>
-            <Row gutter={12} align="middle">
-              <Col xs={24} sm={12} md={8}>
-                <Input prefix={<SearchOutlined style={{ color: '#94a3b8' }} />} placeholder="搜索申请人/基地" allowClear />
+          {/* 筛选工具条 */}
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10, marginBottom: 12 }}
+            styles={{ body: { padding: '10px 14px' } }}
+          >
+            <Row gutter={10} align="middle">
+              <Col xs={24} sm={8} md={6}>
+                <Input prefix={<SearchOutlined style={{ color: '#94a3b8' }} />} placeholder="搜索申请人 / 基地" allowClear size="middle" />
               </Col>
-              <Col style={{ marginLeft: 'auto' }}>
-                <Space>
-                  <Select placeholder="服务类型" allowClear style={{ width: 120 }} options={FINANCE_TYPE_OPTIONS} />
-                  <Select placeholder="状态筛选" allowClear style={{ width: 120 }} options={FINANCE_STATUS_OPTIONS} />
-                  <Button type="primary" icon={<PlusOutlined />} onClick={() => { financeForm.resetFields(); setFinanceModalMode('add'); setFinanceModalOpen(true); }}>申请服务</Button>
-                </Space>
+              <Col xs={12} sm={6} md={4}>
+                <Select placeholder="服务类型" allowClear style={{ width: '100%' }} size="middle" options={FINANCE_TYPE_OPTIONS} />
+              </Col>
+              <Col xs={12} sm={6} md={4}>
+                <Select placeholder="状态筛选" allowClear style={{ width: '100%' }} size="middle" options={FINANCE_STATUS_OPTIONS} />
+              </Col>
+              <Col xs={24} sm={4} md={{ span: 4, offset: 6 }}>
+                <Button type="primary" icon={<PlusOutlined />} block onClick={() => { financeForm.resetFields(); setFinanceModalMode('add'); setFinanceModalOpen(true); }}>
+                  申请服务
+                </Button>
               </Col>
             </Row>
           </Card>
-          <Card bordered={false} style={{ borderRadius: 8 }} styles={{ body: { padding: 0 } }}>
+          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: 0 } }}>
             <Table columns={financeColumns} dataSource={finance} rowKey="id" pagination={{ pageSize: 8 }} size="middle" />
           </Card>
         </>
@@ -639,55 +854,105 @@ const SocialService: React.FC = () => {
     },
     {
       key: 'trend',
-      label: <span><RiseOutlined /> 服务趋势</span>,
+      label: (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <RiseOutlined />
+          服务趋势
+        </span>
+      ),
       children: (
         <>
-          <Card bordered={false} style={{ borderRadius: 8 }} headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9' }} title={<span style={{ color: '#374151' }}>月度服务统计趋势</span>}>
-            <ReactECharts option={monthlyTrendOption} style={{ height: 320 }} />
-          </Card>
-          <Row gutter={[12, 12]} style={{ marginTop: 12 }}>
-            <Col xs={24} sm={8}>
-              <Card bordered={false} style={{ borderRadius: 8 }} headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9' }} title={<span style={{ color: '#374151' }}>专家库</span>}>
-                {mockExperts.map((expert) => (
-                  <div key={expert.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1px solid #f1f5f9' }}>
-                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: CHART_COLORS.primary + '20', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: CHART_COLORS.primary }}>
-                      <UserOutlined />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: 13 }}>{expert.name}</div>
-                      <div style={{ fontSize: 11, color: '#64748b' }}>{expert.title} · {expert.specialty}</div>
-                      <Rate disabled value={expert.rating} style={{ fontSize: 11 }} />
-                    </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: 11, color: '#64748b' }}>累计指导</div>
-                      <div style={{ fontWeight: 600, color: CHART_COLORS.primary }}>{expert.totalGuides}次</div>
-                    </div>
-                  </div>
-                ))}
-              </Card>
+          <Row gutter={[10, 10]} style={{ marginBottom: 12 }}>
+            <Col xs={12} sm={6}>
+              <KpiCard title="农技指导" value={128} suffix="次" icon={<SolutionOutlined />} iconBg="rgba(16,185,129,0.1)" iconColor="#10b981" />
             </Col>
-            <Col xs={24} sm={16}>
-              <Card bordered={false} style={{ borderRadius: 8 }} headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9' }} title={<span style={{ color: '#374151' }}>服务汇总统计</span>}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '4px 0' }}>
-                  {[
-                    { label: '农技指导（次）', value: 128, max: 200, color: CHART_COLORS.primary },
-                    { label: '农机租赁（台次）', value: 186, max: 300, color: CHART_COLORS.secondary },
-                    { label: '统防统治（次）', value: 72, max: 200, color: CHART_COLORS.accent },
-                    { label: '金融服务（笔）', value: 46, max: 100, color: CHART_COLORS.purple },
-                    { label: '覆盖农户（户）', value: 1240, max: 2000, color: CHART_COLORS.pink },
-                  ].map((item, i) => (
-                    <div key={i}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                        <span style={{ fontSize: 12, color: '#374151' }}>{item.label}</span>
-                        <span style={{ fontSize: 12, fontWeight: 600, color: item.color }}>{item.value}</span>
-                      </div>
-                      <Progress percent={Math.round((item.value / item.max) * 100)} size="small" showInfo={false} strokeColor={item.color} trailColor="#e2e8f0" />
-                    </div>
-                  ))}
-                </div>
-              </Card>
+            <Col xs={12} sm={6}>
+              <KpiCard title="农机租赁" value={186} suffix="台次" icon={<ToolOutlined />} iconBg="rgba(6,182,212,0.1)" iconColor="#06b6d4" />
+            </Col>
+            <Col xs={12} sm={6}>
+              <KpiCard title="统防统治" value={72} suffix="次" icon={<ExperimentOutlined />} iconBg="rgba(245,158,11,0.1)" iconColor="#f59e0b" />
+            </Col>
+            <Col xs={12} sm={6}>
+              <KpiCard title="金融服务" value={46} suffix="笔" icon={<BankOutlined />} iconBg="rgba(99,102,241,0.1)" iconColor="#6366f1" />
             </Col>
           </Row>
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10, marginBottom: 12 }}
+            headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9', paddingLeft: 4 }}
+            title={<span style={{ color: '#374151' }}>月度服务统计趋势</span>}
+          >
+            <ReactECharts option={monthlyTrendOption} style={{ height: 320 }} />
+          </Card>
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10, marginBottom: 10 }}
+            headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9', paddingLeft: 4 }}
+            title={<span style={{ color: '#374151' }}>专家库</span>}
+            styles={{ body: { padding: '4px 4px 12px' } }}
+          >
+            <Row gutter={[8, 0]}>
+              {mockExperts.map((expert) => (
+                <Col xs={12} sm={6} key={expert.id}>
+                  <div style={{ padding: '12px 12px', borderRight: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: '50%',
+                      background: CHART_COLORS.primary + '18',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: 16, color: CHART_COLORS.primary,
+                      flexShrink: 0,
+                    }}>
+                      <UserOutlined />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ fontWeight: 600, fontSize: 13, color: '#1e293b' }}>{expert.name}</span>
+                        <span style={{ fontSize: 10, color: '#10b981', background: 'rgba(16,185,129,0.08)', padding: '1px 5px', borderRadius: 4 }}>{expert.rating}</span>
+                      </div>
+                      <div style={{ fontSize: 11, color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{expert.title} · {expert.specialty}</div>
+                    </div>
+                    <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                      <div style={{ fontSize: 10, color: '#94a3b8' }}>累计指导</div>
+                      <div style={{ fontWeight: 700, color: CHART_COLORS.primary }}>{expert.totalGuides}次</div>
+                    </div>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </Card>
+          <Card
+            bordered={false}
+            style={{ borderRadius: 10 }}
+            headStyle={{ fontSize: 13, fontWeight: 600, borderBottom: '1px solid #f1f5f9', paddingLeft: 4 }}
+            title={<span style={{ color: '#374151' }}>服务汇总统计</span>}
+            styles={{ body: { padding: '12px 16px' } }}
+          >
+            <Row gutter={[16, 12]}>
+              {[
+                { label: '农技指导', value: 128, max: 200, color: CHART_COLORS.primary },
+                { label: '农机租赁', value: 186, max: 300, color: CHART_COLORS.secondary },
+                { label: '统防统治', value: 72, max: 200, color: CHART_COLORS.accent },
+                { label: '金融服务', value: 46, max: 100, color: CHART_COLORS.purple },
+                { label: '覆盖农户', value: 1240, max: 2000, color: CHART_COLORS.pink },
+              ].map((item, i) => (
+                <Col xs={24} sm={12} md={8} key={i}>
+                  <div style={{ background: '#f8fafc', borderRadius: 10, padding: '12px 14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                      <span style={{ fontSize: 12, color: '#374151' }}>{item.label}</span>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: item.color }}>{item.value.toLocaleString()}</span>
+                    </div>
+                    <Progress
+                      percent={Math.round((item.value / item.max) * 100)}
+                      size="small"
+                      showInfo={false}
+                      strokeColor={item.color}
+                      trailColor="#e2e8f0"
+                    />
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </Card>
         </>
       ),
     },
@@ -697,11 +962,58 @@ const SocialService: React.FC = () => {
   // 渲染
   // ============================================================
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 20, maxWidth: 1400, margin: '0 auto' }}>
       {/* 页面标题 */}
       <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>社会化服务管理平台</h3>
-        <p className="page-desc">整合区域农机、农技、金融等服务资源，为种植主体提供一站式服务</p>
+        <h3 className="page-title" style={{ margin: '0 0 4px', fontSize: 18, fontWeight: 700, color: '#1e293b' }}>社会化服务管理平台</h3>
+        <p style={{ margin: 0, fontSize: 13, color: '#94a3b8' }}>整合区域农机、农技、金融等服务资源，为种植主体提供一站式服务</p>
+      </div>
+
+      {/* 全局概览条 */}
+      <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+        {(() => {
+          const pendingGuides = guides.filter((g) => g.status === 'pending' || g.status === 'processing').length;
+          const idleMachinery = bookings.filter((b) => b.status === 'booked').length;
+          const activePests = pestTasks.filter((p) => p.status === 'executing' || p.status === 'planned').length;
+          const pendingFinance = finance.filter((f) => f.status === 'pending').length;
+
+          const items = [
+            { icon: <SolutionOutlined />, label: '待处理农技', value: pendingGuides, color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
+            { icon: <ToolOutlined />, label: '农机待执行', value: idleMachinery, color: '#6366f1', bg: 'rgba(99,102,241,0.08)' },
+            { icon: <ExperimentOutlined />, label: '统防任务', value: activePests, color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
+            { icon: <BankOutlined />, label: '待审核金融', value: pendingFinance, color: '#06b6d4', bg: 'rgba(6,182,212,0.08)' },
+          ];
+          return items.map((item) => (
+            <div
+              key={item.label}
+              style={{
+                flex: 1,
+                background: '#fff',
+                borderRadius: 10,
+                border: '1px solid #f1f5f9',
+                padding: '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                cursor: 'default',
+              }}
+            >
+              <div style={{
+                width: 36, height: 36, borderRadius: 8,
+                background: item.bg,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: item.color, fontSize: 16,
+                flexShrink: 0,
+              }}>
+                {item.icon}
+              </div>
+              <div>
+                <div style={{ fontSize: 11, color: '#94a3b8', lineHeight: 1 }}>{item.label}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: item.color, lineHeight: 1.2, marginTop: 3 }}>{item.value}</div>
+              </div>
+            </div>
+          ));
+        })()}
       </div>
 
       <Tabs activeKey={activeTab} onChange={(k) => setActiveTab(k)} items={tabItems} />
@@ -788,9 +1100,13 @@ const SocialService: React.FC = () => {
 
       {/* 农机预约 Modal */}
       <Modal
-        title="农机预约" open={bookingModalOpen}
-        onOk={handleSaveBooking} onCancel={() => setBookingModalOpen(false)}
-        width={480} okText="确认预约" cancelText="取消"
+        title="农机预约"
+        open={bookingModalOpen}
+        onOk={handleSaveBooking}
+        onCancel={() => setBookingModalOpen(false)}
+        width={480}
+        okText="确认预约"
+        cancelText="取消"
       >
         <Form form={bookingForm} layout="vertical" style={{ marginTop: 16 }}>
           <Descriptions column={2} bordered size="small" style={{ marginBottom: 16 }}>
