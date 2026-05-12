@@ -13,6 +13,7 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import ReactECharts from 'echarts-for-react';
 import type { QualityTest, QualityStandard, QualityWarning, TraceRecord, TestResult, InspectionStatus } from '@/types/global';
+import PageHeading from '../../components/PageHeading';
 import {
   INSPECTION_STATUS_MAP, INSPECTION_STATUS_COLOR,
   WARNING_TYPE_LABEL, TRACE_STATUS_MAP, TRACE_STATUS_COLOR,
@@ -647,14 +648,21 @@ const QualityControl: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>产业监管与质控系统</h3>
-        <p className="page-desc">对接药监部门，实现中药材质量全程可追溯与合规监管</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="质量管理"
+        title="产业监管与质控系统"
+        description="对接药监部门，实现中药材质量全程可追溯与合规监管"
+        accentColor="#5db8a6"
+        gradientFrom="#1d2d3d"
+        gradientMid="#2d4252"
+        gradientTo="#3d5267"
+        padding="32px 32px 28px"
+      />
 
-      <Tabs activeKey={activeTab} onChange={(k) => setActiveTab(k)} items={tabItems} />
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        <Tabs activeKey={activeTab} onChange={(k) => setActiveTab(k)} items={tabItems} />
+      </div>
 
       {/* 检测详情 Modal */}
       <Modal

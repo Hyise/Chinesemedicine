@@ -4,6 +4,7 @@ import {
   Progress, Row, Col, Tree, Typography, Divider, Statistic,
   message, Modal,
 } from 'antd';
+import PageHeading from '../../../components/PageHeading';
 import {
   SearchOutlined, PlusOutlined, EditOutlined, DeleteOutlined,
   ExportOutlined, EnvironmentOutlined, MonitorOutlined,
@@ -284,15 +285,18 @@ const PlantingArchives: React.FC = () => {
 
   return (
     <div style={{ background: '#faf9f5', minHeight: '100%' }}>
-      <div style={{ background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.05)', padding: '36px 36px 32px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ fontSize: 12, color: '#cc785c', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 6 }}>种植管理</div>
-          <div style={{ fontSize: 26, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.3px', marginBottom: 6 }}>基地与档案管理</div>
-          <div style={{ fontSize: 13, color: '#6c6a64' }}>管理赤水市各乡镇石斛种植基地档案与物联网数据接入</div>
-        </div>
-      </div>
+      <PageHeading
+        eyebrow="种植管理"
+        title="基地与档案管理"
+        description="管理赤水市各乡镇石斛种植基地档案与物联网数据接入"
+        accentColor="#5db872"
+        gradientFrom="#1a3d2e"
+        gradientMid="#2d5240"
+        gradientTo="#3d6b52"
+        padding="32px 32px 28px"
+      />
 
-      <div style={{ maxWidth: 1680, margin: '0 auto', padding: '28px 36px 48px' }}>
+      <div style={{ maxWidth: 1680, margin: '0 auto', padding: '28px 32px 48px' }}>
         <Row gutter={[20, 20]} style={{ marginBottom: 20 }}>
         <Col xs={24} sm={24} md={5}>
           <Card

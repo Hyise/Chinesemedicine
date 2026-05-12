@@ -199,16 +199,17 @@ const chainStats: ChainStats = {
 // Claude Design — CSS Styles
 // ============================================================
 const css = `
-  /* Unified page header */
-  .trace-header { background: #faf9f5; border-bottom: 1px solid #ebe6df; }
-  .trace-header-inner { max-width: 1200px; margin: 0 auto; padding: 28px 0 24px; display: flex; align-items: center; gap: 24px; }
+  /* Unified page header — matches WMS inventory heading style */
+  .trace-header { background: linear-gradient(135deg, #1d1d1f 0%, #3d2c1e 50%, #5c3d2a 100%); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .trace-header-inner { max-width: 1360px; margin: 0 auto; padding: 32px 32px 28px; display: flex; align-items: center; gap: 24px; }
   .trace-header-left { flex-shrink: 0; }
-  .trace-header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #cc785c; margin-bottom: 6px; }
-  .trace-header-title { font-family: "Tiempos Headline", "Cormorant Garamond", Garamond, "Times New Roman", serif; font-size: 28px; font-weight: 400; color: #141413; line-height: 1.2; margin: 0; }
-  .trace-header-desc { font-size: 14px; color: #6c6a64; line-height: 1.6; flex: 1; }
+  .trace-header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .trace-header-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #5db8a6; box-shadow: 0 0 8px rgba(93,184,166,0.5); flex-shrink: 0; display: inline-block; }
+  .trace-header-title { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 26px; font-weight: 700; color: #fff; line-height: 1.2; margin: 0; letter-spacing: -0.3px; }
+  .trace-header-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; flex: 1; }
 
   .trace-body { background: #faf9f5; }
-  .trace-body-inner { max-width: 1200px; margin: 0 auto; padding: 0; }
+  .trace-body-inner { max-width: 1360px; margin: 0 auto; padding: 0; }
 
   /* KPI Inline (inside tabs) */
   .trace-kpi-inline { display: flex; align-items: stretch; gap: 0; margin-bottom: 12px; border: 1px solid #e6dfd8; border-radius: 10px; overflow: hidden; }

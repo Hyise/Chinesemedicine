@@ -13,6 +13,7 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
 import ReactECharts from 'echarts-for-react';
+import PageHeading from '../../components/PageHeading';
 import type {
   TechGuideRecord, MachineryItem, MachineryBooking, PestControlTask,
   FinanceService, Expert, TechGuideStatus,
@@ -906,15 +907,21 @@ const SocialService: React.FC = () => {
   // 渲染
   // ============================================================
   return (
-    <div style={{ padding: 20, maxWidth: 1400, margin: '0 auto' }}>
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px', fontSize: 18, fontWeight: 700, color: '#1e293b' }}>社会化服务管理平台</h3>
-        <p style={{ margin: 0, fontSize: 13, color: '#94a3b8' }}>整合区域农机、农技、金融等服务资源，为种植主体提供一站式服务</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="社会化服务"
+        title="社会化服务管理平台"
+        description="整合区域农机、农技、金融等服务资源，为种植主体提供一站式服务"
+        accentColor="#e8a55a"
+        gradientFrom="#3d2e1a"
+        gradientMid="#52402d"
+        gradientTo="#67523a"
+        padding="32px 32px 28px"
+      />
 
-      {/* 全局概览条 */}
-      <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* 全局概览条 */}
+        <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
         {(() => {
           const pendingGuides = guides.filter((g) => g.status === 'pending' || g.status === 'processing').length;
           const idleMachinery = bookings.filter((b) => b.status === 'booked').length;
@@ -960,7 +967,9 @@ const SocialService: React.FC = () => {
         })()}
       </div>
 
-      <Tabs activeKey={activeTab} onChange={(k) => setActiveTab(k)} items={tabItems} />
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 32px 32px' }}>
+        <Tabs activeKey={activeTab} onChange={(k) => setActiveTab(k)} items={tabItems} />
+      </div>
 
       {/* 农技指导 Modal */}
       <Modal
@@ -1240,6 +1249,7 @@ const SocialService: React.FC = () => {
           </Form>
         )}
       </Modal>
+      </div>
     </div>
   );
 };

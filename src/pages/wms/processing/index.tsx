@@ -9,6 +9,7 @@ import {
   ExperimentOutlined, ArrowRightOutlined, SwapOutlined, SearchOutlined,
   ExportOutlined, EyeOutlined,
 } from '@ant-design/icons';
+import PageHeading from '../../../components/PageHeading';
 import type { ColumnsType } from 'antd/es/table';
 import {
   processRecords, processingRecipes,
@@ -338,18 +339,24 @@ const WmsProcessing: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 0 }} className="page-container page-enter">
-      {/* 页面标题 */}
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>加工转化与出材率管控</h3>
-        <p className="page-desc">管理鲜条→干条、干条→切片等加工转化流程，监控折干率与损耗</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="WMS · 仓储管理"
+        title="加工转化与出材率管控"
+        description="管理鲜条→干条、干条→切片等加工转化流程，监控折干率与损耗"
+        accentColor="#e8a55a"
+        gradientFrom="#1d1d1f"
+        gradientMid="#3d2c1e"
+        gradientTo="#5c3d2a"
+        padding="32px 32px 28px"
+      />
 
-      {/* 统计 */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
-        <Col span={6}>
-          <Card size="small" className="card-interactive" style={{ borderRadius: 12, textAlign: 'center' }}>
-            <Statistic
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* 统计 */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
+          <Col span={6}>
+            <Card size="small" className="card-interactive" style={{ borderRadius: 12, textAlign: 'center' }}>
+              <Statistic
               title={<Text type="secondary" style={{ fontSize: 11 }}>累计投料</Text>}
               value={totalInput}
               suffix="kg"
@@ -449,6 +456,7 @@ const WmsProcessing: React.FC = () => {
         onSubmit={handleSubmit}
         onCancel={() => { setFormOpen(false); setEditingRecord(null); }}
       />
+      </div>
     </div>
   );
 };

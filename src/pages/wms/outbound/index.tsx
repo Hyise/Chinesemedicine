@@ -5,6 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 import type { OutboundOrder } from '@/types/global';
 import dayjs from 'dayjs';
 import { OUTBOUND_STATUS_MAP } from '@/types/global';
+import PageHeading from '../../../components/PageHeading';
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -118,151 +119,159 @@ const WmsOutbound: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <div style={{ marginBottom: 16 }}>
-        <h3 className="page-title" style={{ margin: '0 0 4px' }}>出库管理</h3>
-        <p className="page-desc">管理中药材出库订单、物流跟踪与客户发货</p>
-      </div>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="WMS · 仓储管理"
+        title="出库管理"
+        description="管理中药材出库订单、物流跟踪与客户发货"
+        accentColor="#5db8a6"
+        gradientFrom="#1d1d1f"
+        gradientMid="#3d2c1e"
+        gradientTo="#5c3d2a"
+        padding="32px 32px 28px"
+      />
 
-      {/* KPI */}
-      <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
-        <Col xs={12} sm={6}>
-          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
-            <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>出库单总数</Text>} value={dataSource.length} valueStyle={{ fontSize: 22, color: '#1677ff' }} />
-          </Card>
-        </Col>
-        <Col xs={12} sm={6}>
-          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
-            <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>待处理</Text>} value={pendingCount} valueStyle={{ fontSize: 22, color: '#f59e0b' }} />
-          </Card>
-        </Col>
-        <Col xs={12} sm={6}>
-          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
-            <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>已发货</Text>} value={shippedCount} valueStyle={{ fontSize: 22, color: '#06b6d4' }} />
-          </Card>
-        </Col>
-        <Col xs={12} sm={6}>
-          <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
-            <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>出库总量</Text>} value={totalQty.toLocaleString()} suffix="kg" valueStyle={{ fontSize: 22, color: '#ef4444' }} />
-          </Card>
-        </Col>
-      </Row>
-
-      <Card bordered={false} style={{ borderRadius: 10, marginBottom: 14 }} styles={{ body: { padding: '12px 16px' } }}>
-        <Row gutter={[12, 12]} align="middle">
-          <Col xs={24} sm={12} md={8}>
-            <Input prefix={<SearchOutlined />} placeholder="搜索单号/批次/药材/客户" value={searchText} onChange={e => setSearchText(e.target.value)} allowClear />
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '20px 32px 32px' }}>
+        {/* KPI */}
+        <Row gutter={[12, 12]} style={{ marginBottom: 14 }}>
+          <Col xs={12} sm={6}>
+            <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
+              <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>出库单总数</Text>} value={dataSource.length} valueStyle={{ fontSize: 22, color: '#1677ff' }} />
+            </Card>
           </Col>
-          <Col xs={12} sm={6} md={4}>
-            <Select placeholder="状态筛选" style={{ width: '100%' }} allowClear value={statusFilter} onChange={setStatusFilter}>
-              <Option value="pending">待处理</Option><Option value="confirmed">已确认</Option><Option value="shipped">已发货</Option><Option value="completed">已完成</Option>
-            </Select>
+          <Col xs={12} sm={6}>
+            <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
+              <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>待处理</Text>} value={pendingCount} valueStyle={{ fontSize: 22, color: '#f59e0b' }} />
+            </Card>
           </Col>
-          <Col style={{ marginLeft: 'auto' }}>
-            <Space>
-              <Button icon={<ExportOutlined />} onClick={handleExport}>导出</Button>
-              <Button type="primary" icon={<PlusOutlined />} onClick={() => { addForm.resetFields(); setAddModalOpen(true); }}>新增出库</Button>
-            </Space>
+          <Col xs={12} sm={6}>
+            <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
+              <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>已发货</Text>} value={shippedCount} valueStyle={{ fontSize: 22, color: '#06b6d4' }} />
+            </Card>
+          </Col>
+          <Col xs={12} sm={6}>
+            <Card bordered={false} style={{ borderRadius: 10 }} styles={{ body: { padding: '12px 16px', textAlign: 'center' } }}>
+              <Statistic title={<Text type="secondary" style={{ fontSize: 11 }}>出库总量</Text>} value={totalQty.toLocaleString()} suffix="kg" valueStyle={{ fontSize: 22, color: '#ef4444' }} />
+            </Card>
           </Col>
         </Row>
-      </Card>
 
-      <Card bordered={false} style={{ borderRadius: 8 }}>
-        <Table columns={columns} dataSource={filteredData} rowKey="id" pagination={{ pageSize: 10, showSizeChanger: true, showTotal: t => `共 ${t} 条` }} scroll={{ x: 1400 }} size="middle" />
-      </Card>
-
-      {/* 详情抽屉 */}
-      <Drawer
-        title={<Space><EyeOutlined style={{ color: '#1677ff' }} />出库详情</Space>}
-        placement="right" width={520}
-        open={detailDrawer.open}
-        onClose={() => setDetailDrawer({ open: false, record: null })}
-      >
-        {detailDrawer.record && (
-          <>
-            <div style={{ background: '#f8fafc', borderRadius: 8, padding: '12px 16px', marginBottom: 16 }}>
-              <Row gutter={[16, 8]}>
-                <Col span={12}><Text type="secondary" style={{ fontSize: 11 }}>出库单号</Text><div style={{ fontWeight: 700, fontSize: 15, color: '#6366f1', fontFamily: 'monospace' }}>{detailDrawer.record.outboundNo}</div></Col>
-                <Col span={12}><Text type="secondary" style={{ fontSize: 11 }}>批次号</Text><div style={{ fontFamily: 'monospace', fontWeight: 600 }}>{detailDrawer.record.batchNo}</div></Col>
-              </Row>
-            </div>
-            <Descriptions column={2} bordered size="small">
-              <Descriptions.Item label="药材"><Text strong>{detailDrawer.record.herbName}</Text></Descriptions.Item>
-              <Descriptions.Item label="出库数量"><Text strong style={{ color: '#ef4444' }}>{detailDrawer.record.quantity.toLocaleString()} {detailDrawer.record.unit}</Text></Descriptions.Item>
-              <Descriptions.Item label="仓库">{detailDrawer.record.warehouse}</Descriptions.Item>
-              <Descriptions.Item label="库位"><Tag color="blue">{detailDrawer.record.location}</Tag></Descriptions.Item>
-              <Descriptions.Item label="客户" span={2}>{detailDrawer.record.customer}</Descriptions.Item>
-              <Descriptions.Item label="出库日期">{detailDrawer.record.outboundDate}</Descriptions.Item>
-              <Descriptions.Item label="处理人">{detailDrawer.record.handler || '—'}</Descriptions.Item>
-              <Descriptions.Item label="状态"><Tag color={statusColorMap[detailDrawer.record.status]}>{OUTBOUND_STATUS_MAP[detailDrawer.record.status]}</Tag></Descriptions.Item>
-              {detailDrawer.record.remark && <Descriptions.Item label="备注" span={2}>{detailDrawer.record.remark}</Descriptions.Item>}
-              <Descriptions.Item label="创建时间" span={2}>{detailDrawer.record.createdAt}</Descriptions.Item>
-            </Descriptions>
-          </>
-        )}
-      </Drawer>
-
-      {/* 新增出库 Modal */}
-      <Modal
-        title={<Space><PlusOutlined style={{ color: '#1677ff' }} />新增出库</Space>}
-        open={addModalOpen}
-        onOk={handleAddOutbound}
-        onCancel={() => { setAddModalOpen(false); addForm.resetFields(); }}
-        okText="确认创建"
-        cancelText="取消"
-        width={640}
-        destroyOnClose
-      >
-        <Form form={addForm} layout="vertical" style={{ marginTop: 16 }}>
-          <Row gutter={12}>
-            <Col span={12}>
-              <Form.Item label="药材名称" name="herbName" rules={[{ required: true, message: '请输入药材名称' }]}>
-                <Input placeholder="如：金钗石斛、鲜石斛" />
-              </Form.Item>
+        <Card bordered={false} style={{ borderRadius: 10, marginBottom: 14 }} styles={{ body: { padding: '12px 16px' } }}>
+          <Row gutter={[12, 12]} align="middle">
+            <Col xs={24} sm={12} md={8}>
+              <Input prefix={<SearchOutlined />} placeholder="搜索单号/批次/药材/客户" value={searchText} onChange={e => setSearchText(e.target.value)} allowClear />
             </Col>
-            <Col span={12}>
-              <Form.Item label="批次号" name="batchNo" rules={[{ required: true, message: '请输入批次号' }]}>
-                <Input placeholder="如：HQ-20260401" />
-              </Form.Item>
+            <Col xs={12} sm={6} md={4}>
+              <Select placeholder="状态筛选" style={{ width: '100%' }} allowClear value={statusFilter} onChange={setStatusFilter}>
+                <Option value="pending">待处理</Option><Option value="confirmed">已确认</Option><Option value="shipped">已发货</Option><Option value="completed">已完成</Option>
+              </Select>
             </Col>
-            <Col span={12}>
-              <Form.Item label="出库数量" name="quantity" rules={[{ required: true, message: '请输入数量' }]}>
-                <InputNumber min={0.1} style={{ width: '100%' }} addonAfter="kg" placeholder="0.00" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="出库日期" name="outboundDate" rules={[{ required: true, message: '请选择出库日期' }]}>
-                <DatePicker style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="仓库" name="warehouse" rules={[{ required: true, message: '请选择仓库' }]}>
-                <Select placeholder="请选择仓库">
-                  <Option value="赤水中心仓">赤水中心仓</Option>
-                  <Option value="旺隆分仓">旺隆分仓</Option>
-                  <Option value="丙安分仓">丙安分仓</Option>
-                  <Option value="两河口分仓">两河口分仓</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="库位" name="location" rules={[{ required: true, message: '请输入库位' }]}>
-                <Input placeholder="如：A-01-03" />
-              </Form.Item>
-            </Col>
-            <Col span={24}>
-              <Form.Item label="客户" name="customer" rules={[{ required: true, message: '请输入客户信息' }]}>
-                <Input placeholder="如：华润三九医药股份有限公司-李总" />
-              </Form.Item>
-            </Col>
-            <Col span={24}>
-              <Form.Item label="备注" name="remark">
-                <Input.TextArea rows={2} placeholder="备注信息（可选）" />
-              </Form.Item>
+            <Col style={{ marginLeft: 'auto' }}>
+              <Space>
+                <Button icon={<ExportOutlined />} onClick={handleExport}>导出</Button>
+                <Button type="primary" icon={<PlusOutlined />} onClick={() => { addForm.resetFields(); setAddModalOpen(true); }}>新增出库</Button>
+              </Space>
             </Col>
           </Row>
-        </Form>
-      </Modal>
+        </Card>
+
+        <Card bordered={false} style={{ borderRadius: 8 }}>
+          <Table columns={columns} dataSource={filteredData} rowKey="id" pagination={{ pageSize: 10, showSizeChanger: true, showTotal: t => `共 ${t} 条` }} scroll={{ x: 1400 }} size="middle" />
+        </Card>
+
+        {/* 详情抽屉 */}
+        <Drawer
+          title={<Space><EyeOutlined style={{ color: '#1677ff' }} />出库详情</Space>}
+          placement="right" width={520}
+          open={detailDrawer.open}
+          onClose={() => setDetailDrawer({ open: false, record: null })}
+        >
+          {detailDrawer.record && (
+            <>
+              <div style={{ background: '#f8fafc', borderRadius: 8, padding: '12px 16px', marginBottom: 16 }}>
+                <Row gutter={[16, 8]}>
+                  <Col span={12}><Text type="secondary" style={{ fontSize: 11 }}>出库单号</Text><div style={{ fontWeight: 700, fontSize: 15, color: '#6366f1', fontFamily: 'monospace' }}>{detailDrawer.record.outboundNo}</div></Col>
+                  <Col span={12}><Text type="secondary" style={{ fontSize: 11 }}>批次号</Text><div style={{ fontFamily: 'monospace', fontWeight: 600 }}>{detailDrawer.record.batchNo}</div></Col>
+                </Row>
+              </div>
+              <Descriptions column={2} bordered size="small">
+                <Descriptions.Item label="药材"><Text strong>{detailDrawer.record.herbName}</Text></Descriptions.Item>
+                <Descriptions.Item label="出库数量"><Text strong style={{ color: '#ef4444' }}>{detailDrawer.record.quantity.toLocaleString()} {detailDrawer.record.unit}</Text></Descriptions.Item>
+                <Descriptions.Item label="仓库">{detailDrawer.record.warehouse}</Descriptions.Item>
+                <Descriptions.Item label="库位"><Tag color="blue">{detailDrawer.record.location}</Tag></Descriptions.Item>
+                <Descriptions.Item label="客户" span={2}>{detailDrawer.record.customer}</Descriptions.Item>
+                <Descriptions.Item label="出库日期">{detailDrawer.record.outboundDate}</Descriptions.Item>
+                <Descriptions.Item label="处理人">{detailDrawer.record.handler || '—'}</Descriptions.Item>
+                <Descriptions.Item label="状态"><Tag color={statusColorMap[detailDrawer.record.status]}>{OUTBOUND_STATUS_MAP[detailDrawer.record.status]}</Tag></Descriptions.Item>
+                {detailDrawer.record.remark && <Descriptions.Item label="备注" span={2}>{detailDrawer.record.remark}</Descriptions.Item>}
+                <Descriptions.Item label="创建时间" span={2}>{detailDrawer.record.createdAt}</Descriptions.Item>
+              </Descriptions>
+            </>
+          )}
+        </Drawer>
+
+        {/* 新增出库 Modal */}
+        <Modal
+          title={<Space><PlusOutlined style={{ color: '#1677ff' }} />新增出库</Space>}
+          open={addModalOpen}
+          onOk={handleAddOutbound}
+          onCancel={() => { setAddModalOpen(false); addForm.resetFields(); }}
+          okText="确认创建"
+          cancelText="取消"
+          width={640}
+          destroyOnClose
+        >
+          <Form form={addForm} layout="vertical" style={{ marginTop: 16 }}>
+            <Row gutter={12}>
+              <Col span={12}>
+                <Form.Item label="药材名称" name="herbName" rules={[{ required: true, message: '请输入药材名称' }]}>
+                  <Input placeholder="如：金钗石斛、鲜石斛" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="批次号" name="batchNo" rules={[{ required: true, message: '请输入批次号' }]}>
+                  <Input placeholder="如：HQ-20260401" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="出库数量" name="quantity" rules={[{ required: true, message: '请输入数量' }]}>
+                  <InputNumber min={0.1} style={{ width: '100%' }} addonAfter="kg" placeholder="0.00" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="出库日期" name="outboundDate" rules={[{ required: true, message: '请选择出库日期' }]}>
+                  <DatePicker style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="仓库" name="warehouse" rules={[{ required: true, message: '请选择仓库' }]}>
+                  <Select placeholder="请选择仓库">
+                    <Option value="赤水中心仓">赤水中心仓</Option>
+                    <Option value="旺隆分仓">旺隆分仓</Option>
+                    <Option value="丙安分仓">丙安分仓</Option>
+                    <Option value="两河口分仓">两河口分仓</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="库位" name="location" rules={[{ required: true, message: '请输入库位' }]}>
+                  <Input placeholder="如：A-01-03" />
+                </Form.Item>
+              </Col>
+              <Col span={24}>
+                <Form.Item label="客户" name="customer" rules={[{ required: true, message: '请输入客户信息' }]}>
+                  <Input placeholder="如：华润三九医药股份有限公司-李总" />
+                </Form.Item>
+              </Col>
+              <Col span={24}>
+                <Form.Item label="备注" name="remark">
+                  <Input.TextArea rows={2} placeholder="备注信息（可选）" />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Modal>
+      </div>
     </div>
   );
 };
