@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
+import PageHeading from '../../components/PageHeading';
 import {
   loanStats,
   insuranceStats,
@@ -29,7 +30,7 @@ interface ModuleCardProps {
   onClick: () => void;
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({
+const ModuleCard: React.FC< ModuleCardProps> = ({
   title, subtitle, icon, accentColor, stats, badge, badgeColor, onClick,
 }) => (
   <Card
@@ -144,108 +145,97 @@ const FinancePage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ background: '#faf9f5', minHeight: '100vh', padding: '48px 64px' }}>
-      {/* Hero */}
-      <div style={{ marginBottom: 40 }}>
-        <div style={{
-          fontFamily: '"Inter", sans-serif', fontSize: 11, fontWeight: 500,
-          letterSpacing: '1.5px', textTransform: 'uppercase', color: '#cc785c',
-          marginBottom: 10,
-        }}>
-          7S 产地仓
-        </div>
-        <h1 style={{
-          fontFamily: '"Tiempos Headline", "Cormorant Garamond", Garamond, serif',
-          fontSize: 36, fontWeight: 400, letterSpacing: '-0.5px',
-          color: '#141413', margin: '0 0 8px', lineHeight: 1.1,
-        }}>
-          金融服务模块
-        </h1>
-        <p style={{
-          fontFamily: '"Inter", sans-serif', fontSize: 15, color: '#6c6a64',
-          margin: 0, lineHeight: 1.55,
-        }}>
-          为产业链各参与方提供助农贷款、农业保险、供应链金融、资金托管等一站式金融服务
-        </p>
+    <div style={{ background: '#faf9f5', minHeight: '100%' }}>
+      <PageHeading
+        eyebrow="金融服务"
+        title="金融服务模块"
+        description="为产业链各参与方提供助农贷款、农业保险、供应链金融，资金托管等一站式金融服务"
+        accentColor="#e8a55a"
+        gradientFrom="#3d2e1a"
+        gradientMid="#52402d"
+        gradientTo="#67523a"
+        padding="32px 32px 28px"
+      />
+
+      <div style={{ maxWidth: 1360, margin: '0 auto', padding: '28px 32px' }}>
+        {/* Module Entry Cards */}
+        <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+          <Col xs={24} xl={12}>
+            <ModuleCard
+              title="助农贷款服务"
+              subtitle="为农户、合作社、加工企业提供种植、收购、加工等全链条信贷支持"
+              icon={<DollarOutlined />}
+              accentColor="#cc785c"
+              stats={[
+                { label: '累计放款', value: `${loanStats.totalApproved}万元` },
+                { label: '待审批', value: `${loanStats.totalPending}万元` },
+                { label: '还款中', value: `${loanStats.activeLoans}笔` },
+                { label: '逾期', value: `${loanStats.overdueCount}笔` },
+              ]}
+              badge={`${loanStats.totalPending}万元待审批`}
+              badgeColor="#d4a017"
+              onClick={() => navigate('/finance/loans')}
+            />
+          </Col>
+          <Col xs={24} xl={12}>
+            <ModuleCard
+              title="农业保险服务"
+              subtitle="气象灾害险、质量保障险，综合收入险，护航石斛全生长周期"
+              icon={<SafetyOutlined />}
+              accentColor="#5db8a6"
+              stats={[
+                { label: '生效保单', value: `${insuranceStats.activePolicies}份` },
+                { label: '参保面积', value: `${insuranceStats.totalInsuredArea}亩` },
+                { label: '累计保费', value: `${(insuranceStats.totalPremium / 10000).toFixed(1)}万元` },
+                { label: '待理赔', value: `${insuranceStats.pendingClaims}件` },
+              ]}
+              onClick={() => navigate('/finance/insurance')}
+            />
+          </Col>
+          <Col xs={24} xl={12}>
+            <ModuleCard
+              title="供应链金融"
+              subtitle="应收账款确权与融资，帮助供应商提前回款，加速资金周转"
+              icon={<FileTextOutlined />}
+              accentColor="#e8a55a"
+              stats={[
+                { label: '应收账款', value: `${scfStats.totalReceivables}万元` },
+                { label: '已融资', value: `${scfStats.totalFinanced}万元` },
+                { label: '待融资', value: `${scfStats.pendingCount}笔` },
+                { label: '未结清', value: `${scfStats.outstandingAmount}万元` },
+              ]}
+              onClick={() => navigate('/finance/scf')}
+            />
+          </Col>
+          <Col xs={24} xl={12}>
+            <ModuleCard
+              title="资金托管服务"
+              subtitle="交易资金分阶段托管，验货后放款，保障买卖双方权益"
+              icon={<WalletOutlined />}
+              accentColor="#5db872"
+              stats={[
+                { label: '托管中', value: `${escrowStats.totalInEscrow}万元` },
+                { label: '已释放', value: `${escrowStats.totalReleased}万元` },
+                { label: '活跃托管', value: `${escrowStats.activeEscrow}笔` },
+                { label: '验货中', value: `${escrowStats.pendingVerify}笔` },
+              ]}
+              onClick={() => navigate('/finance/escrow')}
+            />
+          </Col>
+        </Row>
+
+        {/* Trend Chart */}
+        <Card
+          title={<span style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 500, color: '#141413' }}>
+            金融服务月度趋势
+          </span>}
+          extra={<span style={{ fontFamily: '"Inter", sans-serif', fontSize: 11, color: '#8e8b82' }}>近10个月</span>}
+          style={{ borderRadius: 12, border: '1px solid #e6dfd8' }}
+          styles={{ body: { padding: '16px 24px 8px' } }}
+        >
+          <TrendChart />
+        </Card>
       </div>
-
-      {/* Module Entry Cards */}
-      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
-        <Col xs={24} xl={12}>
-          <ModuleCard
-            title="助农贷款服务"
-            subtitle="为农户、合作社、加工企业提供种植、收购、加工等全链条信贷支持"
-            icon={<DollarOutlined />}
-            accentColor="#cc785c"
-            stats={[
-              { label: '累计放款', value: `${loanStats.totalApproved}万元` },
-              { label: '待审批', value: `${loanStats.totalPending}万元` },
-              { label: '还款中', value: `${loanStats.activeLoans}笔` },
-              { label: '逾期', value: `${loanStats.overdueCount}笔` },
-            ]}
-            badge={`${loanStats.totalPending}万元待审批`}
-            badgeColor="#d4a017"
-            onClick={() => navigate('/finance/loans')}
-          />
-        </Col>
-        <Col xs={24} xl={12}>
-          <ModuleCard
-            title="农业保险服务"
-            subtitle="气象灾害险、质量保障险、综合收入险，护航石斛全生长周期"
-            icon={<SafetyOutlined />}
-            accentColor="#5db8a6"
-            stats={[
-              { label: '生效保单', value: `${insuranceStats.activePolicies}份` },
-              { label: '参保面积', value: `${insuranceStats.totalInsuredArea}亩` },
-              { label: '累计保费', value: `${(insuranceStats.totalPremium / 10000).toFixed(1)}万元` },
-              { label: '待理赔', value: `${insuranceStats.pendingClaims}件` },
-            ]}
-            onClick={() => navigate('/finance/insurance')}
-          />
-        </Col>
-        <Col xs={24} xl={12}>
-          <ModuleCard
-            title="供应链金融"
-            subtitle="应收账款确权与融资，帮助供应商提前回款，加速资金周转"
-            icon={<FileTextOutlined />}
-            accentColor="#e8a55a"
-            stats={[
-              { label: '应收账款', value: `${scfStats.totalReceivables}万元` },
-              { label: '已融资', value: `${scfStats.totalFinanced}万元` },
-              { label: '待融资', value: `${scfStats.pendingCount}笔` },
-              { label: '未结清', value: `${scfStats.outstandingAmount}万元` },
-            ]}
-            onClick={() => navigate('/finance/scf')}
-          />
-        </Col>
-        <Col xs={24} xl={12}>
-          <ModuleCard
-            title="资金托管服务"
-            subtitle="交易资金分阶段托管，验货后放款，保障买卖双方权益"
-            icon={<WalletOutlined />}
-            accentColor="#5db872"
-            stats={[
-              { label: '托管中', value: `${escrowStats.totalInEscrow}万元` },
-              { label: '已释放', value: `${escrowStats.totalReleased}万元` },
-              { label: '活跃托管', value: `${escrowStats.activeEscrow}笔` },
-              { label: '验货中', value: `${escrowStats.pendingVerify}笔` },
-            ]}
-            onClick={() => navigate('/finance/escrow')}
-          />
-        </Col>
-      </Row>
-
-      {/* Trend Chart */}
-      <Card
-        title={<span style={{ fontFamily: '"Inter", sans-serif', fontSize: 14, fontWeight: 500, color: '#141413' }}>
-          金融服务月度趋势
-        </span>}
-        extra={<span style={{ fontFamily: '"Inter", sans-serif', fontSize: 11, color: '#8e8b82' }}>近10个月</span>}
-        style={{ borderRadius: 12, border: '1px solid #e6dfd8' }}
-        styles={{ body: { padding: '16px 24px 8px' } }}
-      >
-        <TrendChart />
-      </Card>
     </div>
   );
 };

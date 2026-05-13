@@ -81,7 +81,7 @@
 
 .navLogoSub {
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.8);
   font-weight: 400;
 }
 
@@ -95,9 +95,9 @@
 
 .navLink {
   padding: 6px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(232, 228, 223, 0.55);
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(232, 228, 223, 0.9);
   text-decoration: none;
   border-radius: 6px;
   transition: all 0.25s ease;
@@ -345,7 +345,10 @@
   display: block;
   font-size: clamp(36px, 7vw, 64px);
   font-weight: 700;
-  color: #f0ece6;
+  background: linear-gradient(135deg, #5db8a6 0%, #cc785c 50%, #e8a55a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -1px;
   text-shadow: 0 0 60px rgba(93,184,166,0.1);
 }
@@ -363,9 +366,9 @@
 }
 
 .heroDesc {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.9;
-  color: rgba(232, 228, 223, 0.45);
+  color: rgba(232, 228, 223, 0.85);
   margin: 0 0 40px;
   letter-spacing: 0.3px;
 }
@@ -520,13 +523,13 @@
 
 .heroKpiLabel {
   font-size: 12px;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.75);
   letter-spacing: 0.5px;
 }
 
 .heroKpiUnit {
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.3);
+  color: rgba(232, 228, 223, 0.45);
   margin-left: 2px;
 }
 
@@ -540,7 +543,7 @@
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.2);
+  color: rgba(232, 228, 223, 0.4);
   letter-spacing: 1px;
   animation: float 3s ease-in-out infinite;
 }
@@ -585,8 +588,8 @@
 }
 
 .sectionDesc {
-  font-size: 15px;
-  color: rgba(232, 228, 223, 0.4);
+  font-size: 16px;
+  color: rgba(232, 228, 223, 0.8);
   margin: 0;
   letter-spacing: 0.3px;
 }
@@ -683,7 +686,7 @@
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1.5px;
-  color: rgba(232, 228, 223, 0.25);
+  color: rgba(232, 228, 223, 0.65);
   margin-bottom: 4px;
 }
 
@@ -706,9 +709,9 @@
 }
 
 .moduleDesc {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.8);
   margin: 0 0 16px;
 }
 
@@ -813,9 +816,9 @@
 }
 
 .archDesc {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
-  color: rgba(232, 228, 223, 0.35);
+  color: rgba(232, 228, 223, 0.75);
   margin: 0;
 }
 
@@ -865,7 +868,7 @@
   margin-left: auto;
   font-size: 11px;
   font-weight: 400;
-  color: rgba(232, 228, 223, 0.3);
+  color: rgba(232, 228, 223, 0.5);
 }
 
 .liveFeedList {
@@ -901,9 +904,9 @@
 }
 
 .liveFeedName {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: #f0ece6;
+  color: rgba(232, 228, 223, 0.85);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -913,7 +916,7 @@
 
 .liveFeedLoc {
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.3);
+  color: rgba(232, 228, 223, 0.5);
 }
 
 .liveFeedRight {
@@ -934,7 +937,7 @@
 .liveFeedChange {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(232, 228, 223, 0.55);
+  color: rgba(232, 228, 223, 0.8);
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
   min-width: 52px;
@@ -971,7 +974,7 @@
 
 .statLabel {
   font-size: 13px;
-  color: rgba(232, 228, 223, 0.45);
+  color: rgba(232, 228, 223, 0.75);
 }
 
 .statValue {
@@ -1078,7 +1081,7 @@
 
 .dashboardKpiLabel {
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.7);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1219,7 +1222,7 @@
 .dashboardCardBadge {
   font-size: 11px;
   font-weight: 500;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.7);
   padding: 2px 8px;
   background: rgba(93, 184, 166, 0.06);
   border: 1px solid rgba(93, 184, 166, 0.1);
@@ -1283,7 +1286,7 @@
 
 .miniBarLabel {
   font-size: 11px;
-  color: rgba(232, 228, 223, 0.5);
+  color: rgba(232, 228, 223, 0.75);
   width: 72px;
   flex-shrink: 0;
   white-space: nowrap;
@@ -1332,7 +1335,7 @@
 
 .qualityRingLabel {
   font-size: 10px;
-  color: rgba(232, 228, 223, 0.4);
+  color: rgba(232, 228, 223, 0.7);
   letter-spacing: 0.3px;
 }
 
@@ -1352,7 +1355,7 @@
 .dashboardRowName {
   flex: 1;
   font-size: 12px;
-  color: rgba(232, 228, 223, 0.5);
+  color: rgba(232, 228, 223, 0.75);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1421,7 +1424,7 @@
 
 .dashboardCtaSub {
   font-size: 12px;
-  color: rgba(232, 228, 223, 0.25);
+  color: rgba(232, 228, 223, 0.4);
   letter-spacing: 0.5px;
 }
 
@@ -1499,8 +1502,8 @@
 
 .ctaDesc {
   position: relative;
-  font-size: 15px;
-  color: rgba(232, 228, 223, 0.4);
+  font-size: 16px;
+  color: rgba(232, 228, 223, 0.8);
   margin: 0 0 36px;
 }
 
@@ -1541,12 +1544,12 @@
 .footerBrandName {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(232, 228, 223, 0.75);
+  color: rgba(232, 228, 223, 0.85);
 }
 
 .footerBrandDesc {
   font-size: 12px;
-  color: rgba(232, 228, 223, 0.3);
+  color: rgba(232, 228, 223, 0.6);
   margin-top: 2px;
 }
 
@@ -1557,7 +1560,7 @@
 
 .footerLinks a {
   font-size: 13px;
-  color: rgba(232, 228, 223, 0.35);
+  color: rgba(232, 228, 223, 0.5);
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -1575,7 +1578,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: rgba(232, 228, 223, 0.2);
+  color: rgba(232, 228, 223, 0.35);
 }
 
 /* ── REVEAL ANIMATION ── */

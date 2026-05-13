@@ -53,7 +53,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 3px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.8);
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -61,7 +61,10 @@
 .heroTitle {
   font-size: clamp(32px, 6vw, 56px);
   font-weight: 700;
-  color: #f0ece6;
+  background: linear-gradient(135deg, #5db8a6 0%, #cc785c 50%, #e8a55a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -1px;
   line-height: 1.2;
   margin: 0 0 20px;
@@ -75,9 +78,9 @@
 }
 
 .heroDesc {
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.8;
-  color: rgba(232,228,223,0.4);
+  color: rgba(232,228,223,0.85);
   margin: 0 0 36px;
 }
 
@@ -133,7 +136,7 @@
   gap: 8px;
   font-size: 10px;
   letter-spacing: 3px;
-  color: rgba(232,228,223,0.2);
+  color: rgba(232,228,223,0.4);
   animation: float 3s ease-in-out infinite;
 }
 
@@ -193,7 +196,7 @@
 
 .statLabel {
   font-size: 12px;
-  color: rgba(232,228,223,0.35);
+  color: rgba(232,228,223,0.75);
   letter-spacing: 0.5px;
 }
 
@@ -248,16 +251,16 @@
 }
 
 .featureSubtitle {
-  font-size: 16px;
-  color: rgba(232,228,223,0.45);
+  font-size: 17px;
+  color: rgba(232,228,223,0.85);
   margin: 0 0 20px;
   font-weight: 400;
 }
 
 .featureDesc {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.85;
-  color: rgba(232,228,223,0.38);
+  color: rgba(232,228,223,0.8);
   margin: 0 0 28px;
 }
 
@@ -289,8 +292,8 @@
 }
 
 .featureHighlightValue {
-  font-size: 13px;
-  color: rgba(232,228,223,0.38);
+  font-size: 14px;
+  color: rgba(232,228,223,0.8);
   line-height: 1.5;
 }
 
@@ -383,13 +386,13 @@
 .chainIdx {
   font-size: 12px;
   font-weight: 700;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.5);
   transition: color 0.4s ease;
 }
 
 .chainLabel {
   font-size: 11px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   text-align: center;
   transition: color 0.4s ease;
 }
@@ -400,7 +403,7 @@
   left: calc(50% + 16px);
   right: calc(-50% + 16px);
   height: 2px;
-  background: rgba(93,184,166,0.08);
+  background: rgba(93,184,166,0.2);
   transition: background 0.4s ease;
 }
 
@@ -438,7 +441,7 @@
 
 .chainCardStatus {
   font-size: 11px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.5);
 }
 
 .chainCardConfirmed {
@@ -449,7 +452,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(93,184,166,0.05);
@@ -470,12 +473,12 @@
 
 .chainCardLabel {
   font-size: 11px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.65);
 }
 
 .chainCardValue {
   font-size: 12px;
-  color: rgba(232,228,223,0.7);
+  color: rgba(232,228,223,0.8);
   font-weight: 500;
 }
 
@@ -489,14 +492,14 @@
 
 .chainHashLabel {
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   font-family: monospace;
   flex-shrink: 0;
 }
 
 .chainHashValue {
   font-size: 10px;
-  color: rgba(93,184,166,0.5);
+  color: rgba(232,228,223,0.6);
   font-family: monospace;
   letter-spacing: 0.3px;
   flex: 1;
@@ -534,7 +537,7 @@
   padding: 7px 12px;
   font-size: 12px;
   font-weight: 500;
-  color: rgba(232,228,223,0.35);
+  color: rgba(232,228,223,0.5);
   background: transparent;
   border: 1px solid rgba(93,184,166,0.08);
   border-radius: 8px;
@@ -581,7 +584,7 @@
 
 .wmsZoneName {
   font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  color: rgba(232,228,223,0.75);
 }
 
 .wmsZoneCount {
@@ -632,7 +635,7 @@
 
 .wmsOpsTitle {
   font-size: 11px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   margin-bottom: 4px;
   letter-spacing: 0.5px;
 }
@@ -671,7 +674,7 @@
 
 .wmsOpHerb {
   font-size: 12px;
-  color: rgba(232,228,223,0.65);
+  color: rgba(232,228,223,0.75);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -679,7 +682,7 @@
 
 .wmsOpMeta {
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
 }
 
 .wmsOpRight {
@@ -693,13 +696,13 @@
 .wmsOpQty {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(232,228,223,0.6);
+  color: rgba(232,228,223,0.75);
   font-feature-settings: 'tnum';
 }
 
 .wmsOpTime {
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
 }
 
 .wmsOpStatus {
@@ -722,7 +725,7 @@
   background: rgba(93,184,166,0.04);
   border-radius: 8px;
   font-size: 11px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.7);
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -733,7 +736,7 @@
   gap: 8px;
   padding: 8px 12px;
   font-size: 12px;
-  color: rgba(232,228,223,0.55);
+  color: rgba(232,228,223,0.65);
   border-bottom: 1px solid rgba(93,184,166,0.04);
   align-items: center;
 }
@@ -756,7 +759,7 @@
 .plantTitle {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(232,228,223,0.5);
+  color: rgba(232,228,223,0.75);
   margin-bottom: 10px;
 }
 
@@ -791,7 +794,7 @@
 
 .plantEnvLabel {
   font-size: 9px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.65);
   flex: 1;
 }
 
@@ -811,7 +814,7 @@
 .plantMonth {
   padding: 5px;
   font-size: 11px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.5);
   background: transparent;
   border: 1px solid rgba(93,184,166,0.06);
   border-radius: 5px;
@@ -882,13 +885,13 @@
 
 .plantTaskWorker {
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   display: block;
 }
 
 .plantTaskDate {
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   white-space: nowrap;
 }
 
@@ -912,7 +915,7 @@
   padding: 6px 10px;
   font-size: 11px;
   font-weight: 500;
-  color: rgba(232,228,223,0.35);
+  color: rgba(232,228,223,0.5);
   background: transparent;
   border: 1px solid rgba(93,184,166,0.08);
   border-radius: 7px;
@@ -954,7 +957,7 @@
 .finCardFarmer {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(232,228,223,0.7);
+  color: rgba(232,228,223,0.85);
 }
 
 .finCardStatus {
@@ -975,7 +978,7 @@
 
 .finCardPurpose {
   font-size: 11px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.65);
   margin-bottom: 6px;
 }
 
@@ -983,7 +986,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  color: rgba(232,228,223,0.25);
+  color: rgba(232,228,223,0.5);
   margin-bottom: 6px;
 }
 
@@ -1039,14 +1042,14 @@
 
 .codeDesc {
   font-size: 10px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.65);
   text-align: center;
   line-height: 1.4;
 }
 
 .codeSub {
   font-size: 9px;
-  color: rgba(232,228,223,0.2);
+  color: rgba(232,228,223,0.45);
 }
 
 .codeCount {
@@ -1107,7 +1110,7 @@
 
 .iotName {
   font-size: 10px;
-  color: rgba(232,228,223,0.3);
+  color: rgba(232,228,223,0.65);
   margin-bottom: 2px;
 }
 
@@ -1177,8 +1180,8 @@
 }
 
 .ctaDesc {
-  font-size: 15px;
-  color: rgba(232,228,223,0.35);
+  font-size: 16px;
+  color: rgba(232,228,223,0.55);
   margin: 0 0 32px;
 }
 
@@ -1235,7 +1238,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: rgba(232,228,223,0.2);
+  color: rgba(232,228,223,0.4);
 }
 
 /* ── RESPONSIVE ── */

@@ -262,7 +262,7 @@ function PlantingMockup() {
               {task.status === 'active' && <span className={styles.plantTaskPulse} />}
             </div>
             <div className={styles.plantTaskInfo}>
-              <span className={styles.plantTaskName} style={{ color: task.status === 'upcoming' ? 'rgba(232,228,223,0.35)' : '#f0ece6' }}>{task.name}</span>
+              <span className={styles.plantTaskName} style={{ color: task.status === 'upcoming' ? 'rgba(232,228,223,0.5)' : '#f0ece6' }}>{task.name}</span>
               <span className={styles.plantTaskWorker}>{task.worker}</span>
             </div>
             <span className={styles.plantTaskDate}>{task.date}</span>
@@ -569,7 +569,7 @@ const LandingShowcase: React.FC = () => {
         <div className={styles.heroBgGrid} />
         <div className={styles.heroContent}>
           <div className={styles.heroEyebrow}>功能展示 · Feature Showcase</div>
-          <h1 className={styles.heroTitle}>金钗石斛7s产业仓数据平台<br /><span className={styles.heroTitleAccent}>公共服务平台功能详解</span></h1>
+          <h1 className={styles.heroTitle}>7s赤水金钗石斛产地仓公共服务平台</h1>
           <p className={styles.heroDesc}>
             深入了解平台核心服务模块的能力与特色<br />
             从田间到终端，金钗石斛全产业链一站式公共服务
@@ -667,7 +667,7 @@ const LandingShowcase: React.FC = () => {
 
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span>© 2025 金钗石斛7s产业仓数据平台公共服务平台 · 功能展示页</span>
+          <span>© 2025 7s赤水金钗石斛产地仓公共服务平台 · 功能展示页</span>
           <span>贵州省赤水市</span>
         </div>
       </footer>
