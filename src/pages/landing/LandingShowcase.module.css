@@ -1,11 +1,12 @@
 /* ============================================================
-   LANDING SHOWCASE — Enhanced Feature Deep-Dive Page
+   LANDING SHOWCASE — Light Theme (浅色主题)
+   保留所有设计风格和结构，背景改为浅色
    ============================================================ */
 
 .page {
   min-height: 100vh;
-  background: #060912;
-  color: #e8e4df;
+  background: #f5f0e8;
+  color: #3d3d3a;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
   overflow-x: hidden;
 }
@@ -21,6 +22,7 @@
   padding: 120px 32px 80px;
   text-align: center;
   overflow: hidden;
+  background: linear-gradient(180deg, #faf9f5 0%, #f0ebe2 50%, #ebe5db 100%);
 }
 
 .heroBg {
@@ -28,8 +30,7 @@
   inset: 0;
   background:
     radial-gradient(ellipse at 30% 40%, rgba(93,184,166,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 60%, rgba(204,120,92,0.04) 0%, transparent 50%),
-    linear-gradient(180deg, #060912 0%, #0a0e1a 100%);
+    radial-gradient(ellipse at 70% 60%, rgba(204,120,92,0.04) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -37,8 +38,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(93,184,166,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(93,184,166,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(204,120,92,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204,120,92,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
 }
@@ -50,16 +51,16 @@
 }
 
 .heroEyebrow {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 3px;
-  color: rgba(232,228,223,0.8);
+  color: #6c6a64;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
 
 .heroTitle {
-  font-size: clamp(32px, 6vw, 56px);
+  font-size: clamp(34px, 6vw, 58px);
   font-weight: 700;
   background: linear-gradient(135deg, #5db8a6 0%, #cc785c 50%, #e8a55a 100%);
   -webkit-background-clip: text;
@@ -78,10 +79,11 @@
 }
 
 .heroDesc {
-  font-size: 19px;
+  font-size: 21px;
   line-height: 1.8;
-  color: rgba(232,228,223,0.85);
+  color: #3d3d3a;
   margin: 0 0 36px;
+  font-weight: 600;
 }
 
 .heroActions {
@@ -92,14 +94,15 @@
 
 .heroBtnPrimary {
   padding: 14px 32px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: #060912;
+  color: #ffffff;
   background: linear-gradient(135deg, #5db8a6, #4a9a8a);
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 4px 16px rgba(93,184,166,0.2);
 }
 
 .heroBtnPrimary:hover {
@@ -109,20 +112,21 @@
 
 .heroBtnSecondary {
   padding: 14px 28px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: rgba(232,228,223,0.7);
-  background: transparent;
-  border: 1px solid rgba(93,184,166,0.2);
+  color: #6c6a64;
+  background: #ffffff;
+  border: 1.5px solid #e6dfd8;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(20,20,19,0.05);
 }
 
 .heroBtnSecondary:hover {
-  color: #5db8a6;
-  border-color: rgba(93,184,166,0.4);
-  background: rgba(93,184,166,0.05);
+  color: #cc785c;
+  border-color: rgba(204,120,92,0.4);
+  box-shadow: 0 4px 16px rgba(204,120,92,0.1);
 }
 
 .heroScroll {
@@ -134,9 +138,9 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 3px;
-  color: rgba(232,228,223,0.4);
+  color: #b0aca4;
   animation: float 3s ease-in-out infinite;
 }
 
@@ -158,10 +162,10 @@
   justify-content: center;
   gap: 0;
   padding: 32px;
-  background: rgba(10,14,26,0.8);
-  border-top: 1px solid rgba(93,184,166,0.06);
-  border-bottom: 1px solid rgba(93,184,166,0.06);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
+  border-top: 1px solid #e6dfd8;
+  border-bottom: 1px solid #e6dfd8;
+  box-shadow: 0 2px 8px rgba(20,20,19,0.04);
 }
 
 .statItem {
@@ -171,7 +175,7 @@
   align-items: center;
   gap: 4px;
   padding: 16px 24px;
-  border-right: 1px solid rgba(93,184,166,0.06);
+  border-right: 1px solid #ebe6df;
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -196,8 +200,9 @@
 
 .statLabel {
   font-size: 12px;
-  color: rgba(232,228,223,0.75);
+  color: #6c6a64;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 /* ── FEATURES ── */
@@ -206,6 +211,10 @@
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.feature:nth-child(even) {
+  background: #ebe5db;
 }
 
 .feature.featureVisible {
@@ -233,7 +242,7 @@
 
 .featureTag {
   display: inline-block;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 2px;
   padding: 5px 12px;
@@ -243,25 +252,26 @@
 }
 
 .featureTitle {
-  font-size: clamp(24px, 4vw, 36px);
-  font-weight: 600;
-  color: #f0ece6;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  color: #141413;
   letter-spacing: -0.3px;
   margin: 0 0 8px;
 }
 
 .featureSubtitle {
-  font-size: 17px;
-  color: rgba(232,228,223,0.85);
+  font-size: 21px;
+  color: #3d3d3a;
   margin: 0 0 20px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .featureDesc {
   font-size: 15px;
   line-height: 1.85;
-  color: rgba(232,228,223,0.8);
+  color: #3d3d3a;
   margin: 0 0 28px;
+  font-weight: 500;
 }
 
 .featureHighlights {
@@ -286,15 +296,16 @@
 }
 
 .featureHighlightLabel {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 .featureHighlightValue {
-  font-size: 14px;
-  color: rgba(232,228,223,0.8);
+  font-size: 16px;
+  color: #3d3d3a;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .featureCta {
@@ -304,12 +315,13 @@
 
 .featureBtn {
   padding: 11px 24px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
+  color: #ffffff;
 }
 
 .featureBtn:hover {
@@ -319,27 +331,29 @@
 
 .featureBtnGhost {
   padding: 11px 24px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  background: transparent;
-  border: 1px solid;
+  background: #ffffff;
+  border: 1.5px solid #e6dfd8;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(20,20,19,0.04);
 }
 
 .featureBtnGhost:hover {
-  background: rgba(255,255,255,0.05);
+  border-color: rgba(204,120,92,0.3);
+  box-shadow: 0 4px 12px rgba(20,20,19,0.08);
 }
 
 /* ── MOCKUPS ── */
 .mockupBlock {
-  background: rgba(10,14,26,0.7);
-  border: 1px solid rgba(93,184,166,0.08);
+  background: #ffffff;
+  border: 1px solid #e6dfd8;
   border-radius: 20px;
   overflow: hidden;
   padding: 24px;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px #e6dfd8, 0 4px 16px rgba(20,20,19,0.05);
 }
 
 /* Blockchain Mockup */
@@ -364,37 +378,38 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid rgba(93,184,166,0.15);
+  border: 2px solid rgba(204,120,92,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(10,14,26,0.8);
+  background: #faf9f5;
   transition: all 0.4s ease;
   position: relative;
   z-index: 1;
 }
 
 .chainStepActive .chainNode {
-  background: rgba(93,184,166,0.1);
+  background: rgba(93,184,166,0.08);
 }
 
 .chainStepDone .chainNode {
-  border-color: rgba(93,184,166,0.3);
-  background: rgba(93,184,166,0.05);
+  border-color: rgba(93,184,166,0.25);
+  background: rgba(93,184,166,0.04);
 }
 
 .chainIdx {
   font-size: 12px;
   font-weight: 700;
-  color: rgba(232,228,223,0.5);
+  color: #6c6a64;
   transition: color 0.4s ease;
 }
 
 .chainLabel {
-  font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  color: #6c6a64;
   text-align: center;
   transition: color 0.4s ease;
+  font-weight: 600;
 }
 
 .chainLine {
@@ -403,17 +418,17 @@
   left: calc(50% + 16px);
   right: calc(-50% + 16px);
   height: 2px;
-  background: rgba(93,184,166,0.2);
+  background: rgba(204,120,92,0.12);
   transition: background 0.4s ease;
 }
 
 .chainLineDone {
-  background: linear-gradient(90deg, rgba(93,184,166,0.3), rgba(93,184,166,0.1));
+  background: linear-gradient(90deg, rgba(93,184,166,0.25), rgba(93,184,166,0.08));
 }
 
 .chainCard {
-  background: rgba(6,10,20,0.6);
-  border: 1px solid rgba(93,184,166,0.06);
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 12px;
   padding: 16px;
 }
@@ -426,7 +441,7 @@
 }
 
 .chainCardBadge {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 4px;
@@ -434,14 +449,15 @@
 }
 
 .chainCardTitle {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   flex: 1;
 }
 
 .chainCardStatus {
-  font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  color: #6c6a64;
+  font-weight: 600;
 }
 
 .chainCardConfirmed {
@@ -451,11 +467,12 @@
 .chainCardMeta {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  color: #6c6a64;
+  font-weight: 600;
   margin-bottom: 12px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(93,184,166,0.05);
+  border-bottom: 1px solid #ebe6df;
 }
 
 .chainCardData {
@@ -472,14 +489,15 @@
 }
 
 .chainCardLabel {
-  font-size: 11px;
-  color: rgba(232,228,223,0.65);
+  font-size: 15px;
+  color: #6c6a64;
+  font-weight: 600;
 }
 
 .chainCardValue {
   font-size: 12px;
-  color: rgba(232,228,223,0.8);
-  font-weight: 500;
+  color: #141413;
+  font-weight: 600;
 }
 
 .chainHash {
@@ -487,19 +505,20 @@
   align-items: center;
   gap: 6px;
   padding-top: 10px;
-  border-top: 1px solid rgba(93,184,166,0.06);
+  border-top: 1px solid #ebe6df;
 }
 
 .chainHashLabel {
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
   font-family: monospace;
   flex-shrink: 0;
+  font-weight: 600;
 }
 
 .chainHashValue {
-  font-size: 10px;
-  color: rgba(232,228,223,0.6);
+  font-size: 12px;
+  color: #6c6a64;
   font-family: monospace;
   letter-spacing: 0.3px;
   flex: 1;
@@ -510,10 +529,10 @@
 
 .chainHashBtn {
   padding: 2px 8px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: #5db8a6;
-  background: rgba(93,184,166,0.1);
+  background: rgba(93,184,166,0.08);
   border: 1px solid rgba(93,184,166,0.2);
   border-radius: 4px;
   cursor: pointer;
@@ -522,7 +541,7 @@
 }
 
 .chainHashBtn:hover {
-  background: rgba(93,184,166,0.2);
+  background: rgba(93,184,166,0.15);
 }
 
 /* WMS Mockup */
@@ -536,10 +555,10 @@
   flex: 1;
   padding: 7px 12px;
   font-size: 12px;
-  font-weight: 500;
-  color: rgba(232,228,223,0.5);
+  font-weight: 600;
+  color: #6c6a64;
   background: transparent;
-  border: 1px solid rgba(93,184,166,0.08);
+  border: 1px solid #e6dfd8;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -547,7 +566,7 @@
 
 .wmsTabActive {
   color: #5db8a6;
-  border-color: rgba(93,184,166,0.25);
+  border-color: rgba(93,184,166,0.3);
   background: rgba(93,184,166,0.06);
 }
 
@@ -565,14 +584,14 @@
 
 .wmsZone {
   padding: 10px 12px;
-  background: rgba(8,12,22,0.5);
-  border: 1px solid rgba(93,184,166,0.04);
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 10px;
   transition: border-color 0.2s ease;
 }
 
 .wmsZone:hover {
-  border-color: rgba(93,184,166,0.1);
+  border-color: rgba(204,120,92,0.25);
 }
 
 .wmsZoneHeader {
@@ -583,18 +602,19 @@
 }
 
 .wmsZoneName {
-  font-size: 11px;
-  color: rgba(232,228,223,0.75);
+  font-size: 15px;
+  color: #3d3d3a;
+  font-weight: 600;
 }
 
 .wmsZoneCount {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
 .wmsZoneBar {
   height: 4px;
-  background: rgba(93,184,166,0.08);
+  background: #f0ebe2;
   border-radius: 2px;
   margin-bottom: 4px;
   position: relative;
@@ -612,19 +632,19 @@
   top: -2px;
   width: 2px;
   height: 8px;
-  background: rgba(198,69,69,0.5);
+  background: rgba(198,69,69,0.4);
   border-radius: 1px;
 }
 
 .wmsZoneFooter {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .wmsZoneWarn {
   color: #c64545;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .wmsOps {
@@ -634,10 +654,11 @@
 }
 
 .wmsOpsTitle {
-  font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  color: #6c6a64;
   margin-bottom: 4px;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .wmsOpRow {
@@ -645,19 +666,19 @@
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
-  background: rgba(8,12,22,0.4);
-  border: 1px solid rgba(93,184,166,0.04);
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 8px;
   transition: all 0.2s ease;
 }
 
 .wmsOpRow:hover {
-  border-color: rgba(93,184,166,0.1);
-  background: rgba(8,12,22,0.6);
+  border-color: rgba(204,120,92,0.2);
+  background: #ffffff;
 }
 
 .wmsOpType {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 4px;
@@ -674,15 +695,17 @@
 
 .wmsOpHerb {
   font-size: 12px;
-  color: rgba(232,228,223,0.75);
+  color: #141413;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 600;
 }
 
 .wmsOpMeta {
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
+  font-weight: 600;
 }
 
 .wmsOpRight {
@@ -695,18 +718,19 @@
 
 .wmsOpQty {
   font-size: 12px;
-  font-weight: 600;
-  color: rgba(232,228,223,0.75);
+  font-weight: 700;
+  color: #141413;
   font-feature-settings: 'tnum';
 }
 
 .wmsOpTime {
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
+  font-weight: 600;
 }
 
 .wmsOpStatus {
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 600;
   padding: 1px 5px;
   border-radius: 3px;
@@ -722,10 +746,10 @@
   grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
   gap: 8px;
   padding: 8px 12px;
-  background: rgba(93,184,166,0.04);
+  background: #f5f0e8;
   border-radius: 8px;
-  font-size: 11px;
-  color: rgba(232,228,223,0.7);
+  font-size: 15px;
+  color: #6c6a64;
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -736,19 +760,24 @@
   gap: 8px;
   padding: 8px 12px;
   font-size: 12px;
-  color: rgba(232,228,223,0.65);
-  border-bottom: 1px solid rgba(93,184,166,0.04);
+  color: #141413;
+  font-weight: 500;
+  border-bottom: 1px solid #ebe6df;
   align-items: center;
+}
+
+.wmsTableRow:last-child {
+  border-bottom: none;
 }
 
 .wmsTableMono {
   font-family: monospace;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .wmsTableStatus {
   font-weight: 600;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 /* Planting Mockup */
@@ -759,7 +788,7 @@
 .plantTitle {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(232,228,223,0.75);
+  color: #3d3d3a;
   margin-bottom: 10px;
 }
 
@@ -775,7 +804,7 @@
   align-items: center;
   gap: 5px;
   padding: 5px 8px;
-  background: rgba(8,12,22,0.4);
+  background: #faf9f5;
   border: 1px solid;
   border-radius: 6px;
 }
@@ -787,19 +816,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .plantEnvLabel {
-  font-size: 9px;
-  color: rgba(232,228,223,0.65);
+  font-size: 15px;
+  color: #6c6a64;
   flex: 1;
 }
 
 .plantEnvValue {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   font-feature-settings: 'tnum';
 }
@@ -813,13 +842,14 @@
 
 .plantMonth {
   padding: 5px;
-  font-size: 11px;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  color: #6c6a64;
   background: transparent;
-  border: 1px solid rgba(93,184,166,0.06);
+  border: 1px solid #e6dfd8;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-weight: 600;
 }
 
 .plantMonthActive {
@@ -839,13 +869,13 @@
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  background: rgba(8,12,22,0.4);
+  background: #faf9f5;
   border-radius: 8px;
   transition: background 0.2s ease;
 }
 
 .plantTaskRow:hover {
-  background: rgba(8,12,22,0.6);
+  background: #f0ebe2;
 }
 
 .plantTaskCheck {
@@ -878,25 +908,29 @@
 }
 
 .plantTaskName {
-  font-size: 13px;
+  font-size: 15px;
   display: block;
+  color: #141413;
   transition: color 0.3s ease;
+  font-weight: 600;
 }
 
 .plantTaskWorker {
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
   display: block;
+  font-weight: 600;
 }
 
 .plantTaskDate {
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .plantTaskBadge {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   padding: 2px 7px;
   border-radius: 4px;
@@ -913,11 +947,11 @@
 .finTab {
   flex: 1;
   padding: 6px 10px;
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(232,228,223,0.5);
+  font-size: 15px;
+  font-weight: 600;
+  color: #6c6a64;
   background: transparent;
-  border: 1px solid rgba(93,184,166,0.08);
+  border: 1px solid #e6dfd8;
   border-radius: 7px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -937,14 +971,15 @@
 
 .finCard {
   padding: 12px 14px;
-  background: rgba(8,12,22,0.5);
-  border: 1px solid rgba(93,184,166,0.06);
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 10px;
   transition: all 0.2s ease;
 }
 
 .finCard:hover {
-  border-color: rgba(93,184,166,0.12);
+  border-color: rgba(204,120,92,0.2);
+  box-shadow: 0 2px 8px rgba(20,20,19,0.05);
 }
 
 .finCardTop {
@@ -955,13 +990,13 @@
 }
 
 .finCardFarmer {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: rgba(232,228,223,0.85);
+  color: #3d3d3a;
 }
 
 .finCardStatus {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 4px;
@@ -970,29 +1005,30 @@
 .finCardAmount {
   font-size: 20px;
   font-weight: 700;
-  color: #f0ece6;
+  color: #141413;
   margin-bottom: 2px;
   font-feature-settings: 'tnum';
-  text-shadow: 0 0 20px rgba(232,228,223,0.1);
 }
 
 .finCardPurpose {
-  font-size: 11px;
-  color: rgba(232,228,223,0.65);
+  font-size: 15px;
+  color: #3d3d3a;
   margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .finCardMeta {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
-  color: rgba(232,228,223,0.5);
+  font-size: 12px;
+  color: #6c6a64;
   margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .finCardBar {
   height: 3px;
-  background: rgba(93,184,166,0.08);
+  background: #f0ebe2;
   border-radius: 2px;
   overflow: visible;
 }
@@ -1016,14 +1052,15 @@
   align-items: center;
   gap: 8px;
   padding: 16px 10px;
-  background: rgba(8,12,22,0.4);
-  border: 1px solid;
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .codeCard:hover {
-  background: rgba(8,12,22,0.6);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(20,20,19,0.08);
 }
 
 .codeQrWrap {
@@ -1033,27 +1070,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
 }
 
 .codeLabel {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 }
 
 .codeDesc {
-  font-size: 10px;
-  color: rgba(232,228,223,0.65);
+  font-size: 12px;
+  color: #3d3d3a;
   text-align: center;
   line-height: 1.4;
+  font-weight: 600;
 }
 
 .codeSub {
-  font-size: 9px;
-  color: rgba(232,228,223,0.45);
+  font-size: 15px;
+  color: #6c6a64;
+  font-weight: 600;
 }
 
 .codeCount {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
@@ -1072,14 +1112,15 @@
   justify-content: space-between;
   gap: 10px;
   padding: 12px;
-  background: rgba(8,12,22,0.5);
-  border: 1px solid;
+  background: #faf9f5;
+  border: 1px solid #ebe6df;
   border-radius: 10px;
   transition: all 0.2s ease;
 }
 
 .iotCard:hover {
-  background: rgba(8,12,22,0.7);
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(20,20,19,0.06);
   transform: translateY(-1px);
 }
 
@@ -1109,19 +1150,20 @@
 }
 
 .iotName {
-  font-size: 10px;
-  color: rgba(232,228,223,0.65);
+  font-size: 12px;
+  color: #6c6a64;
   margin-bottom: 2px;
+  font-weight: 600;
 }
 
 .iotValue {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   font-feature-settings: 'tnum';
 }
 
 .iotUnit {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   margin-left: 2px;
   opacity: 0.6;
@@ -1136,7 +1178,7 @@
 }
 
 .iotStatus {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 4px;
@@ -1149,7 +1191,7 @@
 
 .iotBarBg {
   height: 4px;
-  background: rgba(93,184,166,0.06);
+  background: #f0ebe2;
   border-radius: 2px;
 }
 
@@ -1162,8 +1204,8 @@
 /* ── CTA ── */
 .cta {
   padding: 80px 32px;
-  background: linear-gradient(180deg, #060912 0%, #0a1020 100%);
-  border-top: 1px solid rgba(93,184,166,0.06);
+  background: linear-gradient(180deg, #ebe5db 0%, #e5dfd4 100%);
+  border-top: 1px solid #e6dfd8;
   text-align: center;
 }
 
@@ -1173,16 +1215,17 @@
 }
 
 .ctaTitle {
-  font-size: clamp(24px, 4vw, 36px);
-  font-weight: 600;
-  color: #f0ece6;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  color: #141413;
   margin: 0 0 12px;
 }
 
 .ctaDesc {
   font-size: 16px;
-  color: rgba(232,228,223,0.55);
+  color: #6c6a64;
   margin: 0 0 32px;
+  font-weight: 600;
 }
 
 .ctaBtns {
@@ -1193,14 +1236,15 @@
 
 .ctaBtnPrimary {
   padding: 14px 32px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: #060912;
+  color: #ffffff;
   background: linear-gradient(135deg, #5db8a6, #4a9a8a);
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(93,184,166,0.2);
 }
 
 .ctaBtnPrimary:hover {
@@ -1210,25 +1254,27 @@
 
 .ctaBtnSecondary {
   padding: 14px 28px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: rgba(232,228,223,0.65);
-  background: transparent;
-  border: 1px solid rgba(93,184,166,0.2);
+  color: #6c6a64;
+  background: #ffffff;
+  border: 1.5px solid #e6dfd8;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(20,20,19,0.05);
 }
 
 .ctaBtnSecondary:hover {
-  color: #5db8a6;
-  border-color: rgba(93,184,166,0.4);
+  color: #cc785c;
+  border-color: rgba(204,120,92,0.4);
+  box-shadow: 0 4px 16px rgba(204,120,92,0.1);
 }
 
 /* ── FOOTER ── */
 .footer {
-  background: rgba(4,6,12,0.9);
-  border-top: 1px solid rgba(93,184,166,0.05);
+  background: #ebe5db;
+  border-top: 1px solid #e6dfd8;
 }
 
 .footerInner {
@@ -1238,7 +1284,8 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: rgba(232,228,223,0.4);
+  color: #6c6a64;
+  font-weight: 500;
 }
 
 /* ── RESPONSIVE ── */
@@ -1270,7 +1317,7 @@
   .statItem {
     flex: 0 0 33.333%;
     border-right: none;
-    border-bottom: 1px solid rgba(93,184,166,0.06);
+    border-bottom: 1px solid #ebe6df;
   }
   .feature {
     padding: 60px 20px;

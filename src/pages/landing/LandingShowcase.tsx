@@ -414,7 +414,7 @@ function IoTMockup() {
                 </div>
                 <div className={styles.iotInfo}>
                   <div className={styles.iotName}>{sensor.name}</div>
-                  <div className={styles.iotValue} style={{ color: sensor.status === 'warning' ? '#e8a55a' : '#f0ece6' }}>
+                  <div className={styles.iotValue} style={{ color: sensor.status === 'warning' ? '#e8a55a' : '#141413' }}>
                     {sensor.value}<span className={styles.iotUnit}>{sensor.unit}</span>
                   </div>
                 </div>
@@ -445,7 +445,7 @@ const FEATURES = [
     tag: 'BLOCKCHAIN',
     title: '区块链溯源管理',
     subtitle: '让每一份药材都有"数字身份证"',
-    desc: '基于 Hyperledger Fabric 联盟链架构，将金钗石斛从田间种植、采收加工、仓储物流到终端销售的每一个环节数据上链存证。通过一物一码技术，消费者扫码即可查验全链路溯源信息，实现"来源可查、去向可追、责任可究"。',
+    desc: '基于 Hyperledger Fabric 联盟链架构，将金钗石斛从田间种植、采收加工、仓储物流到终端销售的每一个环节数据上链存证。通过一物一码技术，消费者扫码即可查验全链路溯源信息，实现"来源可查、去向可追，责任可究"。',
     highlights: [
       { label: '数据上链', value: '关键节点数据实时存证，hash 值上链，不可篡改' },
       { label: '扫码验真', value: '消费者扫码查询，3秒内获取全链路溯源信息' },
@@ -453,7 +453,7 @@ const FEATURES = [
     ],
     mockup: <BlockchainMockup />,
     color: '#5db8a6',
-    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,166,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,166,0.04) 0%, transparent 60%)',
   },
   {
     id: 'wms',
@@ -468,7 +468,7 @@ const FEATURES = [
     ],
     mockup: <WMSMockup />,
     color: '#cc785c',
-    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(204,120,92,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(204,120,92,0.04) 0%, transparent 60%)',
   },
   {
     id: 'planting',
@@ -483,7 +483,7 @@ const FEATURES = [
     ],
     mockup: <PlantingMockup />,
     color: '#5db872',
-    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,114,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,114,0.04) 0%, transparent 60%)',
   },
   {
     id: 'finance',
@@ -498,7 +498,7 @@ const FEATURES = [
     ],
     mockup: <FinanceMockup />,
     color: '#e8a55a',
-    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(232,165,90,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(232,165,90,0.04) 0%, transparent 60%)',
   },
   {
     id: 'multicode',
@@ -513,7 +513,7 @@ const FEATURES = [
     ],
     mockup: <MultiCodeMockup />,
     color: '#5db8a6',
-    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,166,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 80% 50%, rgba(93,184,166,0.04) 0%, transparent 60%)',
   },
   {
     id: 'iot',
@@ -528,7 +528,7 @@ const FEATURES = [
     ],
     mockup: <IoTMockup />,
     color: '#c64545',
-    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(198,69,69,0.07) 0%, transparent 60%)',
+    bgGrad: 'radial-gradient(ellipse at 20% 50%, rgba(198,69,69,0.04) 0%, transparent 60%)',
   },
 ];
 
@@ -599,7 +599,7 @@ const LandingShowcase: React.FC = () => {
           { value: '2,847', label: 'IoT设备', color: '#c64545' },
         ].map((s, i) => (
           <div key={s.label} className={styles.statItem} data-stat style={{ '--delay': `${i * 0.1}s` } as React.CSSProperties}>
-            <span className={styles.statValue} style={{ color: s.color, textShadow: `0 0 20px ${s.color}60` }}>{s.value}</span>
+            <span className={styles.statValue} style={{ color: s.color }}>{s.value}</span>
             <span className={styles.statLabel}>{s.label}</span>
           </div>
         ))}
@@ -634,7 +634,7 @@ const LandingShowcase: React.FC = () => {
                 ))}
               </div>
               <div className={styles.featureCta}>
-                <button className={styles.featureBtn} style={{ background: feature.color, color: '#060912' }}>
+                <button className={styles.featureBtn} style={{ background: feature.color }}>
                   查看详情
                 </button>
                 <button className={styles.featureBtnGhost} style={{ borderColor: `${feature.color}40`, color: feature.color }}>

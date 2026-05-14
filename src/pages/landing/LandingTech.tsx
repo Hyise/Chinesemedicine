@@ -251,7 +251,7 @@ const HexLogo: React.FC<{ size?: number; className?: string }> = ({ size = 200, 
 
         // Outer glow
         ctx.save();
-        ctx.shadowColor = `rgba(93, 184, 166, ${alpha * 0.8})`;
+        ctx.shadowColor = `rgba(93, 184, 166, ${alpha * 0.6})`;
         ctx.shadowBlur = 20 + layer * 10;
         ctx.strokeStyle = `rgba(93, 184, 166, ${alpha})`;
         ctx.lineWidth = 1.5;
@@ -268,7 +268,7 @@ const HexLogo: React.FC<{ size?: number; className?: string }> = ({ size = 200, 
         // Dashed inner ring
         if (layer > 0) {
           ctx.setLineDash([4, 6]);
-          ctx.strokeStyle = `rgba(204, 120, 92, ${alpha * 0.6})`;
+          ctx.strokeStyle = `rgba(204, 120, 92, ${alpha * 0.4})`;
           ctx.lineWidth = 0.75;
           hex(cx, cy, r * 0.7, -t * 0.2);
           ctx.stroke();
@@ -278,9 +278,9 @@ const HexLogo: React.FC<{ size?: number; className?: string }> = ({ size = 200, 
 
       // Center "7S" text glow
       ctx.save();
-      ctx.shadowColor = 'rgba(93, 184, 166, 0.6)';
+      ctx.shadowColor = 'rgba(93, 184, 166, 0.4)';
       ctx.shadowBlur = 30;
-      ctx.fillStyle = 'rgba(93, 184, 166, 0.15)';
+      ctx.fillStyle = 'rgba(93, 184, 166, 0.12)';
       ctx.font = `bold ${size * 0.22}px "Arial Black", Arial, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -298,7 +298,7 @@ const HexLogo: React.FC<{ size?: number; className?: string }> = ({ size = 200, 
         ctx.save();
         ctx.shadowColor = i % 2 === 0 ? '#5db8a6' : '#cc785c';
         ctx.shadowBlur = 10;
-        ctx.fillStyle = i % 2 === 0 ? 'rgba(93,184,166,0.8)' : 'rgba(204,120,92,0.8)';
+        ctx.fillStyle = i % 2 === 0 ? 'rgba(93,184,166,0.6)' : 'rgba(204,120,92,0.6)';
         ctx.beginPath();
         ctx.arc(px, py, dotR, 0, Math.PI * 2);
         ctx.fill();
@@ -306,7 +306,7 @@ const HexLogo: React.FC<{ size?: number; className?: string }> = ({ size = 200, 
       }
 
       // Connecting arcs
-      ctx.strokeStyle = 'rgba(93, 184, 166, 0.1)';
+      ctx.strokeStyle = 'rgba(93, 184, 166, 0.06)';
       ctx.lineWidth = 0.5;
       for (let i = 0; i < 3; i++) {
         const angle1 = t * 0.3 + (Math.PI / 1.5) * i;
@@ -336,14 +336,14 @@ const CircuitLines: React.FC = () => (
     <path d="M0 250H150L200 200H350L400 250H550L600 180H750L800 250H950L1000 220H1200" stroke="rgba(93,184,166,0.05)" strokeWidth="0.75"/>
     <path d="M0 50H100L150 100H300L350 50H500L550 120H700L750 50H900L950 80H1200" stroke="rgba(204,120,92,0.04)" strokeWidth="0.75"/>
     {/* Nodes */}
-    <circle cx="200" cy="150" r="3" fill="rgba(93,184,166,0.15)"/>
-    <circle cx="400" cy="150" r="3" fill="rgba(93,184,166,0.15)"/>
-    <circle cx="600" cy="150" r="3" fill="rgba(93,184,166,0.15)"/>
-    <circle cx="800" cy="150" r="3" fill="rgba(93,184,166,0.15)"/>
-    <circle cx="1000" cy="150" r="3" fill="rgba(93,184,166,0.15)"/>
-    <circle cx="240" cy="100" r="2" fill="rgba(93,184,166,0.1)"/>
-    <circle cx="640" cy="80" r="2" fill="rgba(93,184,166,0.1)"/>
-    <circle cx="1040" cy="120" r="2" fill="rgba(93,184,166,0.1)"/>
+    <circle cx="200" cy="150" r="3" fill="rgba(93,184,166,0.12)"/>
+    <circle cx="400" cy="150" r="3" fill="rgba(93,184,166,0.12)"/>
+    <circle cx="600" cy="150" r="3" fill="rgba(93,184,166,0.12)"/>
+    <circle cx="800" cy="150" r="3" fill="rgba(93,184,166,0.12)"/>
+    <circle cx="1000" cy="150" r="3" fill="rgba(93,184,166,0.12)"/>
+    <circle cx="240" cy="100" r="2" fill="rgba(93,184,166,0.08)"/>
+    <circle cx="640" cy="80" r="2" fill="rgba(93,184,166,0.08)"/>
+    <circle cx="1040" cy="120" r="2" fill="rgba(93,184,166,0.08)"/>
   </svg>
 );
 
@@ -374,7 +374,7 @@ const DataStream: React.FC<{ className?: string }> = ({ className }) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw horizontal guide lines
-      ctx.strokeStyle = 'rgba(93, 184, 166, 0.04)';
+      ctx.strokeStyle = 'rgba(204, 120, 92, 0.04)';
       ctx.lineWidth = 1;
       for (let y = 0; y < canvas.height; y += 40) {
         ctx.beginPath();
@@ -409,19 +409,19 @@ const DataStream: React.FC<{ className?: string }> = ({ className }) => {
         ctx.globalAlpha = p.alpha;
 
         // Packet body
-        ctx.fillStyle = 'rgba(93, 184, 166, 0.1)';
+        ctx.fillStyle = 'rgba(93, 184, 166, 0.08)';
         const w = 60 + p.text.length * 7;
         const h = 18;
         ctx.beginPath();
         ctx.roundRect(p.x - w / 2, p.y - h / 2, w, h, 4);
         ctx.fill();
 
-        ctx.strokeStyle = 'rgba(93, 184, 166, 0.3)';
+        ctx.strokeStyle = 'rgba(93, 184, 166, 0.2)';
         ctx.lineWidth = 0.75;
         ctx.stroke();
 
         // Text
-        ctx.fillStyle = 'rgba(93, 184, 166, 0.7)';
+        ctx.fillStyle = 'rgba(93, 184, 166, 0.5)';
         ctx.font = '9px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -429,7 +429,7 @@ const DataStream: React.FC<{ className?: string }> = ({ className }) => {
 
         // Trail
         ctx.globalAlpha = p.alpha * 0.3;
-        ctx.strokeStyle = 'rgba(93, 184, 166, 0.4)';
+        ctx.strokeStyle = 'rgba(93, 184, 166, 0.2)';
         ctx.lineWidth = 0.5;
         ctx.setLineDash([3, 4]);
         ctx.beginPath();
@@ -539,7 +539,7 @@ const ParticleCanvas: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Grid
-      ctx.strokeStyle = 'rgba(93, 184, 166, 0.04)';
+      ctx.strokeStyle = 'rgba(204, 120, 92, 0.04)';
       ctx.lineWidth = 1;
       const cellSize = 60;
       for (let x = 0; x < canvas.width; x += cellSize) {
@@ -557,7 +557,7 @@ const ParticleCanvas: React.FC = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(93, 184, 166, ${(1 - dist / 150) * 0.15})`;
+            ctx.strokeStyle = `rgba(93, 184, 166, ${(1 - dist / 150) * 0.08})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -576,12 +576,12 @@ const ParticleCanvas: React.FC = () => {
         const pulseOpacity = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(93, 184, 166, ${pulseOpacity})`;
+        ctx.fillStyle = `rgba(93, 184, 166, ${pulseOpacity * 0.6})`;
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(93, 184, 166, ${pulseOpacity * 0.1})`;
+        ctx.fillStyle = `rgba(93, 184, 166, ${pulseOpacity * 0.05})`;
         ctx.fill();
       });
 
@@ -601,7 +601,7 @@ const ParticleCanvas: React.FC = () => {
 
         if (node.active) {
           ctx.beginPath();
-          ctx.strokeStyle = 'rgba(93, 184, 166, 0.15)';
+          ctx.strokeStyle = 'rgba(93, 184, 166, 0.08)';
           ctx.lineWidth = 1;
           ctx.setLineDash([4, 6]);
           ctx.moveTo(node.x, node.y);
@@ -611,12 +611,12 @@ const ParticleCanvas: React.FC = () => {
 
           ctx.beginPath();
           ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(93, 184, 166, 0.4)';
+          ctx.fillStyle = 'rgba(93, 184, 166, 0.25)';
           ctx.fill();
 
           ctx.beginPath();
           ctx.arc(node.x, node.y, 6, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(93, 184, 166, 0.2)';
+          ctx.strokeStyle = 'rgba(93, 184, 166, 0.12)';
           ctx.lineWidth = 1;
           ctx.stroke();
         }
@@ -651,7 +651,7 @@ const HexPattern: React.FC<{ className?: string; opacity?: number }> = ({ classN
     const size = 30;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = `rgba(93, 184, 166, ${opacity})`;
+      ctx.strokeStyle = `rgba(204, 120, 92, ${opacity * 0.8})`;
       ctx.lineWidth = 0.5;
 
       for (let row = -1; row < canvas.height / (size * 1.732) + 2; row++) {
@@ -798,7 +798,7 @@ const LandingTech: React.FC = () => {
       {/* HERO */}
       <section className={styles.hero}>
         <ParticleCanvas />
-        <HexPattern className={styles.hexBg} opacity={0.025} />
+        <HexPattern className={styles.hexBg} opacity={0.015} />
         <DataStream className={styles.dataStream} />
         <CircuitLines />
         <div className={styles.heroGlow} />
@@ -895,7 +895,7 @@ const LandingTech: React.FC = () => {
 
       {/* ARCHITECTURE */}
       <section className={styles.arch} id="arch">
-        <HexPattern className={styles.archHex} opacity={0.035} />
+        <HexPattern className={styles.archHex} opacity={0.02} />
         <div className={styles.sectionHeader} data-reveal>
           <div className={styles.sectionTag}>TECHNOLOGY STACK</div>
           <h2 className={styles.sectionTitle}>技术架构优势</h2>
@@ -1121,7 +1121,7 @@ const LandingTech: React.FC = () => {
 
       {/* CTA */}
       <section className={styles.cta} data-reveal>
-        <HexPattern className={styles.ctaHex} opacity={0.05} />
+        <HexPattern className={styles.ctaHex} opacity={0.015} />
         <div className={styles.ctaInner}>
           <div className={styles.ctaGlow} />
           <div className={styles.ctaDecor1} />
